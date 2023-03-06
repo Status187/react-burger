@@ -1,6 +1,6 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
-import styles from './cardElement.module.css';
+import styles from './CardElement.module.css';
 
 type TCardElement = {
   data: IData[];
@@ -59,7 +59,7 @@ export const CardElement = ({
       </div>
       
       <div>
-        <span className={`${styles["category-title"]}`}>Главное</span>
+        <span className={`${styles["category-title"]}`}>Начинки</span>
         <div className={`${styles["category-list"]}`}>{renderListData(data, categoryTypes.main)}</div>
       </div>
     </div>

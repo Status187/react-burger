@@ -20,6 +20,7 @@
 .category-wraper {
   overflow-y: auto;
   margin-bottom: 40px;
+  height: 780px;
 }
 
 .category-list {
@@ -28,7 +29,7 @@
   grid-template-rows: auto;
   column-gap: 24px;
   row-gap: 32px;
-  padding: 24px 16px 40px 16px;
+  padding: 24px 4px 40px 16px;
 }
 
 .category :nth-child(1n) {

@@ -2,7 +2,8 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import React from 'react';
 import { data } from '../../utils/choice';
 import styles from './BurgerConstructor.module.css';
-import { DrugAndDrop } from './components/DrugAndDrop';
+import { DrugAndDrop } from './components/drugAndDrop/DrugAndDrop';
+import { InfoAmount } from './components/infoAmount/InfoAmount';
 
 export const BurgerConstructor = ()=> {
 
@@ -42,6 +43,7 @@ export const BurgerConstructor = ()=> {
           thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
           extraClass={`ml-4 mr-4`}
         />
+        <InfoAmount />
     </div>
     </section>
   )
