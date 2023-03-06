@@ -1,6 +1,6 @@
 .main {
   display: grid;
-  grid-template-columns: 620px 620px;
+  grid-template-columns: 600px 600px;
   grid-template-rows: 90vh;
   justify-content: center;
   column-gap: 40px;

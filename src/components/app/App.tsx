@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from '../../logo.svg';
 import { AppHeader } from '../appHeader/AppHeader';
+import { BurgerConstructor } from '../burgerConstructor/BurgerConstructor';
 import { BurgerIngredients } from '../burgerIngredients/BurgerIngredients';
 import styles from './App.module.css';
 
@@ -10,6 +10,7 @@ function App() {
       <AppHeader />
       <main className={styles.main}>
         <BurgerIngredients />
+        <BurgerConstructor />
       </main>
     </div>
   );

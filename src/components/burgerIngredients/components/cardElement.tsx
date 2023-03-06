@@ -50,16 +50,16 @@ export const CardElement = ({
   return (
     <div className={`${styles["category-wraper"]} custom-scroll`}>
       <div>
-        <h3 className={`${styles["category-title"]}`}>Булки</h3>
+        <span className={`${styles["category-title"]}`}>Булки</span>
         <div className={`${styles["category-list"]}`}>{renderListData(data, categoryTypes.bun)}</div>
       </div>
       <div>
-        <h3 className={`${styles["category-title"]}`}>Соусы</h3>
+        <span className={`${styles["category-title"]}`}>Соусы</span>
         <div className={`${styles["category-list"]}`}>{renderListData(data, categoryTypes.sauce)}</div>
       </div>
       
       <div>
-        <h3 className={`${styles["category-title"]}`}>Главное</h3>
+        <span className={`${styles["category-title"]}`}>Главное</span>
         <div className={`${styles["category-list"]}`}>{renderListData(data, categoryTypes.main)}</div>
       </div>
     </div>
