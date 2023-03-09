@@ -1,25 +1,7 @@
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
-import styles from './CardElement.module.css';
-
-type TCardElement = {
-  data: IData[];
-}
-
-interface IData {
-  id?: string,
-  name: string,
-  type: string,
-  proteins: number,
-  fat: number,
-  carbohydrates: number,
-  calories: number,
-  price: number,
-  image: string
-  image_mobile: string,
-  image_large: string,
-  v?: number
-}
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { IData, TCardElement } from '../../../../types';
+import styles from './IngredientList.module.css'
 
 const categoryTypes = {
   bun: "bun",
@@ -35,12 +17,12 @@ export const CardElement = ({
     return (
       data.map((el) => (
         el.type === categoryTypesElement && (
-        <div className={`${styles["cart"]}`}>
-          <img src={el.image} alt="bun" className='ml-4 mr-4'/>
+        <div className={`${styles["cart"]}`}  key={el._id + 'cart'}>
+          <img src={el.image} alt={el.name} className='ml-4 mr-4'/>
           <div>
             <div className={`${styles["price"]} text_type_digits-default mt-1 mb-1`}>{el.price}<CurrencyIcon type={'secondary'} /></div>
           </div>
-          <span className={`${styles["description"]} text_type_main-default`}text_type_main-default >{el.name}</span>
+          <span className={`${styles["description"]} text_type_main-default`}>{el.name}</span>
         </div>)
         )
       )

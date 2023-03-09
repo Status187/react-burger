@@ -1,5 +1,5 @@
-import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
+import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './InfoAmount.module.css';
 
 export const InfoAmount = ()=> {

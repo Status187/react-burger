@@ -1,3 +1,4 @@
+import React from 'react';
 import { BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './HeaderLink.module.css';
 
