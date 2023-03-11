@@ -3,8 +3,8 @@ import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-comp
 import { IData } from '../../types';
 import { data } from '../../utils/choice';
 import styles from './BurgerConstructor.module.css';
-import { DrugAndDrop } from './components/DrugAndDrop/DrugAndDrop';
-import { InfoAmount } from './components/InfoAmount/InfoAmount';
+import { DrugAndDrop } from './components/DDrugAndDrop/DrugAndDrop';
+import { InfoAmount } from './components/IInfoAmount/InfoAmount';
 
 export const BurgerConstructor = ()=> {
 

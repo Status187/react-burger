@@ -2,7 +2,7 @@ import React from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { data } from '../../utils/data';
 import styles from './BurgerIngredients.module.css';
-import { CardElement } from './components/IngredientList/IngredientList';
+import { CardElement } from './components/IIngredientList/IngredientList';
 
 export const BurgerIngredients = ()=> {
   const [current, setCurrent] = React.useState('bun')

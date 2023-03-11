@@ -1,7 +1,7 @@
 import React from 'react';
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './AppHeader.module.css';
-import { HeaderLink } from './components/HeaderLink/HeaderLink';
+import { HeaderLink } from './components/HHeaderLink/HeaderLink';
 
 export const AppHeader = ()=> {
   return (
