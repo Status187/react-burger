@@ -1,10 +1,10 @@
 import React from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import { data } from '../../utils/data';
 import styles from './BurgerIngredients.module.css';
 import { CardElement } from './components/IIngredientList/IngredientList';
+import { IData } from '../../types';
 
-export const BurgerIngredients = ()=> {
+export const BurgerIngredients = (props: { data: IData[]; }) => {
   const [current, setCurrent] = React.useState('bun')
   return (
     <section className={`${styles["ingredients"]}`}>
@@ -14,7 +14,7 @@ export const BurgerIngredients = ()=> {
         <Tab value={'sauce'} active={current === 'sauce'} onClick={setCurrent}>Соусы</Tab>
         <Tab value={'fillings'} active={current === 'fillings'} onClick={setCurrent}>Начинки</Tab>
       </div>
-      <CardElement data={data}/>
+      <CardElement data={props.data}/>
     </section>
   )
 }
