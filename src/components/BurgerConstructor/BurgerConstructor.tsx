@@ -1,11 +1,11 @@
 import React from 'react';
-import { CloseIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { IData } from '../../types';
 import styles from './BurgerConstructor.module.css';
 import { DrugAndDrop } from './components/DrugAndDrop/DrugAndDrop';
 import { InfoAmount } from './components/InfoAmount/InfoAmount';
 import { Modal } from '../Modal/Modal';
-import graphics from '../../graphics.png';
+import { OrderDetails } from '../OrderDetails/OrderDetails';
 
 export const BurgerConstructor = (props: { data: IData[]; }) => {
 
@@ -40,14 +40,7 @@ export const BurgerConstructor = (props: { data: IData[]; }) => {
   return (
     <section className={`${styles["constructor-wrapper"]}`}>
       {isOpenModal && <Modal onClose={closeModal}>
-          <div className={`${styles["modal-order"]} mt-30 mb-30`}>
-            <div className={`${styles["modal-close"]}`}><CloseIcon type="primary" onClick={() => closeModal()}/></div>
-            <span className={`text_type_digits-large mb-8`}>034536</span>
-            <span className={`text_type_main-medium mb-15`}>идентификатор заказа</span>
-            <img className={`mb-15`} src={graphics} alt={"checked"}/>
-            <span className={`text_type_main-default mb-2`}>Ваш заказ начали готовить</span>
-            <span className={`${styles["text-bottom"]} text_type_main-default`}>Дождитесь готовности на орбитальной станции</span>
-          </div>
+          <OrderDetails />
         </Modal>}
        <div className={`${styles["constructor-wrapper"]} mt-25`}>
         <ConstructorElement

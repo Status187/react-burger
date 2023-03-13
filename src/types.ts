@@ -35,3 +35,4 @@ export interface IModalOverlay {
   onClose: () => void,
   forwardRef: React.RefObject<HTMLDivElement>
 }
+

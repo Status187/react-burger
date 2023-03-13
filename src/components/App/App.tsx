@@ -15,9 +15,14 @@ function App() {
 
   React.useEffect(() => {
     fetch(URL)
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка ${res.status}`);
+      })
       .then(json => setData(json))
-      .catch(() => console.error("Что то пошло не так"))
+      .catch((error) => console.error(`"Что то пошло не так", ${error}`))
   }, []);
 
   return (

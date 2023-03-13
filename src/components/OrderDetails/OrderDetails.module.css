@@ -1,0 +1,10 @@
+.modal-order {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text-bottom {
+  color: var(--text-inactive-color);
+}

@@ -14,3 +14,9 @@
   background: #1C1C21;
   border-radius: 40px;
 }
+
+.modal-close {
+  position: absolute;
+  top: 60px;
+  right: 40px;
+}

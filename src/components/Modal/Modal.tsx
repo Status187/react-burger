@@ -1,3 +1,4 @@
+import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ModalOverlay } from '../ModalOverlay/ModalOverlay';
@@ -16,22 +17,22 @@ export const Modal = ({
 
   const pointRef = React.useRef(null);
 
-  const handlePressEsc = React.useCallback((evt: KeyboardEvent ) => {
-    if (evt.key === 'Escape') {
-      onClose();
-    }
-  }, [onClose]);
-  
   React.useEffect(() => {
+    const handlePressEsc = (evt: KeyboardEvent ) => {
+      if (evt.key === 'Escape') {
+        onClose();
+      }
+    };
     document.addEventListener('keydown', handlePressEsc);
     return () => {
-        document.removeEventListener('keydown', handlePressEsc);
+      document.removeEventListener('keydown', handlePressEsc);
     };
-}, [handlePressEsc]);
+  }, [onClose]);
   
   return ReactDOM.createPortal(
     <div>
       <div className={styles.modal}>
+      <div className={`${styles["modal-close"]}`}><CloseIcon type="primary" onClick={() => onClose()}/></div>
         {children}
       </div>
       <ModalOverlay onClose={onClose} forwardRef={pointRef}/>

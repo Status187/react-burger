@@ -1,8 +1,9 @@
 import React from 'react';
-import { CloseIcon, Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { IData, IElement, TCardElement } from '../../../../types';
 import styles from './IngredientList.module.css'
 import { Modal } from '../../../Modal/Modal';
+import { IngredientDetails } from '../../../IngredientDetails/IngredientDetails';
 
 const categoryTypes = {
   bun: "bun",
@@ -70,37 +71,7 @@ export const CardElement = ({
   return (
     <div className={`${styles["category-wraper"]} custom-scroll`}>
       {isOpenModal && <Modal onClose={closeModal}>
-          <div className={`${styles["modal-order"]}`}>
-            <div className={`${styles["modal-header"]} mt-15 ml-10 mr-10`}>
-              <span className={`${styles["modal-title"]} text_type_main-large`}>Детали ингредиента</span>
-              <div className={`${styles["modal-close"]}`}><CloseIcon type="primary" onClick={() => closeModal()}/></div>
-            </div>
-            <div className={`${styles["modal-additionally"]}`}>
-              <img src={currentIngredient.image_large} alt={currentIngredient.name} className={`${styles["modal-image"]}`}/>
-
-              <span className={`${styles["modal-name"]} text_type_main-medium mt-4 mb-8`}>{currentIngredient.name}</span>
-
-              <div className={`${styles["modal-table"]} mb-15`}>
-                <div className={`${styles["modal-table_wrapper"]}`}>
-                  <span className={`${styles["modal-table_name"]} text_type_main-default`}>Калории,ккал</span>
-                  <span className={`${styles["modal-table_value"]} text_type_digits-default`}>{currentIngredient.calories}</span>
-                </div>
-                <div className={`${styles["modal-table_wrapper"]}`}>
-                  <span className={`${styles["modal-table_name"]} text_type_main-default`}>Белки, г</span>
-                  <span className={`${styles["modal-table_value"]} text_type_digits-default`}>{currentIngredient.proteins}</span>
-                </div>
-                <div className={`${styles["modal-table_wrapper"]}`}>
-                  <span className={`${styles["modal-table_name"]} text_type_main-default`}>Жиры, г</span>
-                  <span className={`${styles["modal-table_value"]} text_type_digits-default`}>{currentIngredient.fat}</span>
-                </div>
-                <div className={`${styles["modal-table_wrapper"]}`}>
-                  <span className={`${styles["modal-table_name"]} text_type_main-default`}>Углеводы, г</span>
-                  <span className={`${styles["modal-table_value"]} text_type_digits-default`}>{currentIngredient.carbohydrates}</span>
-                </div>
-              </div>
-            </div>
-            
-          </div>
+          <IngredientDetails {...currentIngredient}/>
         </Modal>}
       <div>
         <span className={`${styles["category-title"]}`}>Булки</span>
