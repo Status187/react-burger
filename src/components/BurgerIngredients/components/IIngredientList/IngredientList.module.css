@@ -1,0 +1,51 @@
+.cart {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.price {
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90px;
+  column-gap: 8px;
+}
+
+.description {
+  text-align: center;
+}
+
+.category-wraper {
+  overflow-y: auto;
+  margin-bottom: 40px;
+  height: 780px;
+}
+
+.category-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  column-gap: 24px;
+  row-gap: 32px;
+  padding: 24px 4px 40px 16px;
+}
+
+.category :nth-child(1n) {
+  grid-column: 1/2;
+  grid-row: auto;
+}
+.category :nth-child(2n) {
+  grid-column: 2/3;
+  grid-row: auto;
+}
+
+.category-title {
+  text-align: left;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+}

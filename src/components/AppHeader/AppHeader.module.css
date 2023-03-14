@@ -1,0 +1,27 @@
+.header {
+  width: 100%;
+  background: var(--background);
+}
+
+.header-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 1280px;
+  justify-content: space-between;
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 16px 0;
+}
+
+.item-left {
+  display: flex;
+  margin-right: auto;
+}
+
+.header-logo {
+  margin: 0 auto;
+}
+
+.item-right {
+  margin-left: auto;
+}

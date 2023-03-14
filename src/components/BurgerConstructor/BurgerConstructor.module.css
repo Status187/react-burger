@@ -1,0 +1,22 @@
+.constructor-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  row-gap: 16px;
+  width: 100%;
+}
+
+.ingredients-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  row-gap: 16px;
+  overflow-y: auto;
+  max-height: 560px;
+}
+
+.item-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

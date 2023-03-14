@@ -1,0 +1,16 @@
+.ingredients {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ingredients-title {
+  width: 100%;
+  text-align: start;
+}
+
+.ingredients-tabs {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
