@@ -2,10 +2,11 @@ import React from 'react';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './InfoAmount.module.css';
 import { TotalPriceContext } from '../../../../services/totalPriceContext';
+import { IInfoAmount } from '../../../../types';
 
 export const InfoAmount = ({
   onClick = () => {}
-})=> {
+}: IInfoAmount): JSX.Element => {
   const { totalPriceState, handleClick } = React.useContext(TotalPriceContext);
 
   return (

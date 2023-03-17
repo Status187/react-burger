@@ -6,7 +6,7 @@ import { BurgerConstructorContext } from '../../services/appContext'
 import styles from './App.module.css';
 import { IDataState, IInitialState } from '../../types';
 
-function App() {
+function App(): JSX.Element {
 
   const URL = "https://norma.nomoreparties.space/api/ingredients ";
 
@@ -48,8 +48,6 @@ function App() {
   React.useEffect(() => {
     dataStateDispatcher({type: 'set', payload: data});
   },[data]);
-
-  // React.useEffect(() => {console.log(dataState)}, [dataState])
   
   return (
     <div className={styles.app}>

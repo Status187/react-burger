@@ -3,7 +3,7 @@ import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './AppHeader.module.css';
 import { HeaderLink } from './components/HeaderLink/HeaderLink';
 
-export const AppHeader = ()=> {
+export const AppHeader = (): JSX.Element => {
   return (
     <header className={`${styles["header"]} text_type_main-default`}>
       <nav className={`${styles["header-nav"]}`}>

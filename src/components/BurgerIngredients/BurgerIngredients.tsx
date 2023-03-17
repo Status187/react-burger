@@ -4,7 +4,7 @@ import styles from './BurgerIngredients.module.css';
 import { CardElement } from './components/IIngredientList/IngredientList';
 import { IData } from '../../types';
 
-export const BurgerIngredients = (props: { data: IData[]; }) => {
+export const BurgerIngredients = (props: { data: IData[]; }): JSX.Element => {
   const [current, setCurrent] = React.useState('bun')
   return (
     <section className={`${styles["ingredients"]}`}>

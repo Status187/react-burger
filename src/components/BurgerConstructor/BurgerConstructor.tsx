@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { IData, IDataState } from '../../types';
+import { IData, IDataReduce, IDataState } from '../../types';
 import styles from './BurgerConstructor.module.css';
 import { DrugAndDrop } from './components/DrugAndDrop/DrugAndDrop';
 import { InfoAmount } from './components/InfoAmount/InfoAmount';
@@ -8,26 +8,24 @@ import { Modal } from '../Modal/Modal';
 import { OrderDetails } from '../OrderDetails/OrderDetails';
 import { BurgerConstructorContext } from '../../services/appContext';
 import { TotalPriceContext } from '../../services/totalPriceContext';
+import { OrderNumberContext } from '../../services/orderNumberContext';
 
-export const BurgerConstructor = () => {
+export const BurgerConstructor = (): JSX.Element => {
   const { dataState } = useContext(BurgerConstructorContext);
   const [isOpenModal, setIsOpenModal] = React.useState(false);
 
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [data, setData] = React.useState({
-    success: null,
-    data: []
-  });
-
   const initialState = [0];
+  const initialData = {
+    name: null,
+    order: 0,
+    success: false
+  };
+
   const stateOfConstructor = [...dataState.data].slice(1, Infinity);
   const stateOfConstructorIds = stateOfConstructor.map((item) => item._id);
-  console.log(isLoading,data);
 
   const handleClick = () => {
-    setIsLoading(true);
     const URL = "https://norma.nomoreparties.space/api/orders";
-
       fetch(URL, {
         method: 'POST',
         headers: {
@@ -44,22 +42,37 @@ export const BurgerConstructor = () => {
         }
         return Promise.reject(`Ошибка ${res.status}`);
       })
-      .then(json => setData(json))
+      .then(json => serverResponseDispatcher({type: 'set', payload: json}))
       .catch((error) => console.error(`"Что то пошло не так", ${error}`))
   };
 
   const reducer = (state: any, action: IDataState) => {
     switch (action.type) {
       case "set":
-        return action.payload.data.map((item: { type: string; price: number; }) => item.type !== "bun" ? (item.price) : 0).reduce((a: number, b: number) => a + b, stateOfConstructor[0].price * 2)
+        return action.payload.data.map((item: { type: string; price: number; }) => 
+        item.type !== "bun" ? (item.price) : 0).reduce((a: number, b: number) => a + b,
+         stateOfConstructor[0].price * 2)
       case "reset":
         return initialState
       default:
         throw new Error(`Wrong type of action: ${action.type}`);
     }
   }
+  
+  const dataReducer = (state: any, action: IDataReduce ) => {
+    switch (action.type) {
+      case "set":
+        return { success: action.payload.success, name: action.payload.name, order: action.payload.order }
+      case "reset":
+        return initialData
+      default:
+        throw new Error(`Wrong type of action: ${action.type}`);
+    }
+  }
 
   const [totalPriceState, totalPriceDispatcher] = React.useReducer(reducer, initialState, undefined);
+
+  const [serverResponseData, serverResponseDispatcher] = React.useReducer(dataReducer, initialData, undefined);
 
   const openModal = () => {
     setIsOpenModal(true)
@@ -76,7 +89,7 @@ export const BurgerConstructor = () => {
     totalPriceDispatcher({type: 'set', payload: dataState});
   },[dataState]);
 
-  const getChoice = (dataState: { data: IData[]; }) => {
+  const getChoice = (dataState: { data: IData[]; }): (false | JSX.Element)[] => {
     return (
       dataState.data.map((el) => (
         el.type !== "bun" && (
@@ -93,7 +106,7 @@ export const BurgerConstructor = () => {
     )))
   };
 
-  const getChoiceBunTop = (dataState: IData[]) => {
+  const getChoiceBunTop = (dataState: IData[]): (false | JSX.Element)[] => {
     return (
       dataState.map((el) => (
         el.type === "bun" && (
@@ -110,7 +123,7 @@ export const BurgerConstructor = () => {
     )))
   };
 
-  const getChoiceBunBottom = (dataState: IData[]) => {
+  const getChoiceBunBottom = (dataState: IData[]): (false | JSX.Element)[] => {
     return (
       dataState.map((el) => (
         el.type === "bun" && (
@@ -130,7 +143,9 @@ export const BurgerConstructor = () => {
   return (
     <section className={`${styles["constructor-wrapper"]}`}>
       {isOpenModal && <Modal onClose={closeModal}>
+        <OrderNumberContext.Provider value={{serverResponseData}}>
           <OrderDetails />
+        </OrderNumberContext.Provider>
         </Modal>}
       <div className={`${styles["constructor-wrapper"]} mt-25`}>
         {getChoiceBunTop(stateOfConstructor)}
