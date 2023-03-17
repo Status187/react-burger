@@ -30,9 +30,20 @@ export interface IElement {
   image_large: string,
   name: string
 };
-
 export interface IModalOverlay {
   onClose: () => void,
   forwardRef: React.RefObject<HTMLDivElement>
+}
+export interface IDataState {
+  type: string;
+  payload: {
+      success: boolean;
+      data: IData[];
+  }
+}
+
+export interface IInitialState {
+  success: boolean;
+  data: IData[];
 }
 
