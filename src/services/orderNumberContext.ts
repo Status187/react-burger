@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IInitialData } from '../types';
+import { IDataReduce, IInitialData } from '../types';
 
 const initialData: IInitialData | any = {
   name: null,
@@ -7,4 +7,16 @@ const initialData: IInitialData | any = {
   success: false
 };
 
-export const OrderNumberContext = React.createContext(initialData)
+export const OrderNumberContext = React.createContext(initialData);
+
+
+export const dataReducer = (state: any, action: IDataReduce ) => {
+  switch (action.type) {
+    case "set":
+      return { success: action.payload.success, name: action.payload.name, order: action.payload.order }
+    case "reset":
+      return initialData
+    default:
+      throw new Error(`Wrong type of action: ${action.type}`);
+  }
+};

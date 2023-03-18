@@ -1,10 +1,16 @@
 .header-list {
   display: flex;
   cursor: pointer;
+  text-decoration: none;
+  color: #F2F2F3;
+  pointer-events: none;
 }
 
-.item-icon {
-
+.header-list-disabled {
+  display: flex;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text-inactive-color);
 }
 
 .item-text {

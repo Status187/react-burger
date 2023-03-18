@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { IData, IDataReduce, IDataState } from '../../types';
 import styles from './BurgerConstructor.module.css';
 import { DrugAndDrop } from './components/DrugAndDrop/DrugAndDrop';
 import { InfoAmount } from './components/InfoAmount/InfoAmount';
@@ -8,69 +7,33 @@ import { Modal } from '../Modal/Modal';
 import { OrderDetails } from '../OrderDetails/OrderDetails';
 import { BurgerConstructorContext } from '../../services/appContext';
 import { TotalPriceContext } from '../../services/totalPriceContext';
-import { OrderNumberContext } from '../../services/orderNumberContext';
+import { dataReducer, OrderNumberContext } from '../../services/orderNumberContext';
+import { DOWN, UP} from '../../ constants';
+import { getIngredients } from '../../utils/burger-api';
 
 export const BurgerConstructor = (): JSX.Element => {
   const { dataState } = useContext(BurgerConstructorContext);
   const [isOpenModal, setIsOpenModal] = React.useState(false);
 
-  const initialState = [0];
   const initialData = {
     name: null,
     order: 0,
     success: false
   };
 
-  const stateOfConstructor = [...dataState.data].slice(1, Infinity);
-  const stateOfConstructorIds = stateOfConstructor.map((item) => item._id);
+  const stateOfConstructor = [...dataState.data].slice(1, Infinity,);
 
   const handleClick = () => {
-    const URL = "https://norma.nomoreparties.space/api/orders";
-      fetch(URL, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          "ingredients": stateOfConstructorIds
-        })
-      })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка ${res.status}`);
-      })
-      .then(json => serverResponseDispatcher({type: 'set', payload: json}))
-      .catch((error) => console.error(`"Что то пошло не так", ${error}`))
+    const stateOfConstructorIds = stateOfConstructor.map((item) => item._id);
+    stateOfConstructorIds.push(stateOfConstructor[0]._id);
+      getIngredients(stateOfConstructorIds, serverResponseDispatcher)
   };
 
-  const reducer = (state: any, action: IDataState) => {
-    switch (action.type) {
-      case "set":
-        return action.payload.data.map((item: { type: string; price: number; }) => 
-        item.type !== "bun" ? (item.price) : 0).reduce((a: number, b: number) => a + b,
-         stateOfConstructor[0].price * 2)
-      case "reset":
-        return initialState
-      default:
-        throw new Error(`Wrong type of action: ${action.type}`);
-    }
-  }
-  
-  const dataReducer = (state: any, action: IDataReduce ) => {
-    switch (action.type) {
-      case "set":
-        return { success: action.payload.success, name: action.payload.name, order: action.payload.order }
-      case "reset":
-        return initialData
-      default:
-        throw new Error(`Wrong type of action: ${action.type}`);
-    }
-  }
-
-  const [totalPriceState, totalPriceDispatcher] = React.useReducer(reducer, initialState, undefined);
+  const totalPrice = React.useMemo(() => {
+    return dataState.data.map((item: { type: string; price: number; }) => 
+          item.type !== "bun" ? (item.price) : 0).reduce((a: number, b: number) => a + b,
+           stateOfConstructor[0].price * 2)
+  }, [dataState.data, stateOfConstructor])
 
   const [serverResponseData, serverResponseDispatcher] = React.useReducer(dataReducer, initialData, undefined);
 
@@ -82,17 +45,16 @@ export const BurgerConstructor = (): JSX.Element => {
     setIsOpenModal(false)
   };
 
-  const UP = '(верх)';
-  const DOWN = '(низ)';
+  const { bun, ingredients } = React.useMemo(() => {
+    return {
+      bun: dataState.data.find((item: { type: string; }) => item.type === 'bun'),
+      ingredients: dataState.data.filter((item: { type: string; }) => item.type !== 'bun'),
+    };
+  }, [dataState.data]);
 
-  React.useEffect(() => {
-    totalPriceDispatcher({type: 'set', payload: dataState});
-  },[dataState]);
-
-  const getChoice = (dataState: { data: IData[]; }): (false | JSX.Element)[] => {
+  const getChoice = (): JSX.Element => {
     return (
-      dataState.data.map((el) => (
-        el.type !== "bun" && (
+      ingredients.map((el: { _id: string; name: string; price: number; image: string; }) => (
         <div className={`${styles["item-wrapper"]}`} key={el._id + 'ingredients'}>
           <DrugAndDrop />
           <ConstructorElement
@@ -102,42 +64,38 @@ export const BurgerConstructor = (): JSX.Element => {
             thumbnail={el.image}
             extraClass={`mr-1`}
           />
-        </div>)
+        </div>
     )))
   };
 
-  const getChoiceBunTop = (dataState: IData[]): (false | JSX.Element)[] => {
+  const getChoiceBunTop = (): JSX.Element => {
     return (
-      dataState.map((el) => (
-        el.type === "bun" && (
-        <div className={`${styles["item-wrapper"]}`} key={el._id + 'ingredients'}>
+        <div className={`${styles["item-wrapper"]}`}>
           <ConstructorElement
             type="top"
             isLocked={true}
-            text={`${el.name} ${UP}`}
-            price={el.price}
-            thumbnail={el.image}
+            text={`${bun.name} ${UP}`}
+            price={bun.price}
+            thumbnail={bun.image}
             extraClass={`ml-4 mr-4`}
           />
-        </div>)
-    )))
+        </div>
+    )
   };
 
-  const getChoiceBunBottom = (dataState: IData[]): (false | JSX.Element)[] => {
+  const getChoiceBunBottom = (): JSX.Element => {
     return (
-      dataState.map((el) => (
-        el.type === "bun" && (
-        <div className={`${styles["item-wrapper"]}`} key={el._id + 'ingredients'}>
+        <div className={`${styles["item-wrapper"]}`}>
           <ConstructorElement
             type="bottom"
             isLocked={true}
-            text={`${el.name} ${DOWN}`}
-            price={el.price}
-            thumbnail={el.image}
+            text={`${bun.name} ${DOWN}`}
+            price={bun.price}
+            thumbnail={bun.image}
             extraClass={`ml-4 mr-4`}
           />
-        </div>)
-    )))
+        </div>
+    )
   };
 
   return (
@@ -148,10 +106,10 @@ export const BurgerConstructor = (): JSX.Element => {
         </OrderNumberContext.Provider>
         </Modal>}
       <div className={`${styles["constructor-wrapper"]} mt-25`}>
-        {getChoiceBunTop(stateOfConstructor)}
-        <div className={`${styles["ingredients-wrapper"]} custom-scroll`}>{getChoice(dataState)}</div>
-        {getChoiceBunBottom(stateOfConstructor)}
-        <TotalPriceContext.Provider value={{ totalPriceState, totalPriceDispatcher, handleClick }}>
+        {getChoiceBunTop()}
+        <div className={`${styles["ingredients-wrapper"]} custom-scroll`}>{getChoice()}</div>
+        {getChoiceBunBottom()}
+        <TotalPriceContext.Provider value={{ totalPrice, handleClick }}>
           <InfoAmount onClick={openModal}/>
         </TotalPriceContext.Provider>
       </div>

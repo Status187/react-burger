@@ -2,13 +2,12 @@ import React from 'react';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { BurgerConstructor } from '../BurgerConstructor/BurgerConstructor';
 import { BurgerIngredients } from '../BurgerIngredients/BurgerIngredients';
-import { BurgerConstructorContext } from '../../services/appContext'
+import { BurgerConstructorContext, reducer } from '../../services/appContext'
 import styles from './App.module.css';
-import { IDataState, IInitialState } from '../../types';
+import { IInitialState } from '../../types';
+import { URL_MAIN as URL} from '../../ constants';
 
 function App(): JSX.Element {
-
-  const URL = "https://norma.nomoreparties.space/api/ingredients ";
 
   const [data, setData] = React.useState({ 
     success: false,
@@ -19,18 +18,7 @@ function App(): JSX.Element {
     success: false,
     data: []
   };
-
-  function reducer(state: any, action: IDataState) {
-    switch (action.type) {
-      case "set":
-        return { success: action.payload.success, data: action.payload.data };
-      case "reset":
-        return initialState 
-      default:
-        throw new Error(`Wrong type of action: ${action.type}`);
-    }
-  };
-
+  
   React.useEffect(() => {
     fetch(URL)
       .then(res => {
