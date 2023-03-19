@@ -12,7 +12,7 @@ interface IModal {
 export const Modal = ({
   children,
   onClose = () => {}
-}:IModal) => {
+}:IModal): React.ReactPortal => {
   const modalRoot = document.getElementById('react-modals') as HTMLElement;
 
   const pointRef = React.useRef(null);

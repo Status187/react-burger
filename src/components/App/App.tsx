@@ -2,17 +2,23 @@ import React from 'react';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { BurgerConstructor } from '../BurgerConstructor/BurgerConstructor';
 import { BurgerIngredients } from '../BurgerIngredients/BurgerIngredients';
+import { BurgerConstructorContext, reducer } from '../../services/appContext'
 import styles from './App.module.css';
+import { IInitialState } from '../../types';
+import { URL_MAIN as URL} from '../../ constants';
 
-function App() {
+function App(): JSX.Element {
 
-  const URL = "https://norma.nomoreparties.space/api/ingredients ";
-
-  const [data, setData] = React.useState({
+  const [data, setData] = React.useState({ 
     success: false,
-    data: []}
-  )
+    data: []
+  });
 
+  const initialState: IInitialState = { 
+    success: false,
+    data: []
+  };
+  
   React.useEffect(() => {
     fetch(URL)
       .then(res => {
@@ -25,14 +31,22 @@ function App() {
       .catch((error) => console.error(`"Что то пошло не так", ${error}`))
   }, []);
 
+  const [dataState, dataStateDispatcher] = React.useReducer(reducer, initialState, undefined);
+
+  React.useEffect(() => {
+    dataStateDispatcher({type: 'set', payload: data});
+  },[data]);
+  
   return (
     <div className={styles.app}>
       <AppHeader />
       <main className={styles.main}>
-        {data.success && (
+        {dataState.success && (
           <>
             <BurgerIngredients data={data.data}/>
-            <BurgerConstructor data={data.data}/>
+            <BurgerConstructorContext.Provider value={{ dataState, dataStateDispatcher }}>
+              <BurgerConstructor />
+            </BurgerConstructorContext.Provider>
           </>
         )}
       </main>

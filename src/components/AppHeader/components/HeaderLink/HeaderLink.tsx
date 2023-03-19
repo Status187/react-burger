@@ -4,14 +4,16 @@ import styles from './HeaderLink.module.css';
 
 type THeaderLink = {
   active?: boolean;
-  iconVariant: string,
-  children: string
+  iconVariant: string;
+  children: string;
+  disabled?: boolean;
 }
 
 export const HeaderLink = ({
   active,
   iconVariant,
-  children
+  children,
+  disabled
 }:THeaderLink):JSX.Element  => {
 
   const iconSelection = (iconVariant: string) => {
@@ -26,11 +28,16 @@ export const HeaderLink = ({
     }
   }
   
-
   return (
-    <div className={`${styles["header-list"]}`}>
+    active ? 
+    <a href="http://localhost:3002/" className={`${styles["header-list"]}`}>
       <div className={`${styles["item-icon"]} ml-5 mr-2`}>{iconSelection(iconVariant)}</div>
       <span className={`${styles["item-text"]} mr-5`}>{children}</span>
-    </div>
+    </a>
+    : 
+    <a href="http://localhost:3002/" className={`${styles["header-list-disabled"]}`}>
+      <div className={`${styles["item-icon"]} ml-5 mr-2`}>{iconSelection(iconVariant)}</div>
+      <span className={`${styles["item-text"]} mr-5`}>{children}</span>
+    </a>
   )
 }
