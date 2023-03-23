@@ -1,0 +1,1 @@
+export const getTargetTab = (state: { tabItems: { tab: any; }; }) => state.tabItems.tab;

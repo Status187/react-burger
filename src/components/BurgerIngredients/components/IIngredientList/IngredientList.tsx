@@ -13,6 +13,9 @@ const categoryTypes = {
 
 export const CardElement = ({
   data = [],
+  bunsRef,
+  soucesRef,
+  fillingsRef
 }:TCardElement): JSX.Element => {
 
   const [isOpenModal, setIsOpenModal] = React.useState(false)
@@ -73,15 +76,15 @@ export const CardElement = ({
       {isOpenModal && <Modal onClose={closeModal}>
           <IngredientDetails {...currentIngredient}/>
         </Modal>}
-      <div>
+      <div ref={bunsRef}>
         <span className={`${styles["category-title"]}`}>Булки</span>
         <div className={`${styles["category-list"]}`}>{renderListData(data, categoryTypes.bun)}</div>
       </div>
-      <div>
+      <div ref={soucesRef}>
         <span className={`${styles["category-title"]}`}>Соусы</span>
         <div className={`${styles["category-list"]}`}>{renderListData(data, categoryTypes.sauce)}</div>
       </div>
-      <div>
+      <div ref={fillingsRef}>
         <span className={`${styles["category-title"]}`}>Начинки</span>
         <div className={`${styles["category-list"]}`}>{renderListData(data, categoryTypes.main)}</div>
       </div>

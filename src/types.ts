@@ -17,6 +17,9 @@ export interface IData {
 
 export type TCardElement = {
   data: IData[];
+  bunsRef: any,
+  soucesRef: any,
+  fillingsRef: any
 };
 export interface IModal {
   children: React.ReactNode;
