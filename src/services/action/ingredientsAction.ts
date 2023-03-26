@@ -1,4 +1,4 @@
-import { URL_MAIN as URL } from "../../ constants";
+import { URL_MAIN as URL } from "../../constants";
 import { IData } from "../../types";
 import { SAVE_INGREDIENTS } from "./actionTypes";
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './BurgerIngredients.module.css';
 import { CardElement } from './components/IIngredientList/IngredientList';
-import { BUN, FILLINGS, SAUCE } from '../../ constants';
+import { BUN, FILLINGS, SAUCE } from '../../constants';
 import { useSelector } from 'react-redux';
 import { SET_TARGET_TAB } from '../../services/action/actionTypes';
 import { getTargetTab } from '../../services/selectors';

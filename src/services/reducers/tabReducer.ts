@@ -1,4 +1,4 @@
-import { BUN } from "../../ constants";
+import { BUN } from "../../constants";
 import { SET_TARGET_TAB } from "../action/actionTypes";
 
 const initialState = {

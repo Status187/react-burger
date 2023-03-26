@@ -1,4 +1,4 @@
-import { URL_FOR_ORDER as URL } from '../ constants'
+import { URL_FOR_ORDER as URL } from '../constants'
 
 export function sendIngredients(state, serverResponseDispatcher) {
   return fetch(URL, {
