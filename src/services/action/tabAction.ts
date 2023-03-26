@@ -1,1 +1,0 @@
-export const SET_TARGET_TAB = 'SET_TARGET_TAB';

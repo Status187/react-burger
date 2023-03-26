@@ -1,7 +1,7 @@
 import React from "react";
 
 export interface IData {
-  _id?: string,
+  _id: string,
   name: string,
   type: string,
   proteins: number,
@@ -16,10 +16,9 @@ export interface IData {
 };
 
 export type TCardElement = {
-  data: IData[];
-  bunsRef: any,
-  soucesRef: any,
-  fillingsRef: any
+  bunsRef: React.RefObject<HTMLDivElement>,
+  soucesRef: React.RefObject<HTMLDivElement>,
+  fillingsRef: React.RefObject<HTMLDivElement>
 };
 export interface IModal {
   children: React.ReactNode;

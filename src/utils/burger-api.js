@@ -1,6 +1,6 @@
 import { URL_FOR_ORDER as URL } from '../ constants'
 
-export function getIngredients(state, serverResponseDispatcher) {
+export function sendIngredients(state, serverResponseDispatcher) {
   return fetch(URL, {
     method: 'POST',
     headers: {

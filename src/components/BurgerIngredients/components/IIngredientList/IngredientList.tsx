@@ -1,9 +1,14 @@
 import React from 'react';
-import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { IData, IElement, TCardElement } from '../../../../types';
 import styles from './IngredientList.module.css'
 import { Modal } from '../../../Modal/Modal';
 import { IngredientDetails } from '../../../IngredientDetails/IngredientDetails';
+import { useSelector } from 'react-redux';
+import { getIngredients } from '../../../../services/selectors';
+import { useAppDispatch } from '../../../../services/store';
+import { SET_TARGET_TAB } from '../../../../services/action/actionTypes';
+import { BUN, SAUCE, FILLINGS, SURPLUS } from '../../../../ constants'
 
 const categoryTypes = {
   bun: "bun",
@@ -12,11 +17,13 @@ const categoryTypes = {
 };
 
 export const CardElement = ({
-  data = [],
   bunsRef,
   soucesRef,
   fillingsRef
 }:TCardElement): JSX.Element => {
+
+  const { data } = useSelector(getIngredients);
+  const dispatch = useAppDispatch();
 
   const [isOpenModal, setIsOpenModal] = React.useState(false)
   const [currentIngredient, setCurrentIngredients] = React.useState({
@@ -59,7 +66,7 @@ export const CardElement = ({
         el.type === categoryTypesElement && (
         <div className={`${styles["cart"]}`} key={el._id + 'cart'}
          onClick={() => {openModal();saveCurrentData(el)}}>
-          {getChoice().includes(el.name) && (<Counter count={1} />)}
+          {/* {getChoice().includes(el.name) && (<Counter count={1} />)} */}
           <img src={el.image} alt={el.name} className='ml-4 mr-4'/>
           <div>
             <div className={`${styles["price"]} text_type_digits-default mt-1 mb-1`}>{el.price}<CurrencyIcon type={'secondary'} /></div>
@@ -69,10 +76,24 @@ export const CardElement = ({
         )
       )
     )
-  }
+  };
+
+  const handleScroll = (e: { currentTarget: { scrollTop: any; }; }) => {
+    const scrollPosition = e.currentTarget.scrollTop;
+    const soucesContainer = soucesRef.current !== null && soucesRef.current.offsetTop;
+    const fillingsContainer = fillingsRef.current !== null && fillingsRef.current.offsetTop;
+    if (scrollPosition + SURPLUS <= soucesContainer) {
+      dispatch({ type: SET_TARGET_TAB, tab: BUN})
+    }
+    else if (scrollPosition + SURPLUS <= fillingsContainer) {
+      dispatch({ type: SET_TARGET_TAB, tab: SAUCE})
+    } else {
+      dispatch({ type: SET_TARGET_TAB, tab: FILLINGS})
+    }
+}
 
   return (
-    <div className={`${styles["category-wraper"]} custom-scroll`}>
+    <div className={`${styles["category-wraper"]} custom-scroll`} onScroll={handleScroll}>
       {isOpenModal && <Modal onClose={closeModal}>
           <IngredientDetails {...currentIngredient}/>
         </Modal>}

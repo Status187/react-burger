@@ -2,53 +2,31 @@ import React from 'react';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { BurgerConstructor } from '../BurgerConstructor/BurgerConstructor';
 import { BurgerIngredients } from '../BurgerIngredients/BurgerIngredients';
-import { BurgerConstructorContext, reducer } from '../../services/appContext'
 import styles from './App.module.css';
-import { IInitialState } from '../../types';
-import { URL_MAIN as URL} from '../../ constants';
+import { loadIngredients } from '../../services/action/ingredientsAction';
+import { useAppDispatch } from '../../services/store';
+import { useSelector } from 'react-redux';
+import { getIngredients } from '../../services/selectors';
 
 function App(): JSX.Element {
-
-  const [data, setData] = React.useState({ 
-    success: false,
-    data: []
-  });
-
-  const initialState: IInitialState = { 
-    success: false,
-    data: []
-  };
-  
-  React.useEffect(() => {
-    fetch(URL)
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка ${res.status}`);
-      })
-      .then(json => setData(json))
-      .catch((error) => console.error(`"Что то пошло не так", ${error}`))
-  }, []);
-
-  const [dataState, dataStateDispatcher] = React.useReducer(reducer, initialState, undefined);
+  const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    dataStateDispatcher({type: 'set', payload: data});
-  },[data]);
-  
+    dispatch(loadIngredients)
+  }, [dispatch]);
+
+  const { success } = useSelector(getIngredients);
+
   return (
     <div className={styles.app}>
       <AppHeader />
       <main className={styles.main}>
-        {dataState.success && (
-          <>
-            <BurgerIngredients data={data.data}/>
-            <BurgerConstructorContext.Provider value={{ dataState, dataStateDispatcher }}>
+          {success && (
+            <>
+              <BurgerIngredients />
               <BurgerConstructor />
-            </BurgerConstructorContext.Provider>
-          </>
-        )}
+            </>
+          )}
       </main>
     </div>
   );

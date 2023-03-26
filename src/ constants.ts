@@ -7,3 +7,5 @@ export const DOWN = '(низ)';
 export const BUN = "bun";
 export const SAUCE = "sauce";
 export const FILLINGS = "fillings";
+
+export const SURPLUS = 300;
