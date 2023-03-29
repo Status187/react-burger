@@ -9,7 +9,7 @@ const saveIngredients = (list: IData[]) => {
   }
 }
 
-export const loadIngredients = (dispatch: (arg0: { type: string; list: IData[]; }) => any, getState: any) => {
+export const loadIngredients = (dispatch: (arg0: { type: string; list: IData[]; }) => any) => {
   // todo state loading
   
   fetch(URL)

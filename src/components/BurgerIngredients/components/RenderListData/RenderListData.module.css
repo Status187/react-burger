@@ -1,0 +1,19 @@
+.cart {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.price {
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90px;
+  column-gap: 8px;
+}
+
+.description {
+  text-align: center;
+}

@@ -1,5 +1,4 @@
 import React from 'react';
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { IData, IElement, TCardElement } from '../../../../types';
 import styles from './IngredientList.module.css'
 import { Modal } from '../../../Modal/Modal';
@@ -9,8 +8,9 @@ import { getIngredients } from '../../../../services/selectors';
 import { useAppDispatch } from '../../../../services/store';
 import { SET_TARGET_TAB } from '../../../../services/action/actionTypes';
 import { BUN, SAUCE, FILLINGS, SURPLUS, CATEGORY_TYPES } from '../../../../constants'
+import { RenderListData } from '../RenderListData/RenderListData';
 
-export const CardElement = ({
+export const IngredientList = ({
   bunsRef,
   soucesRef,
   fillingsRef
@@ -29,48 +29,18 @@ export const CardElement = ({
     name: ''
   })
 
-  const getChoice = () => {
-    const mockdata = [...data].slice(1, data.length)
-    const ids = mockdata.map((item) => item.name);
-    return ids
-  };
-
   const openModal = () => {
     setIsOpenModal(true)
   }
 
   const closeModal = () => {
     setIsOpenModal(false)
-  }
-
-  const saveCurrentData = (el: IElement) => {
-    setCurrentIngredients({
-      calories: el.calories,
-      carbohydrates: el.carbohydrates,
-      fat: el.fat,
-      proteins: el.proteins,
-      image_large: el.image_large,
-      name: el.name
-    })
-  }
-
-  const handleDrag = (e: React.DragEvent<HTMLImageElement>) => {
-    e.preventDefault();
-  }; 
+  };
   
   const renderListData = (data: IData[], categoryTypesElement: string) => {
     return (
       data.map((el) => (
-        el.type === categoryTypesElement && (
-        <div className={`${styles["cart"]}`} key={el._id + 'cart'}
-         onClick={() => {openModal();saveCurrentData(el)}}>
-          {/* {getChoice().includes(el.name) && (<Counter count={1} />)} */}
-          <img src={el.image} alt={el.name} className='ml-4 mr-4' draggable onDrag={(e) => handleDrag(e)}/>
-          <div>
-            <div className={`${styles["price"]} text_type_digits-default mt-1 mb-1`}>{el.price}<CurrencyIcon type={'secondary'} /></div>
-          </div>
-          <span className={`${styles["description"]} text_type_main-default`}>{el.name}</span>
-        </div>)
+        <RenderListData key={el._id} el={el} categoryTypesElement={categoryTypesElement} openModal={openModal}/>
         )
       )
     )

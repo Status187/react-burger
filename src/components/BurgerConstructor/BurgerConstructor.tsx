@@ -1,27 +1,53 @@
 import React, { useRef } from 'react';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './BurgerConstructor.module.css';
-import { DrugAndDrop } from './components/DrugAndDrop/DrugAndDrop';
 import { InfoAmount } from './components/InfoAmount/InfoAmount';
 import { Modal } from '../Modal/Modal';
 import { OrderDetails } from '../OrderDetails/OrderDetails';
-import { BUNS_TEXT, DOWN, INGREDIENTS_TEXT, UP} from '../../constants';
+import { BUN, BUNS_TEXT, DOWN, INGREDIENTS_TEXT, MAIN, SAUCE, UP} from '../../constants';
 import { useSelector } from 'react-redux';
-import { getIngredients } from '../../services/selectors';
+import { getSelectedBuns, getSelectedIngredients } from '../../services/selectors';
+import { useAppDispatch } from '../../services/store';
+import { ADD_INGREDIENTS, DELETE_INGREDIENT, SET_BUNS } from '../../services/action/actionTypes';
+import { useDrop } from 'react-dnd';
+import { IngredientsChoice } from './components/IngredientsChoice/IngredientsChoice';
+import { v4 as uuid } from 'uuid';
 
 export const BurgerConstructor = (): JSX.Element => {
-  const { data } = useSelector(getIngredients);
   const [isOpenModal, setIsOpenModal] = React.useState(false);
 
-  const ref = useRef(null);
+  const ingredients = useSelector(getSelectedIngredients);
+  const bun = useSelector(getSelectedBuns);
 
-  // const stateOfConstructor = [...data].slice(1, Infinity,);
+  const dispatch = useAppDispatch();
 
-  const handleClick = () => {
-    // const stateOfConstructorIds = stateOfConstructor.map((item) => item._id);
-    // stateOfConstructorIds.push(stateOfConstructor[0]._id);
-    //   sendIngredients(stateOfConstructorIds, serverResponseDispatcher)
-  };
+  const [, refDropBunUp] = useDrop({
+    accept: BUN,
+    drop(bun) {
+      console.log(bun)
+      dispatch({ type: SET_BUNS, bun: bun });
+    }
+  });
+
+  const [, refDropBunDown] = useDrop({
+    accept: BUN,
+    drop(bun) {
+      console.log(bun)
+      dispatch({ type: SET_BUNS, bun: bun });
+    }
+  });
+
+  const [, refDropIngredients] = useDrop({
+    accept: [SAUCE, MAIN],
+    drop(ingredient) {
+      console.log(ingredient)
+      dispatch({ type: ADD_INGREDIENTS, ingredient: ingredient });
+    }
+  });
+
+  function deleteIngredient(index: number) {
+    dispatch({ type: DELETE_INGREDIENT, index: index })
+}
 
   // const totalPrice = React.useMemo(() => {
   //   return data.map((item: { type: string; price: any; }) => 
@@ -39,30 +65,14 @@ export const BurgerConstructor = (): JSX.Element => {
     setIsOpenModal(false)
   };
 
-  const { bun, ingredients } = React.useMemo(() => {
-    return {
-      bun: data.find((item: { type: string; }) => item.type === 'bun'),
-      ingredients: data.filter((item: { type: string; }) => item.type !== 'bun'),
-    };
-  }, [data]);
-
-  const getChoice = (): JSX.Element[] => {
+  const getChoiceIngredients = (): JSX.Element[] => {
     return (
-      ingredients.map((el: { _id: string; name: string; price: number; image: string; }) => (
-        <div className={`${styles["item-wrapper"]}`} key={el._id + 'ingredients'} ref={ref}>
-          <DrugAndDrop />
-          <ConstructorElement
-            isLocked={false}
-            text={el.name}
-            price={el.price}
-            thumbnail={el.image}
-            extraClass={`mr-1`}
-          />
-        </div>
+      ingredients.map((el, index) => (
+        <IngredientsChoice el={el} key={uuid()} index={index} onDelete={() => deleteIngredient(index)}/>
     )))
   };
 
-  const getChoiceBunTop = (): JSX.Element | undefined => {
+  const getChoiceBunTop = (): JSX.Element => {
     return bun && (
       <div className={`${styles["item-wrapper"]}`}>
         <ConstructorElement
@@ -77,7 +87,7 @@ export const BurgerConstructor = (): JSX.Element => {
     )
   };
 
-  const getChoiceBunBottom = (): JSX.Element | undefined => {
+  const getChoiceBunBottom = (): JSX.Element => {
     return bun && (
         <div className={`${styles["item-wrapper"]}`}>
           <ConstructorElement
@@ -96,31 +106,38 @@ export const BurgerConstructor = (): JSX.Element => {
     return (
       <div className={`${styles["stub-wrapper-ingredients"]} mr-4 ml-4`}>{INGREDIENTS_TEXT}</div>
     )
-  }
+  };
 
   const StubOfBunsTop = (): JSX.Element => {
     return <div className={`${styles["stub-wrapper-buns-top"]} top mr-4 ml-4`}>{BUNS_TEXT}</div>
-  }
+  };
 
   const StubOfBunsBottom = (): JSX.Element => {
     return <div className={`${styles["stub-wrapper-buns-bottom"]} top mr-4 ml-4`}>{BUNS_TEXT}</div>
-  }
+  };
 
   return (
     <section className={`${styles["constructor-wrapper"]}`}>
+      
       {isOpenModal && <Modal onClose={closeModal}>
           <OrderDetails />
         </Modal>}
+
       <div className={`${styles["constructor-wrapper"]} mt-25`}>
-        {/* {getChoiceBunTop()} */}
-        <StubOfBunsTop/>
-        <div className={`${styles["ingredients-wrapper"]} custom-scroll`}>
-          <StubOfIngredients/>
-          {/* {getChoice()} */}
+
+        <div ref={refDropBunUp}>
+          { bun ? (getChoiceBunTop()) : (<StubOfBunsTop/>)}
         </div>
-        <StubOfBunsBottom/>
-        {/* {getChoiceBunBottom()} */}
-          <InfoAmount onClick={openModal}/>
+
+        <div className={`${styles["ingredients-wrapper"]} custom-scroll`} ref={refDropIngredients}>
+          { ingredients.length > 0 ? (getChoiceIngredients()) : (<StubOfIngredients/>)}
+        </div>
+
+        <div ref={refDropBunDown}>
+        { bun ? (getChoiceBunBottom()) : (<StubOfBunsBottom/>)}
+        </div>
+
+        <InfoAmount onClick={openModal}/>
       </div>
     </section>
   )
