@@ -51,6 +51,7 @@ export interface IInfoAmount {
   onClick: () => void
 }
 export interface IDataReduce {
+  order: any;
   type: string; 
   payload: { 
     success: boolean;
@@ -59,8 +60,8 @@ export interface IDataReduce {
   };
 }
 export interface IInitialData {
-  name?: null | string,
-  order?: number,
-  success: boolean
+  loading: boolean,
+  isErrors: boolean,
+  order: null
 }
 

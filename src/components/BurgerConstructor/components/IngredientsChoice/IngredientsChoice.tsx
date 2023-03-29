@@ -26,7 +26,7 @@ export const IngredientsChoice: React.FC<IIngredientsChoice> = (props): JSX.Elem
     accept: "cart",
     drop(el: any) {
       if (index !== el.index) {
-          dispatch({ type: SORT_INGREDIENTS, index1: index, index2: el.index });
+          dispatch({ type: SORT_INGREDIENTS, indexCurrent: index, indexNext: el.index });
       }
     }
   });

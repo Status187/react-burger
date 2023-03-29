@@ -1,7 +1,7 @@
-import { URL_FOR_ORDER as URL } from '../constants'
+import { BASE_URL } from '../constants'
 
 export function sendIngredients(state, serverResponseDispatcher) {
-  return fetch(URL, {
+  return fetch(BASE_URL + 'orders', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

@@ -1,4 +1,4 @@
-import { URL_MAIN as URL } from "../../constants";
+import { BASE_URL} from "../../constants";
 import { IData } from "../../types";
 import { SAVE_INGREDIENTS } from "./actionTypes";
 
@@ -12,7 +12,7 @@ const saveIngredients = (list: IData[]) => {
 export const loadIngredients = (dispatch: (arg0: { type: string; list: IData[]; }) => any) => {
   // todo state loading
   
-  fetch(URL)
+  fetch(BASE_URL + 'ingredients')
     .then(res => {
       if (res.ok) {
         return res.json();

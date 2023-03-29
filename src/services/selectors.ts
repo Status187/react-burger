@@ -9,3 +9,7 @@ export const getActiveIngredient = (state: RootState) => state.ingredients.curre
 export const getSelectedIngredients = (state: RootState) => state.burgerConstructor.ingredients;
 
 export const getSelectedBuns = (state: RootState) => state.burgerConstructor.bun;
+
+export const getTotalAmount = (state: RootState) => state.burgerConstructor.amount;
+
+// export const getOrder = (state: RootState) => state.createOrder;

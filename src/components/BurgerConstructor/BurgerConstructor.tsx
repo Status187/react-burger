@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import * as React from 'react';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './BurgerConstructor.module.css';
 import { InfoAmount } from './components/InfoAmount/InfoAmount';
@@ -8,7 +8,7 @@ import { BUN, BUNS_TEXT, DOWN, INGREDIENTS_TEXT, MAIN, SAUCE, UP} from '../../co
 import { useSelector } from 'react-redux';
 import { getSelectedBuns, getSelectedIngredients } from '../../services/selectors';
 import { useAppDispatch } from '../../services/store';
-import { ADD_INGREDIENTS, DELETE_INGREDIENT, SET_BUNS } from '../../services/action/actionTypes';
+import { ADD_INGREDIENTS, DELETE_INGREDIENT, SET_AMOUNT, SET_BUNS } from '../../services/action/actionTypes';
 import { useDrop } from 'react-dnd';
 import { IngredientsChoice } from './components/IngredientsChoice/IngredientsChoice';
 import { v4 as uuid } from 'uuid';
@@ -21,10 +21,19 @@ export const BurgerConstructor = (): JSX.Element => {
 
   const dispatch = useAppDispatch();
 
+  React.useEffect(() => {
+    let amount = 0;
+    if (bun) {
+      amount += bun.price * 2
+    }
+    amount += ingredients.reduce((total, item) => total += item.price, 0)
+    console.log(amount)
+    dispatch({ type: SET_AMOUNT, amount })
+  }, [bun, dispatch, ingredients]);
+
   const [, refDropBunUp] = useDrop({
     accept: BUN,
     drop(bun) {
-      console.log(bun)
       dispatch({ type: SET_BUNS, bun: bun });
     }
   });
@@ -32,7 +41,6 @@ export const BurgerConstructor = (): JSX.Element => {
   const [, refDropBunDown] = useDrop({
     accept: BUN,
     drop(bun) {
-      console.log(bun)
       dispatch({ type: SET_BUNS, bun: bun });
     }
   });
@@ -40,22 +48,13 @@ export const BurgerConstructor = (): JSX.Element => {
   const [, refDropIngredients] = useDrop({
     accept: [SAUCE, MAIN],
     drop(ingredient) {
-      console.log(ingredient)
       dispatch({ type: ADD_INGREDIENTS, ingredient: ingredient });
     }
   });
 
   function deleteIngredient(index: number) {
     dispatch({ type: DELETE_INGREDIENT, index: index })
-}
-
-  // const totalPrice = React.useMemo(() => {
-  //   return data.map((item: { type: string; price: any; }) => 
-  //     item.type !== "bun" ? (item.price) : 0).reduce((a: number, b: number) => a + b,
-  //       stateOfConstructor[0].price * 2)
-  // }, [data, stateOfConstructor])
-
-  // const [serverResponseData, serverResponseDispatcher] = React.useReducer(dataReducer, initialData, undefined);
+  };
 
   const openModal = () => {
     setIsOpenModal(true)

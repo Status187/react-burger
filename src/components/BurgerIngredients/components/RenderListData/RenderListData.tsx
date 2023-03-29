@@ -2,7 +2,9 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import * as React from 'react';
 import { useDrag } from 'react-dnd';
 import { useSelector } from 'react-redux';
+import { SET_ACTIVE } from '../../../../services/action/actionTypes';
 import { getSelectedBuns, getSelectedIngredients } from '../../../../services/selectors';
+import { useAppDispatch } from '../../../../services/store';
 import styles from './RenderListData.module.css';
 
 interface IRendarListData {
@@ -21,18 +23,18 @@ export const RenderListData: React.FC<IRendarListData> = (props): JSX.Element =>
   const ingredients = useSelector(getSelectedIngredients);
   const bun = useSelector(getSelectedBuns);
 
+  const dispatch = useAppDispatch();
+
   const countData = React.useMemo(() => {
-    const res: any = {};
-    if (bun) {
-        res[bun._id] = 2;
+    const stateIds: any = {};
+    if ( bun ) {
+        stateIds[bun._id] = 2;
     }
-    for (let item of ingredients) {
-        if (!(item._id in res)) {
-            res[item._id] = 0;
-        }
-        res[item._id]++;
+    for ( let item of ingredients ) {
+        if ( !(item._id in stateIds) ) { stateIds[item._id] = 0; }
+        stateIds[item._id]++;
     }
-    return res;
+    return stateIds;
   }, [ ingredients, bun ]);
 
   const [{isDrag}, refDragItem] = useDrag({
@@ -43,15 +45,16 @@ export const RenderListData: React.FC<IRendarListData> = (props): JSX.Element =>
     })
   });
 
-  const HandleClick = () => {
+  const sendSelectedData = () => {
     openModal();
-  };
+    dispatch({type: SET_ACTIVE, item: el});
+  }
 
   return (
     <>
     {el.type === categoryTypesElement && (
       !isDrag && (<div className={`${styles["cart"]}`} key={el._id + 'cart'}
-       onClick={() => {HandleClick()}}
+       onClick={() => {sendSelectedData()}}
 
        ref={refDragItem}
        >

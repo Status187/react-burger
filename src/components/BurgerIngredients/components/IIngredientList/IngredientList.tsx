@@ -4,9 +4,9 @@ import styles from './IngredientList.module.css'
 import { Modal } from '../../../Modal/Modal';
 import { IngredientDetails } from '../../../IngredientDetails/IngredientDetails';
 import { useSelector } from 'react-redux';
-import { getIngredients } from '../../../../services/selectors';
+import { getActiveIngredient, getIngredients } from '../../../../services/selectors';
 import { useAppDispatch } from '../../../../services/store';
-import { SET_TARGET_TAB } from '../../../../services/action/actionTypes';
+import { SET_ACTIVE, SET_TARGET_TAB } from '../../../../services/action/actionTypes';
 import { BUN, SAUCE, FILLINGS, SURPLUS, CATEGORY_TYPES } from '../../../../constants'
 import { RenderListData } from '../RenderListData/RenderListData';
 
@@ -17,23 +17,18 @@ export const IngredientList = ({
 }:TCardElement): JSX.Element => {
 
   const { data } = useSelector(getIngredients);
+  const currentActive = useSelector(getActiveIngredient);
+
   const dispatch = useAppDispatch();
 
   const [isOpenModal, setIsOpenModal] = React.useState(false)
-  const [currentIngredient, setCurrentIngredients] = React.useState({
-    calories: 0,
-    carbohydrates: 0,
-    fat: 0,
-    proteins: 0,
-    image_large: '',
-    name: ''
-  })
 
   const openModal = () => {
     setIsOpenModal(true)
   }
 
   const closeModal = () => {
+    dispatch({type: SET_ACTIVE, item: null})
     setIsOpenModal(false)
   };
   
@@ -63,7 +58,7 @@ export const IngredientList = ({
   return (
     <div className={`${styles["category-wraper"]} custom-scroll`} onScroll={handleScroll}>
       {isOpenModal && <Modal onClose={closeModal}>
-          <IngredientDetails {...currentIngredient}/>
+          <IngredientDetails {...currentActive}/>
         </Modal>}
       <div ref={bunsRef}>
         <span className={`${styles["category-title"]}`}>Булки</span>
