@@ -1,5 +1,6 @@
-import { BASE_URL} from "../../constants";
 import { IData } from "../../types";
+import { request } from "../../utils/request";
+import { AppDispatch } from "../store";
 import { SAVE_INGREDIENTS } from "./actionTypes";
 
 const saveIngredients = (list: IData[]) => {
@@ -9,16 +10,12 @@ const saveIngredients = (list: IData[]) => {
   }
 }
 
-export const loadIngredients = (dispatch: (arg0: { type: string; list: IData[]; }) => any) => {
+const ingredients = 'ingredients';
+
+export const loadIngredients = () => (dispatch: AppDispatch) => {
   // todo state loading
   
-  fetch(BASE_URL + 'ingredients')
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка ${res.status}`);
-    })
+    request(ingredients)
     .then(json => dispatch(saveIngredients(json)))
     .catch((error) => console.error(`"Что то пошло не так", ${error}`))
 }

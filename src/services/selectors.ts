@@ -12,4 +12,4 @@ export const getSelectedBuns = (state: RootState) => state.burgerConstructor.bun
 
 export const getTotalAmount = (state: RootState) => state.burgerConstructor.amount;
 
-// export const getOrder = (state: RootState) => state.createOrder;
+export const getOrder = (state: RootState) => state.order;

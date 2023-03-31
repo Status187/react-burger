@@ -1,5 +1,5 @@
 import { IData } from "../../types";
-import { ADD_INGREDIENTS, DELETE_INGREDIENT, SET_AMOUNT, SET_BUNS, SORT_INGREDIENTS } from "../action/actionTypes";
+import { ADD_INGREDIENTS, DELETE_INGREDIENT, SET_AMOUNT, SET_BUNS, SET_CLEAR_CONSTRUCTOR, SORT_INGREDIENTS } from "../action/actionTypes";
 
 const initialState = {
   bun: null,
@@ -30,6 +30,8 @@ export function constructorReducer(state = initialState, action: {
       return newSortState;
     case SET_AMOUNT:
       return { ...state, amount: action.amount}
+    case SET_CLEAR_CONSTRUCTOR:
+      return initialState
     default:
       return state;
   }

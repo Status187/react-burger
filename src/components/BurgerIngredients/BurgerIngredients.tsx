@@ -5,16 +5,11 @@ import { IngredientList } from './components/IIngredientList/IngredientList';
 import { BUN, FILLINGS, SAUCE } from '../../constants';
 import { useSelector } from 'react-redux';
 import { SET_TARGET_TAB } from '../../services/action/actionTypes';
-import { loadIngredients } from '../../services/action/ingredientsAction';
 import { useAppDispatch } from '../../services/store';
 import { getTargetTab } from '../../services/selectors';
 
 export const BurgerIngredients = (): JSX.Element => {
   const dispatch = useAppDispatch();
-
-  React.useEffect(() => {
-    dispatch(loadIngredients)
-  }, [dispatch]);
 
   const tabCurrent = useSelector(getTargetTab);
 

@@ -1,7 +1,10 @@
-import { BASE_URL } from '../constants'
+import { SET_ORDER_SUCCESS } from '../services/action/orderNumberAction';
+import { request } from '../utils/request';
 
-export function sendIngredients(state, serverResponseDispatcher) {
-  return fetch(BASE_URL + 'orders', {
+const orders = 'orders';
+
+export const sendIngredients = (state) => (orderNumberReducer) => {
+  request(orders, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -11,12 +14,6 @@ export function sendIngredients(state, serverResponseDispatcher) {
       "ingredients": state
     })
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка ${res.status}`);
-  })
-  .then(json => serverResponseDispatcher({type: 'set', payload: json}))
+  .then(json => orderNumberReducer({type: SET_ORDER_SUCCESS, order: json}))
   .catch((error) => console.error(`"Что то пошло не так", ${error}`))
-}
+};

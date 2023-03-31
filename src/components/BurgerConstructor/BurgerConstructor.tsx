@@ -8,10 +8,10 @@ import { BUN, BUNS_TEXT, DOWN, INGREDIENTS_TEXT, MAIN, SAUCE, UP} from '../../co
 import { useSelector } from 'react-redux';
 import { getSelectedBuns, getSelectedIngredients } from '../../services/selectors';
 import { useAppDispatch } from '../../services/store';
-import { ADD_INGREDIENTS, DELETE_INGREDIENT, SET_AMOUNT, SET_BUNS } from '../../services/action/actionTypes';
+import { ADD_INGREDIENTS, DELETE_INGREDIENT, SET_AMOUNT, SET_BUNS, SET_CLEAR_CONSTRUCTOR } from '../../services/action/actionTypes';
 import { useDrop } from 'react-dnd';
 import { IngredientsChoice } from './components/IngredientsChoice/IngredientsChoice';
-import { v4 as uuid } from 'uuid';
+import { SET_CLEAR_ORDER } from '../../services/action/orderNumberAction';
 
 export const BurgerConstructor = (): JSX.Element => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
@@ -26,8 +26,7 @@ export const BurgerConstructor = (): JSX.Element => {
     if (bun) {
       amount += bun.price * 2
     }
-    amount += ingredients.reduce((total, item) => total += item.price, 0)
-    console.log(amount)
+    amount += ingredients.reduce((total, item) => total += item.price, 0);
     dispatch({ type: SET_AMOUNT, amount })
   }, [bun, dispatch, ingredients]);
 
@@ -61,13 +60,15 @@ export const BurgerConstructor = (): JSX.Element => {
   };
 
   const closeModal = () => {
-    setIsOpenModal(false)
+    setIsOpenModal(false);
+    dispatch({type: SET_CLEAR_ORDER});
+    dispatch({type: SET_CLEAR_CONSTRUCTOR});
   };
 
   const getChoiceIngredients = (): JSX.Element[] => {
     return (
       ingredients.map((el, index) => (
-        <IngredientsChoice el={el} key={uuid()} index={index} onDelete={() => deleteIngredient(index)}/>
+        <IngredientsChoice el={el} key={el._id + index} index={index} onDelete={() => deleteIngredient(index)}/>
     )))
   };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IData, IElement, TCardElement } from '../../../../types';
+import { IData, TCardElement } from '../../../../types';
 import styles from './IngredientList.module.css'
 import { Modal } from '../../../Modal/Modal';
 import { IngredientDetails } from '../../../IngredientDetails/IngredientDetails';

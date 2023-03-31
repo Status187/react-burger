@@ -12,7 +12,7 @@ function App(): JSX.Element {
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    dispatch(loadIngredients)
+    dispatch(loadIngredients())
   }, [dispatch]);
 
   const { success } = useSelector(getIngredients);
