@@ -1,9 +1,10 @@
 import { IData } from "../../types";
 import { ADD_INGREDIENTS, DELETE_INGREDIENT, SET_AMOUNT, SET_BUNS, SET_CLEAR_CONSTRUCTOR, SORT_INGREDIENTS } from "../action/actionTypes";
+import { v4 as uuid } from 'uuid';
 
 const initialState = {
   bun: null,
-  ingredients: [] as IData[],
+  ingredients: [] as (IData & {uuid: string})[],
   amount: 0
 }
 
@@ -20,7 +21,8 @@ export function constructorReducer(state = initialState, action: {
     case SET_BUNS:
       return { ...state, bun: action.bun };
     case ADD_INGREDIENTS:
-      return { ...state, ingredients: [...state.ingredients, action.ingredient]};
+      const newIngredient = {...action.ingredient, uuid: uuid()};
+      return { ...state, ingredients: [...state.ingredients, newIngredient]};
     case DELETE_INGREDIENT:
       return { ...state, ingredients: [...state.ingredients].filter((_item, index) => index !== action.index) };
     case SORT_INGREDIENTS:

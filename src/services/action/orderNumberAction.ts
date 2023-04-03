@@ -7,7 +7,7 @@ export const SET_CLEAR_ORDER = 'SET_CLEAR_ORDER';
 
 const orders = 'orders';
 
-export const sendIngredients = (state: any) => (orderNumberReducer: (arg0: { type: string; order: any; }) => any) => {
+export const sendOrder = (ids: string[]) => (dispatch: (arg0: { type: string; order: number; }) => any) => {
   request(orders, {
     method: 'POST',
     headers: {
@@ -15,9 +15,9 @@ export const sendIngredients = (state: any) => (orderNumberReducer: (arg0: { typ
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      "ingredients": state
+      "ingredients": ids
     })
   })
-  .then((json: any) => orderNumberReducer({type: SET_ORDER_SUCCESS, order: json}))
+  .then((json: any) => dispatch({type: SET_ORDER_SUCCESS, order: json}))
   .catch((error: any) => console.error(`"Что то пошло не так", ${error}`))
 };

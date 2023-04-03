@@ -5,7 +5,7 @@ import { IInfoAmount } from '../../../../types';
 import { getSelectedBuns, getSelectedIngredients, getTotalAmount } from '../../../../services/selectors';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../../services/store';
-import { sendIngredients } from '../../../../services/action/orderNumberAction';
+import { sendOrder } from '../../../../services/action/orderNumberAction';
 
 export const InfoAmount = ({
   onClick = () => {}
@@ -20,7 +20,7 @@ export const InfoAmount = ({
       const bansId = bun && [bun._id];
       const ids = bansId.concat(allIngredientsId)
       const plusBun = ids.concat(bansId)
-      dispatch(sendIngredients(plusBun))
+      dispatch(sendOrder(plusBun))
     return plusBun;
   }
 

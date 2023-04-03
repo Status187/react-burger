@@ -12,7 +12,6 @@ import { ADD_INGREDIENTS, DELETE_INGREDIENT, SET_AMOUNT, SET_BUNS, SET_CLEAR_CON
 import { useDrop } from 'react-dnd';
 import { IngredientsChoice } from './components/IngredientsChoice/IngredientsChoice';
 import { SET_CLEAR_ORDER } from '../../services/action/orderNumberAction';
-import { addToConstructor } from '../../services/action/constructor';
 
 export const BurgerConstructor = (): JSX.Element => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
@@ -49,7 +48,6 @@ export const BurgerConstructor = (): JSX.Element => {
     accept: [SAUCE, MAIN],
     drop(ingredient) {
       dispatch({ type: ADD_INGREDIENTS, ingredient: ingredient });
-      dispatch(addToConstructor(ingredient));
     }
   });
 
@@ -69,8 +67,8 @@ export const BurgerConstructor = (): JSX.Element => {
 
   const getChoiceIngredients = (): JSX.Element[] => {
     return (
-      ingredients.map((el: { _id: React.Key | null | undefined; }, index: number) => (
-        <IngredientsChoice el={el} key={el._id} index={index} onDelete={() => deleteIngredient(index)}/>
+      ingredients.map((el, index: number) => (
+        <IngredientsChoice el={el} key={el.uuid} index={index} onDelete={() => deleteIngredient(index)}/>
     )))
   };
 
