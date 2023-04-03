@@ -5,7 +5,7 @@ import { IInfoAmount } from '../../../../types';
 import { getSelectedBuns, getSelectedIngredients, getTotalAmount } from '../../../../services/selectors';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../../services/store';
-import { sendIngredients } from '../../../../utils/burger-api';
+import { sendIngredients } from '../../../../services/action/orderNumberAction';
 
 export const InfoAmount = ({
   onClick = () => {}

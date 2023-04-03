@@ -53,7 +53,7 @@ export const RenderListData: React.FC<IRendarListData> = (props): JSX.Element =>
   return (
     <>
     {el.type === categoryTypesElement && (
-      !isDrag && (<div className={`${styles["cart"]}`} key={el._id + 'cart'}
+      !isDrag && (<div className={`${styles["cart"]}`}
        onClick={() => {sendSelectedData()}}
 
        ref={refDragItem}
