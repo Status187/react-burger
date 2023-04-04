@@ -1,6 +1,7 @@
 import React from "react";
 
 export interface IData {
+  uuid: string;
   _id: string,
   name: string,
   type: string,

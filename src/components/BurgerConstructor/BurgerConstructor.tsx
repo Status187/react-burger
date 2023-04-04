@@ -8,10 +8,12 @@ import { BUN, BUNS_TEXT, DOWN, INGREDIENTS_TEXT, MAIN, SAUCE, UP} from '../../co
 import { useSelector } from 'react-redux';
 import { getSelectedBuns, getSelectedIngredients } from '../../services/selectors';
 import { useAppDispatch } from '../../services/store';
-import { ADD_INGREDIENTS, DELETE_INGREDIENT, SET_AMOUNT, SET_BUNS, SET_CLEAR_CONSTRUCTOR } from '../../services/action/actionTypes';
+import { DELETE_INGREDIENT, SET_AMOUNT, SET_BUNS, SET_CLEAR_CONSTRUCTOR } from '../../services/action/actionTypes';
 import { useDrop } from 'react-dnd';
 import { IngredientsChoice } from './components/IngredientsChoice/IngredientsChoice';
 import { SET_CLEAR_ORDER } from '../../services/action/orderNumberAction';
+import { addToConstructor } from '../../services/action/constructor';
+import { IData } from '../../types';
 
 export const BurgerConstructor = (): JSX.Element => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
@@ -46,8 +48,8 @@ export const BurgerConstructor = (): JSX.Element => {
 
   const [, refDropIngredients] = useDrop({
     accept: [SAUCE, MAIN],
-    drop(ingredient) {
-      dispatch({ type: ADD_INGREDIENTS, ingredient: ingredient });
+    drop(ingredient: IData) {
+      dispatch(addToConstructor(ingredient));
     }
   });
 
