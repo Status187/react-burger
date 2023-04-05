@@ -1,7 +1,8 @@
 import React from "react";
 
 export interface IData {
-  _id?: string,
+  uuid: string;
+  _id: string,
   name: string,
   type: string,
   proteins: number,
@@ -16,7 +17,9 @@ export interface IData {
 };
 
 export type TCardElement = {
-  data: IData[];
+  bunsRef: React.RefObject<HTMLDivElement>,
+  soucesRef: React.RefObject<HTMLDivElement>,
+  fillingsRef: React.RefObject<HTMLDivElement>
 };
 export interface IModal {
   children: React.ReactNode;
@@ -49,6 +52,7 @@ export interface IInfoAmount {
   onClick: () => void
 }
 export interface IDataReduce {
+  order: any;
   type: string; 
   payload: { 
     success: boolean;
@@ -57,8 +61,8 @@ export interface IDataReduce {
   };
 }
 export interface IInitialData {
-  name?: null | string,
-  order?: number,
-  success: boolean
+  loading: boolean,
+  isErrors: boolean,
+  order: null
 }
 

@@ -1,0 +1,9 @@
+.item-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-wrapper:hover {
+  cursor: grab;
+}
