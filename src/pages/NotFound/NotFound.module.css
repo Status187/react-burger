@@ -1,0 +1,41 @@
+.wrapper {
+  background-image: url("../../images/NotFound.png");
+  width: 1280px;
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50px;
+  margin-top: 30px;
+  animation: color-change 3s infinite;
+}
+@keyframes color-change {
+  0% { color: rgb(245, 239, 239); }
+  50% { color: rgb(155, 114, 165); }
+  100% { color: rgb(245, 239, 239); }
+}
+
+.container {
+  padding: var(--container-padding);
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--container-padding) * 2);
+}
+
+.content {
+  margin-left: auto;
+  margin-right: 150px;
+}
+
+.link {
+  color: var(--color-title);
+}
+
+.link:hover {
+  transition: all 0.15s;
+  color: rgb(245, 239, 239);
+}
+
+.link:not(:hover) {
+  transition: all 0.15s;
+}
