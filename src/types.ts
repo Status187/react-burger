@@ -66,3 +66,12 @@ export interface IInitialData {
   order: null
 }
 
+export interface IAuthReducer {
+  type: any;
+  user: any;
+  error: any;
+  status: any;
+  res: { message: any; };
+  message: any;
+}
+

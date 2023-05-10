@@ -1,27 +1,48 @@
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import * as React from 'react';
+import { Link, useLocation, Navigate } from 'react-router-dom';
 import styles from './Register.module.css';
+import { useSelector } from 'react-redux';
+import { userRegistration } from '../../services/action/authAction';
+import { useAppDispatch } from '../../services/store';
+import { getAuth } from '../../services/selectors';
 
 export const Register = (): JSX.Element => {
 
-  const onSubmit = () => {
-    console.log('---')
-  }
-  const onChange = () => {
-    console.log('---')
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+
+  const { user } = useSelector(getAuth);
+
+  const [email, setEmail] = React.useState('')
+  const onChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    setEmail(e.target.value)
   }
 
+  const [password, setPassword] = React.useState('')
+
+  const [name, setName] = React.useState('');
+
+  const postRegister = () => {
+    dispatch(userRegistration(name, email, password));
+  };
+
   return(
-    <div className={styles.main}>
-      <form className={`${styles["main-form"]}`} onSubmit={onSubmit}>
-        <h1 className="text text_type_main-medium mb-6">Регистрация</h1>
-        <Input placeholder="Имя" extraClass="mb-6" name="name" value={''} onChange={onChange} />
-        <EmailInput extraClass="mb-6" name="email" value={''} onChange={onChange} />
-        <PasswordInput extraClass="mb-6" name="password" value={''} onChange={onChange} />
-        <Button type="primary" extraClass="mb-20" htmlType="submit">Зарегистрироваться</Button>
-        <p className="text text_type_main-default text_color_inactive mb-4">Уже зарегистрированы? <Link className="text_color_accent ml-2" to={'/login'}>Войти</Link></p>
-      </form>
-    </div>
+    <>
+      { user ? <Navigate to={ location.state?.from || '/' } /> : 
+        <div className={styles.main}>
+          <div className={`${styles["main-form"]}`}>
+            <h1 className="text text_type_main-medium mb-6">Регистрация</h1>
+            <Input placeholder="Имя" extraClass="mb-6" name="name" value={name} onChange={(e) => setName(e.target.value)} />
+            <EmailInput extraClass="mb-6" name="email" value={email} onChange={onChange} />
+            <PasswordInput extraClass="mb-6" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <div className="mb-20">
+              <Button type="primary" extraClass="mb-20" htmlType="submit" onClick={() => postRegister()}>Зарегистрироваться</Button>
+            </div>
+            <p className="text text_type_main-default text_color_inactive mb-4">Уже зарегистрированы? <Link className="text_color_accent ml-2" to={'/login'}>Войти</Link></p>
+          </div>
+        </div>
+      }
+    </>
   )
 }
