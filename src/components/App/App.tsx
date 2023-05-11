@@ -15,7 +15,9 @@ import { ForgotPassword } from '../../pages/ForgotPassword/ForgotPassword';
 import { ResetPassword } from '../../pages/ResetPassword/ResetPassword';
 import { Profile } from '../../pages/Profile/Profile';
 import { ProfileEditor } from '../../pages/ProfileEditor/ProfileEditor';
-import { FORGOT_ROUTE_URL, LOGIN_ROUTE_URL, NOT_FOUND_ROUTE_URL, ORIGIN_ROUTE_URL, PROFILE_ROUTE_URL, REGISTER_ROUTE_URL, RESET_ROUTE_URL } from '../../constants';
+import { FORGOT_ROUTE_URL, LOGIN_ROUTE_URL, NOT_FOUND_ROUTE_URL, ORIGIN_ROUTE_URL, PROFILE_ORDERS_ROUTE_URL, PROFILE_ROUTE_URL, REGISTER_ROUTE_URL, RESET_ROUTE_URL } from '../../constants';
+import { ProfileOrders } from '../../pages/ProfileOrders/ProfileOrders';
+import { ProtectedRoute } from '../ProtectedRouter/ProtectedRouter';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -33,13 +35,17 @@ function App(): JSX.Element {
         {success && (
           <Routes>
             <Route path={ORIGIN_ROUTE_URL} element={<div className={styles.main}><BurgerIngredients /><BurgerConstructor /></div> } />
-            <Route path={LOGIN_ROUTE_URL} element={<LoginPage />} />
-            <Route path={REGISTER_ROUTE_URL} element={<Register />} />
-            <Route path={FORGOT_ROUTE_URL} element={<ForgotPassword />} />
-            <Route path={RESET_ROUTE_URL} element={<ResetPassword />} />
-            <Route path={PROFILE_ROUTE_URL} element={<Profile />} />
-              <Route element={<ProfileEditor />} />
-            {/* <Route path="/ingredients/:id" element={} /> */}
+            <Route path={LOGIN_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<LoginPage />} />} />
+            <Route path={REGISTER_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<Register />} />} />
+            <Route path={FORGOT_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<ForgotPassword />} />} />
+            <Route path={RESET_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<ResetPassword  />} />} />
+            {/* <Route path={PROFILE_ROUTE_URL} element={<Profile />} />
+              <Route element={<ProfileEditor />} /> */}
+            <Route path={PROFILE_ROUTE_URL} element={<ProtectedRoute element={<Profile />} />}>
+              <Route index element={<ProfileEditor />} />
+              <Route path={PROFILE_ORDERS_ROUTE_URL} element={<ProfileOrders />} />
+              <Route path={NOT_FOUND_ROUTE_URL} element={<NotFound404 />} />
+            </Route>
             <Route path={NOT_FOUND_ROUTE_URL} element={<NotFound404 />} />
           </Routes>
         )}

@@ -29,8 +29,8 @@ export const Register = (): JSX.Element => {
   };
 
   return(
-    <>
-      { user ? <Navigate to={ location.state?.from || ORIGIN_ROUTE_URL } /> : 
+    // <>
+    //   { user ? <Navigate to={ location.state?.from || ORIGIN_ROUTE_URL } /> : 
         <div className={styles.main}>
           <div className={`${styles["main-form"]}`}>
             <h1 className="text text_type_main-medium mb-6">Регистрация</h1>
@@ -43,7 +43,7 @@ export const Register = (): JSX.Element => {
             <p className="text text_type_main-default text_color_inactive mb-4">Уже зарегистрированы? <Link className="text_color_accent ml-2" to={LOGIN_ROUTE_URL}>Войти</Link></p>
           </div>
         </div>
-      }
-    </>
+    //   }
+    // </>
   )
 }

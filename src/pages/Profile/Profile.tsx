@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Profile.module.css';
+import { PROFILE_ORDERS_ROUTE_URL } from '../../constants';
 
 export const Profile = (): JSX.Element => {
 
@@ -14,7 +15,7 @@ export const Profile = (): JSX.Element => {
             )}</NavLink>
           </li>
           <li>
-            <NavLink to={'orders'}>{({ isActive }) => (
+            <NavLink to={PROFILE_ORDERS_ROUTE_URL}>{({ isActive }) => (
                 <span className={`text text_type_main-medium ${isActive ? "text_color_primary" : "text_color_inactive"}`}>История заказов</span>
             )}</NavLink>
           </li>
