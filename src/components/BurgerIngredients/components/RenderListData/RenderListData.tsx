@@ -58,7 +58,7 @@ export const RenderListData: React.FC<IRendarListData> = (props): JSX.Element =>
 
        ref={refDragItem}
        >
-        <img src={el.image} alt={el.name} className='ml-4 mr-4'/>
+        <img src={el.image} alt={el.name} className='ml-4 mr-4' />
         <div>
           <div className={`${styles["price"]} text_type_digits-default mt-1 mb-1`}>{el.price}<CurrencyIcon type={'secondary'} /></div>
         </div>

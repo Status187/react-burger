@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { userRegistration } from '../../services/action/authAction';
 import { useAppDispatch } from '../../services/store';
 import { getAuth } from '../../services/selectors';
+import { LOGIN_ROUTE_URL, ORIGIN_ROUTE_URL } from '../../constants';
 
 export const Register = (): JSX.Element => {
 
@@ -29,7 +30,7 @@ export const Register = (): JSX.Element => {
 
   return(
     <>
-      { user ? <Navigate to={ location.state?.from || '/' } /> : 
+      { user ? <Navigate to={ location.state?.from || ORIGIN_ROUTE_URL } /> : 
         <div className={styles.main}>
           <div className={`${styles["main-form"]}`}>
             <h1 className="text text_type_main-medium mb-6">Регистрация</h1>
@@ -39,7 +40,7 @@ export const Register = (): JSX.Element => {
             <div className="mb-20">
               <Button type="primary" extraClass="mb-20" htmlType="submit" onClick={() => postRegister()}>Зарегистрироваться</Button>
             </div>
-            <p className="text text_type_main-default text_color_inactive mb-4">Уже зарегистрированы? <Link className="text_color_accent ml-2" to={'/login'}>Войти</Link></p>
+            <p className="text text_type_main-default text_color_inactive mb-4">Уже зарегистрированы? <Link className="text_color_accent ml-2" to={LOGIN_ROUTE_URL}>Войти</Link></p>
           </div>
         </div>
       }

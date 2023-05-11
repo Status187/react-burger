@@ -1,4 +1,11 @@
 export const BASE_URL = 'https://norma.nomoreparties.space/api/';
+export const ORIGIN_ROUTE_URL = '/';
+export const LOGIN_ROUTE_URL = '/login';
+export const REGISTER_ROUTE_URL = '/register';
+export const FORGOT_ROUTE_URL = '/forgot-password';
+export const RESET_ROUTE_URL = '/reset-password';
+export const PROFILE_ROUTE_URL = '/profile';
+export const NOT_FOUND_ROUTE_URL = '/profile';
 
 export const UP = '(верх)';
 export const DOWN = '(низ)';

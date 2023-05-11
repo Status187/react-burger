@@ -6,6 +6,7 @@ import { useAppDispatch } from '../../services/store';
 import { useSelector } from 'react-redux';
 import { getAuth } from '../../services/selectors';
 import { getForgotPassword } from '../../services/action/resetPasswordAction';
+import { LOGIN_ROUTE_URL, ORIGIN_ROUTE_URL } from '../../constants';
 
 export const ForgotPassword = (): JSX.Element => {
 
@@ -26,13 +27,13 @@ export const ForgotPassword = (): JSX.Element => {
 
   return(
     <>
-      { user ? <Navigate to={ location.state?.from || '/' } /> : 
+      { user ? <Navigate to={ location.state?.from || ORIGIN_ROUTE_URL } /> : 
         <div className={styles.main}>
           <div className={`${styles["main-form"]}`}>
             <h1 className="text text_type_main-medium mb-6">Восстановление пароля</h1>
             <EmailInput extraClass="mb-6" placeholder='Укажите e-mail' isIcon={false} name="email" value={email} onChange={onChange} />
             <Button type="primary" extraClass="mb-20" htmlType="submit" onClick={() => postForgotRequest()}>Восстановить</Button>
-            <p className="text text_type_main-default text_color_inactive mb-4">Вспомнили пароль?<Link className="text_color_accent ml-2" to={'/login'}>Войти</Link></p>
+            <p className="text text_type_main-default text_color_inactive mb-4">Вспомнили пароль?<Link className="text_color_accent ml-2" to={LOGIN_ROUTE_URL}>Войти</Link></p>
           </div>
         </div>
       }

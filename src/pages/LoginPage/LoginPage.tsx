@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { getAuth } from '../../services/selectors';
 import { useAppDispatch } from '../../services/store';
 import { authlogin } from '../../services/action/authAction';
+import { FORGOT_ROUTE_URL, ORIGIN_ROUTE_URL, REGISTER_ROUTE_URL } from '../../constants';
 
 export const LoginPage = (): JSX.Element => {
 
@@ -28,7 +29,7 @@ export const LoginPage = (): JSX.Element => {
 
   return(
     <>
-      { user ? <Navigate to={ location.state?.from || '/' } /> : 
+      { user ? <Navigate to={ location.state?.from || ORIGIN_ROUTE_URL } /> : 
         <div className={styles.main}>
           <div className={`${styles["main-form"]}`}>
             <h1 className="text_type_main-medium text mb-6">Вход</h1>
@@ -38,11 +39,11 @@ export const LoginPage = (): JSX.Element => {
             <Button type="primary" extraClass="mb-20" htmlType="submit" onClick={() => onClick()}>Войти</Button>
             <p className="text text_type_main-default text_color_inactive mb-4">
               Вы — новый пользователь?
-              <Link className="text_color_accent ml-2" to={'/register'}>Зарегистрироваться</Link>
+              <Link className="text_color_accent ml-2" to={REGISTER_ROUTE_URL}>Зарегистрироваться</Link>
             </p>
             <p className="text text_type_main-default text_color_inactive">
               Забыли пароль? 
-              <Link className="text_color_accent ml-2" to={'/forgot-password'}>Восстановить пароль</Link>
+              <Link className="text_color_accent ml-2" to={FORGOT_ROUTE_URL}>Восстановить пароль</Link>
             </p>
           </div>
         </div>

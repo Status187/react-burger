@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from './NotFound.module.css';
+import { ORIGIN_ROUTE_URL } from '../../constants';
 
 export const NotFound404 = (): JSX.Element => {
 
@@ -11,7 +12,7 @@ export const NotFound404 = (): JSX.Element => {
         <div className={styles.content}>
           <h1>Oops! 404 Error</h1>
           <p>The page you requested does not exist</p>
-          <p>check the address or try <Link to='/' className={styles.link}>homepage</Link></p>
+          <p>check the address or try <Link to={ORIGIN_ROUTE_URL} className={styles.link}>homepage</Link></p>
         </div>
       </div>
     </div>
