@@ -13,12 +13,6 @@ export const ProfileEditor = (): JSX.Element => {
   const navigate = useNavigate();
 
   const { name, email } = useSelector(getAuth);
-  
-  // const [state, setState] = React.useState({
-  //   name: '',
-  //   email: '',
-  //   password: ''
-  // });
 
   const {values, setValues, handleChange} = useForm({
     name: '',
@@ -33,26 +27,7 @@ export const ProfileEditor = (): JSX.Element => {
       setValues({...values, name: name, email: email})
     }
   }, [dispatch, name, email, values, setValues]);
-
-  // React.useEffect(() => {
-  //   dispatch(getUser());
-
-  //   if (name && email) {
-  //     setState({...state, name: name, email: email})
-  //   }
-  // }, [dispatch, name, email, state]);
-
-  // const onChange = (e: { target: any; }) => {
-  //   const target = e.target;
-  //   const value = target.value;
-  //   const name = target.name;
-
-  //   setState({
-  //     ...state,
-  //     [name]: value
-  //   })
-  // };
-
+  
   return(
     <div className={styles.main}>
       <div className={`${styles["main-form"]}`}>

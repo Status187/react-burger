@@ -1,4 +1,4 @@
-import { IAuthReducer } from '../../types';
+import { IAuthReducer, IInitialStateAuth } from '../../types';
 import { 
   REGISTRATION_REQUEST, 
   REGISTRATION_SUCCESS, 
@@ -15,10 +15,13 @@ import {
   EDIT_USER_AUTH_REQUEST,
   EDIT_USER_AUTH_SUCCESS,
   EDIT_USER_AUTH_FAILED
- } from '../action/actionTypes';
+} from '../action/actionTypes';
 
-const initialState = {
-  user: null,
+const initialState: IInitialStateAuth = {
+  user: {
+    email: '',
+    name: '',
+  },
   status: null,
   registerRequest: false,
   registerSuccess: false,

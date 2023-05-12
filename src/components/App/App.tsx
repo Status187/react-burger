@@ -39,13 +39,13 @@ function App(): JSX.Element {
             <Route path={REGISTER_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<Register />} />} />
             <Route path={FORGOT_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<ForgotPassword />} />} />
             <Route path={RESET_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<ResetPassword  />} />} />
-            {/* <Route path={PROFILE_ROUTE_URL} element={<Profile />} />
-              <Route element={<ProfileEditor />} /> */}
+
             <Route path={PROFILE_ROUTE_URL} element={<ProtectedRoute element={<Profile />} />}>
               <Route index element={<ProfileEditor />} />
               <Route path={PROFILE_ORDERS_ROUTE_URL} element={<ProfileOrders />} />
               <Route path={NOT_FOUND_ROUTE_URL} element={<NotFound404 />} />
             </Route>
+            
             <Route path={NOT_FOUND_ROUTE_URL} element={<NotFound404 />} />
           </Routes>
         )}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './HeaderLink.module.css';
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 type THeaderLink = {
   href: string;
@@ -23,22 +23,28 @@ export const HeaderLink = ({
     console.log(state)
   }, [state])
 
-  const iconSelection = (iconVariant: string) => {
+  const iconSelection = (iconVariant: string, isActive: boolean) => {
     switch (iconVariant) {
       case "constructor":
-        return (<BurgerIcon type={ active ? 'primary' : 'secondary'} />)
+        return (<BurgerIcon type={ isActive ? 'primary' : 'secondary'} />)
       case "orderFeed":
-        return (<ListIcon type={ active ? 'primary' : 'secondary'} />)
+        return (<ListIcon type={ isActive ? 'primary' : 'secondary'} />)
       case "personalAccount":
-        return (<ProfileIcon type={ active ? 'primary' : 'secondary'} />)
+        return (<ProfileIcon type={ isActive ? 'primary' : 'secondary'} />)
         default: return <></>
     }
   }
   
   return (
-    <Link to={href} className={`${styles["header-list-disabled"]}`}>
-      <div className={`${styles["item-icon"]} ml-5 mr-2`}>{iconSelection(iconVariant)}</div>
-      <span className={`${styles["item-text"]} mr-5`}>{children}</span>
-    </Link>
+    <NavLink to={href} className={`${styles["header-list-disabled"]}`}>
+      {({ isActive }) => (
+        <>
+          <div className={`${styles["item-icon"]} ml-5 mr-2`}>{iconSelection(iconVariant, isActive)}</div>
+          <span className={`${styles["item-text"]} text text_type_main-default mr-5 ${isActive ? "text_color_primary" : "text_color_inactive"}`}>
+              {children}
+          </span>
+        </>
+      )}
+    </NavLink>
   )
 }

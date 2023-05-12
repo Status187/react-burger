@@ -6,6 +6,7 @@ export const FORGOT_ROUTE_URL = '/forgot-password';
 export const RESET_ROUTE_URL = '/reset-password';
 export const PROFILE_ROUTE_URL = '/profile';
 export const PROFILE_ORDERS_ROUTE_URL = 'orders';
+export const PROFILE_LOGUOT_ROUTE_URL = 'logout';
 export const NOT_FOUND_ROUTE_URL = '*';
 
 export const UP = '(верх)';

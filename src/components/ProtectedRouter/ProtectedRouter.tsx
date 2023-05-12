@@ -2,7 +2,8 @@ import { useSelector } from "react-redux";
 import { Navigate } from 'react-router-dom';
 import { getAuth } from "../../services/selectors";
 import * as React from "react";
-import { LOGIN_ROUTE_URL, ORIGIN_ROUTE_URL } from "../../constants";
+import { ORIGIN_ROUTE_URL } from "../../constants";
+import { IInitialStateAuth } from "../../types";
 
 export interface IProtectRoute {
   element: any;
@@ -17,12 +18,16 @@ export const ProtectedRoute: React.FC<IProtectRoute> = (props) => {
     onlyUnAuth = false
   } = props;
 
-  const { user } = useSelector(getAuth);
-  console.log(user)
+  const { user }: IInitialStateAuth = useSelector(getAuth);
+  console.log('ProtectedRoute', user, onlyUnAuth)
 
-  // const [isUserLoaded, setUserLoaded] = React.useState(false);
+  if (user.email.length > 0 && !onlyUnAuth) {
+    return element
+  }
 
-  // const init = async () => {
+  return user.email.length === 0 && onlyUnAuth === true ? element : <Navigate to={ORIGIN_ROUTE_URL} replace/>;
+
+    // const init = async () => {
   //   await getUser();
   //   setUserLoaded(true);
   // };
@@ -34,6 +39,4 @@ export const ProtectedRoute: React.FC<IProtectRoute> = (props) => {
   // if (!onlyUnAuth) {
   //   return null;
   // }
-
-  return !user && onlyUnAuth ? element : <Navigate to={ORIGIN_ROUTE_URL} replace/>;
 };  

@@ -66,12 +66,36 @@ export interface IInitialData {
   order: null
 }
 
+export interface IUser {
+  email: string;
+  name: string;
+}
 export interface IAuthReducer {
   type: any;
-  user: any;
+  user: IUser[];
   error: any;
   status: any;
   res: { message: any; };
   message: any;
 }
+
+export interface IInitialStateAuth {
+  user: {
+    email: string;
+    name: string;
+  }
+  status: null;
+  registerRequest: boolean;
+  registerSuccess: boolean;
+  registerFailure: boolean;
+  loginRequest: boolean;
+  loginFailure: boolean;
+  logoutRequest: boolean;
+  logoutFailed: boolean;
+  getUserRequest: boolean;
+  getUserFailure: boolean;
+  editUserRequest: boolean;
+  editUserSuccess: boolean;
+  editUserFailure: boolean;
+};
 
