@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './InfoAmount.module.css';
-import { IInfoAmount } from '../../../../types';
-import { getSelectedBuns, getSelectedIngredients, getTotalAmount } from '../../../../services/selectors';
+import { IInfoAmount, IInitialStateAuth } from '../../../../types';
+import { getAuth, getSelectedBuns, getSelectedIngredients, getTotalAmount } from '../../../../services/selectors';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../../services/store';
 import { sendOrder } from '../../../../services/action/orderNumberAction';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { LOGIN_ROUTE_URL } from '../../../../constants';
 
 export const InfoAmount = ({
   onClick = () => {}
@@ -14,6 +16,9 @@ export const InfoAmount = ({
   const bun = useSelector(getSelectedBuns);
   const ingredients = useSelector(getSelectedIngredients);
   const dispatch = useAppDispatch();
+  const { user }: IInitialStateAuth = useSelector(getAuth);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const getAllOrderId = () => {
       const allIngredientsId = ingredients && ingredients.map((el) => el._id)
@@ -31,8 +36,12 @@ export const InfoAmount = ({
   }, [bun, ingredients]);
 
   const onHandleClick = () => {
-    getAllOrderId();
-    onClick();
+    if (user.email.length > 0) {
+      getAllOrderId();
+      onClick();
+    } else {
+      navigate(LOGIN_ROUTE_URL, { replace: true, state: { from: location } });
+    }
   }
 
   const totalAmount = useSelector(getTotalAmount)

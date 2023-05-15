@@ -18,10 +18,6 @@ export const HeaderLink = ({
   children,
   disabled
 }:THeaderLink):JSX.Element  => {
-  const { state } = useLocation();
-  React.useEffect(() => {
-    console.log(state)
-  }, [state])
 
   const iconSelection = (iconVariant: string, isActive: boolean) => {
     switch (iconVariant) {
@@ -33,7 +29,7 @@ export const HeaderLink = ({
         return (<ProfileIcon type={ isActive ? 'primary' : 'secondary'} />)
         default: return <></>
     }
-  }
+  };
   
   return (
     <NavLink to={href} className={`${styles["header-list-disabled"]}`}>

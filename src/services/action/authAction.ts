@@ -1,7 +1,7 @@
 import { apiRequest, refreshToken } from "../../utils/api"; 
 import { setCookie, deleteCookie, getCookie } from "../../utils/cookie";
 import { AppDispatch } from "../store";
-import { EDIT_USER_AUTH_FAILED, EDIT_USER_AUTH_REQUEST, EDIT_USER_AUTH_SUCCESS, GET_USER_AUTH_FAILED, GET_USER_AUTH_REQUEST, GET_USER_AUTH_SUCCESS, LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAILED, LOGOUT_REQUEST, LOGOUT_SUCCESS, REGISTRATION_FAILED, REGISTRATION_REQUEST, REGISTRATION_SUCCESS } from "./actionTypes";
+import { CLEAR_STATE, EDIT_USER_AUTH_FAILED, EDIT_USER_AUTH_REQUEST, EDIT_USER_AUTH_SUCCESS, GET_USER_AUTH_FAILED, GET_USER_AUTH_REQUEST, GET_USER_AUTH_SUCCESS, LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAILED, LOGOUT_REQUEST, LOGOUT_SUCCESS, REGISTRATION_FAILED, REGISTRATION_REQUEST, REGISTRATION_SUCCESS } from "./actionTypes";
 
 export const userRegistration = (name: string, email: string, password: string) => (dispatch: AppDispatch) => {
 
@@ -23,6 +23,12 @@ export const userRegistration = (name: string, email: string, password: string) 
 
   apiRequest('auth/register', options)
     .then((res) => {
+      const accessToken = res.accessToken.split("Bearer ")[1];
+        const refreshToken = res.refreshToken;
+        if (accessToken) {
+            setCookie("accessToken", accessToken);
+            localStorage.setItem("refreshToken", refreshToken);
+        }
       dispatch({
         type: REGISTRATION_SUCCESS,
         user: res.user
@@ -45,6 +51,8 @@ export const userRegistration = (name: string, email: string, password: string) 
 
     })
 };
+
+export const clearState = () => ({ type: CLEAR_STATE });
 
 export const authlogin = (email: string, password: string | number) => (dispatch: AppDispatch) => {
   const options = {
@@ -76,14 +84,14 @@ export const authlogin = (email: string, password: string | number) => (dispatch
 
 export const logout = () => (dispatch: AppDispatch) => {
   const options = {
-      method: 'POST',
-      body: JSON.stringify({
-          "token": getCookie('refreshToken')
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
+    method: 'POST',
+    body: JSON.stringify({
+        "token": getCookie('refreshToken')
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
 
   dispatch({type: LOGOUT_REQUEST});
 
@@ -129,7 +137,6 @@ export const getUser = () => (dispatch: AppDispatch) => {
         dispatch({type: GET_USER_AUTH_FAILED})
       }
     })
-
 };
 
 export const updateUser = (form: any) => (dispatch: AppDispatch) => {
@@ -137,7 +144,7 @@ export const updateUser = (form: any) => (dispatch: AppDispatch) => {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
-      'authorization': getCookie('accessToken')
+      Authorization: getCookie("accessToken")
     },
     body: JSON.stringify(form)
   };

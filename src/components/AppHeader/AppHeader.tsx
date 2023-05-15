@@ -21,8 +21,8 @@ export const AppHeader = (): JSX.Element => {
           </li>
           <li className={`${styles["header-logo"]}`}><Logo /></li>
           <li className={`${styles["item-right"]} mb-4 mt-4`}>
-            <HeaderLink href={user.email.length > 0  ? PROFILE_ROUTE_URL : LOGIN_ROUTE_URL }
-            iconVariant={"personalAccount"} children={ user.email.length > 0 ? user.email : "Личный кабинет" }/>
+            <HeaderLink href={user?.email.length > 0 ? PROFILE_ROUTE_URL : LOGIN_ROUTE_URL }
+            iconVariant={"personalAccount"} children={ user?.email.length > 0 ? user.email : "Личный кабинет" }/>
            </li>
         </ul>
       </nav>

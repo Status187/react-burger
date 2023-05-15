@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { getAuth } from "../../services/selectors";
 import * as React from "react";
-import { ORIGIN_ROUTE_URL } from "../../constants";
+import { LOGIN_ROUTE_URL, ORIGIN_ROUTE_URL, PROFILE_ROUTE_URL } from "../../constants";
 import { IInitialStateAuth } from "../../types";
 
 export interface IProtectRoute {
@@ -17,26 +17,23 @@ export const ProtectedRoute: React.FC<IProtectRoute> = (props) => {
     path,
     onlyUnAuth = false
   } = props;
+  
+  const navigate = useNavigate();
+
+  const { pathname } = useLocation();
 
   const { user }: IInitialStateAuth = useSelector(getAuth);
-  console.log('ProtectedRoute', user, onlyUnAuth)
 
-  if (user.email.length > 0 && !onlyUnAuth) {
-    return element
-  }
+  React.useEffect(() => {
+    if (!user && onlyUnAuth) {
+      navigate(LOGIN_ROUTE_URL, { state: { from: pathname }, replace: true });
+    }
+  }, [navigate, onlyUnAuth, pathname, user]);
 
-  return user.email.length === 0 && onlyUnAuth === true ? element : <Navigate to={ORIGIN_ROUTE_URL} replace/>;
-
-    // const init = async () => {
-  //   await getUser();
-  //   setUserLoaded(true);
-  // };
-
-  // React.useEffect(() => {
-  //   init();
-  // }, []);
-
+  return element
   // if (!onlyUnAuth) {
-  //   return null;
+  //   return element
+  // } else {
+  //   navigate(ORIGIN_ROUTE_URL, { state: { from: pathname }, replace: true });
   // }
 };  

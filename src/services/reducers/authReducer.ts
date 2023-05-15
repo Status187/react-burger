@@ -14,7 +14,8 @@ import {
   GET_USER_AUTH_FAILED,
   EDIT_USER_AUTH_REQUEST,
   EDIT_USER_AUTH_SUCCESS,
-  EDIT_USER_AUTH_FAILED
+  EDIT_USER_AUTH_FAILED,
+  CLEAR_STATE
 } from '../action/actionTypes';
 
 const initialState: IInitialStateAuth = {
@@ -39,6 +40,9 @@ const initialState: IInitialStateAuth = {
 
 export const authReducerReducer = (state = initialState, action: IAuthReducer) => {
   switch (action.type) {
+    case CLEAR_STATE: {
+      return initialState;
+    }
     case REGISTRATION_REQUEST: {
       return {
         ...state,
@@ -106,7 +110,10 @@ export const authReducerReducer = (state = initialState, action: IAuthReducer) =
     case LOGOUT_SUCCESS: {
       return {
         ...state,
-        user: null,
+        user: {
+          email: '',
+          name: '',
+        },
         status: action.res.message,
         logoutRequest: false,
         logoutFailure: false,

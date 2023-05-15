@@ -83,6 +83,7 @@ export interface IInitialStateAuth {
   user: {
     email: string;
     name: string;
+    password?: string;
   }
   status: null;
   registerRequest: boolean;

@@ -1,3 +1,8 @@
+.link {
+  color: var(--text-primary-color);
+  text-decoration: none;
+}
+
 .cart {
   position: relative;
   display: flex;
