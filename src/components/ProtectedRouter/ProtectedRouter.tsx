@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { getAuth } from "../../services/selectors";
 import * as React from "react";
-import { LOGIN_ROUTE_URL, ORIGIN_ROUTE_URL, PROFILE_ROUTE_URL } from "../../constants";
+import { LOGIN_ROUTE_URL,} from "../../constants";
 import { IInitialStateAuth } from "../../types";
 
 export interface IProtectRoute {
@@ -14,7 +14,6 @@ export interface IProtectRoute {
 export const ProtectedRoute: React.FC<IProtectRoute> = (props) => {
   const {
     element,
-    path,
     onlyUnAuth = false
   } = props;
   
@@ -28,12 +27,7 @@ export const ProtectedRoute: React.FC<IProtectRoute> = (props) => {
     if (!user && onlyUnAuth) {
       navigate(LOGIN_ROUTE_URL, { state: { from: pathname }, replace: true });
     }
-  }, [navigate, onlyUnAuth, pathname, user]);
+  }, [element, navigate, onlyUnAuth, pathname, user]);
 
   return element
-  // if (!onlyUnAuth) {
-  //   return element
-  // } else {
-  //   navigate(ORIGIN_ROUTE_URL, { state: { from: pathname }, replace: true });
-  // }
 };  

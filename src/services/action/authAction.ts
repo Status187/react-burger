@@ -1,3 +1,4 @@
+import { PROFILE_ROUTE_URL } from "../../constants";
 import { apiRequest, refreshToken } from "../../utils/api"; 
 import { setCookie, deleteCookie, getCookie } from "../../utils/cookie";
 import { AppDispatch } from "../store";
@@ -54,7 +55,7 @@ export const userRegistration = (name: string, email: string, password: string) 
 
 export const clearState = () => ({ type: CLEAR_STATE });
 
-export const authlogin = (email: string, password: string | number) => (dispatch: AppDispatch) => {
+export const authlogin = (email: string, password: string | number, navigator: any) => (dispatch: AppDispatch) => {
   const options = {
       method: 'POST',
       body: JSON.stringify({
@@ -74,6 +75,7 @@ export const authlogin = (email: string, password: string | number) => (dispatch
       setCookie('accessToken', res.accessToken);
       setCookie('refreshToken', res.refreshToken);
     })
+    .then(() => navigator(PROFILE_ROUTE_URL, {replace: true}))
     .catch(status => {
       dispatch({ 
         type: LOGIN_FAILED,

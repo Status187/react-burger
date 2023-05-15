@@ -1,6 +1,6 @@
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './LoginPage.module.css';
 import { useSelector } from 'react-redux';
 import { getAuth } from '../../services/selectors';
@@ -15,9 +15,11 @@ export const LoginPage = (): JSX.Element => {
 
   const dispatch = useAppDispatch();
 
+  const navigate = useNavigate();
+
   const submitForm = React.useCallback((values: any) => {
-      dispatch(authlogin(values.email, values.password));
-  }, [dispatch]);
+      dispatch(authlogin(values.email, values.password, navigate));
+  }, [dispatch, navigate]);
 
   const {values, handleChange, onSubmit} = useForm({
     email: '',

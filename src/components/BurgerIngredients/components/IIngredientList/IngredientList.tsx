@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { getActiveIngredient, getIngredients } from '../../../../services/selectors';
 import { useAppDispatch } from '../../../../services/store';
 import { SET_ACTIVE, SET_TARGET_TAB } from '../../../../services/action/actionTypes';
-import { BUN, SAUCE, FILLINGS, SURPLUS, CATEGORY_TYPES, LOGIN_ROUTE_URL, ORIGIN_ROUTE_URL } from '../../../../constants'
+import { BUN, SAUCE, FILLINGS, SURPLUS, CATEGORY_TYPES, ORIGIN_ROUTE_URL } from '../../../../constants'
 import { RenderListData } from '../RenderListData/RenderListData';
 import { useLocation, useNavigate } from 'react-router-dom';
 

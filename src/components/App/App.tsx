@@ -55,10 +55,9 @@ function App(): JSX.Element {
               <Route
                 path={`${INGREDIENTS_ROUTE_URL}/:id`}
                 element={<IngredientDetailsPage />}
-              />
-            }
+              />}
 
-            <Route path={PROFILE_ROUTE_URL} element={<ProtectedRoute element={<Profile />} />} >
+            <Route path={PROFILE_ROUTE_URL} element={<Profile />} >
               <Route index={true} element={<ProfileEditor />} />
               <Route path={PROFILE_ORDERS_ROUTE_URL} element={<ProfileOrders />} />
               <Route path={NOT_FOUND_ROUTE_URL} element={<NotFound404 />} />

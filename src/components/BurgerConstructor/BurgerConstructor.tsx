@@ -122,8 +122,8 @@ export const BurgerConstructor = (): JSX.Element => {
     <section className={`${styles["constructor-wrapper"]}`}>
       
       {isOpenModal && <Modal onClose={closeModal}>
-          <OrderDetails />
-        </Modal>}
+        <OrderDetails />
+      </Modal>}
 
       <div className={`${styles["constructor-wrapper"]} mt-25`}>
 
