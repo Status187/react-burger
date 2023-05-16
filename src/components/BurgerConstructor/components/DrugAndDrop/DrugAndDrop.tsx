@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import styles from './DrugAndDrop.module.css';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 

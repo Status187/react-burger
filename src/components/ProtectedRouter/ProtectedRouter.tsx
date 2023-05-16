@@ -1,7 +1,7 @@
+import * as React from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getAuth } from "../../services/selectors";
-import * as React from "react";
 import { LOGIN_ROUTE_URL,} from "../../constants";
 import { IInitialStateAuth } from "../../types";
 

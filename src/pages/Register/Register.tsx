@@ -1,5 +1,5 @@
-import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import * as React from 'react';
+import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
 import styles from './Register.module.css';
 import { userRegistration } from '../../services/action/authAction';

@@ -1,6 +1,6 @@
+import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import * as React from 'react';
 import styles from './IngredientsDeteilsPage.module.css';
 import { getIngredients } from '../../services/selectors';
 import { loadIngredients } from '../../services/action/ingredientsAction';

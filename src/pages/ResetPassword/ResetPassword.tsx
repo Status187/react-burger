@@ -1,5 +1,5 @@
-import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import * as React from 'react';
+import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './ResetPassword.module.css';
 import { useAppDispatch } from '../../services/store';

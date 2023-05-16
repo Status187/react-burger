@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { IElement } from '../../types';
 import styles from './IngredientDetails.module.css';
 

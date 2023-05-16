@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { IModalOverlay } from '../../types';
 import styles from './ModalOverlay.module.css';
 

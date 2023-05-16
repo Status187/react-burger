@@ -1,5 +1,5 @@
-import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import * as React from 'react';
+import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './LoginPage.module.css';
 import { useSelector } from 'react-redux';

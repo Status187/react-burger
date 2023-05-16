@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import styles from './OrderDetails.module.css';
 import graphics from '../../graphics.png';
 import { useSelector } from 'react-redux';

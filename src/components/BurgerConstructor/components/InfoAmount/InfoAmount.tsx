@@ -6,7 +6,7 @@ import { getAuth, getSelectedBuns, getSelectedIngredients, getTotalAmount } from
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../../services/store';
 import { sendOrder } from '../../../../services/action/orderNumberAction';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTE_URL } from '../../../../constants';
 
 export const InfoAmount = ({

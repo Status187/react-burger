@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './HeaderLink.module.css';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 type THeaderLink = {
   href: string;
