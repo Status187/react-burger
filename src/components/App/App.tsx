@@ -37,6 +37,10 @@ function App(): JSX.Element {
     }
   }, [dispatch]);
 
+  // React.useEffect(() => {
+  //   dispatch(loadIngredients())
+  // }, [])
+
   const { success } = useSelector(getIngredients);
 
   return (
@@ -44,27 +48,35 @@ function App(): JSX.Element {
       <AppHeader />
       <main>
         {success && (
-          <Routes location={backgroundLocation || location}>
-            <Route path={ORIGIN_ROUTE_URL} element={<div className={styles.main}><BurgerIngredients /><BurgerConstructor /></div> } />
-            <Route path={LOGIN_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<LoginPage />} />} />
-            <Route path={REGISTER_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<Register />} />} />
-            <Route path={FORGOT_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<ForgotPassword />} />} />
-            <Route path={RESET_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<ResetPassword  />} />} />
+          <>
+            <Routes location={backgroundLocation || location}>
+              <Route path={ORIGIN_ROUTE_URL} element={<div className={styles.main}><BurgerIngredients /><BurgerConstructor /></div> } />
+              <Route path={LOGIN_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<LoginPage />} />} />
+              <Route path={REGISTER_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<Register />} />} />
+              <Route path={FORGOT_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<ForgotPassword />} />} />
+              <Route path={RESET_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<ResetPassword  />} />} />
 
-            {backgroundLocation && 
+              <Route path={PROFILE_ROUTE_URL} element={<Profile />} >
+                <Route index={true} element={<ProfileEditor />} />
+                <Route path={PROFILE_ORDERS_ROUTE_URL} element={<ProfileOrders />} />
+                <Route path={NOT_FOUND_ROUTE_URL} element={<NotFound404 />} />
+              </Route>
+              
+              <Route path={NOT_FOUND_ROUTE_URL} element={<NotFound404 />} />
               <Route
                 path={`${INGREDIENTS_ROUTE_URL}/:id`}
                 element={<IngredientDetailsPage />}
-              />}
+              />
+            </Routes>
 
-            <Route path={PROFILE_ROUTE_URL} element={<Profile />} >
-              <Route index={true} element={<ProfileEditor />} />
-              <Route path={PROFILE_ORDERS_ROUTE_URL} element={<ProfileOrders />} />
-              <Route path={NOT_FOUND_ROUTE_URL} element={<NotFound404 />} />
-            </Route>
-            
-            <Route path={NOT_FOUND_ROUTE_URL} element={<NotFound404 />} />
-          </Routes>
+            {backgroundLocation &&
+              <Routes>
+                <Route
+                  path={`${INGREDIENTS_ROUTE_URL}/:id`}
+                  element={<IngredientDetailsPage />}
+                />
+              </Routes>}
+          </>
         )}
       </main>
     </div>

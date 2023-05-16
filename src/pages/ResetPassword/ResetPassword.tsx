@@ -13,7 +13,6 @@ export const ResetPassword = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const submitForm = React.useCallback((values: any) => {
-    debugger
     dispatch(postResetPassword(values.password, values.token, navigate))
   }, [dispatch, navigate]);
 
