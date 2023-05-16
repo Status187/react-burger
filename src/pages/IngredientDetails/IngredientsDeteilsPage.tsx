@@ -28,7 +28,7 @@ export const IngredientDetailsPage = () => {
 
   return stateIngredient ? (
     <div className={styles.wrapper}>
-      <div className={styles.container}>
+      <div>
         <IngredientDetails {...stateIngredient} />
       </div>
     </div>
