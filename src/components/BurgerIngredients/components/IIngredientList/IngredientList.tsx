@@ -7,8 +7,9 @@ import { useSelector } from 'react-redux';
 import { getActiveIngredient, getIngredients } from '../../../../services/selectors';
 import { useAppDispatch } from '../../../../services/store';
 import { SET_ACTIVE, SET_TARGET_TAB } from '../../../../services/action/actionTypes';
-import { BUN, SAUCE, FILLINGS, SURPLUS, CATEGORY_TYPES } from '../../../../constants'
+import { BUN, SAUCE, FILLINGS, SURPLUS, CATEGORY_TYPES, ORIGIN_ROUTE_URL } from '../../../../constants'
 import { RenderListData } from '../RenderListData/RenderListData';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const IngredientList = ({
   bunsRef,
@@ -20,6 +21,8 @@ export const IngredientList = ({
   const currentActive = useSelector(getActiveIngredient);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [isOpenModal, setIsOpenModal] = React.useState(false)
 
@@ -29,7 +32,8 @@ export const IngredientList = ({
 
   const closeModal = () => {
     dispatch({type: SET_ACTIVE, item: null})
-    setIsOpenModal(false)
+    setIsOpenModal(false);
+    navigate(ORIGIN_ROUTE_URL, { replace: true, state: { from: location } });
   };
   
   const renderListData = (data: IData[], categoryTypesElement: string) => {

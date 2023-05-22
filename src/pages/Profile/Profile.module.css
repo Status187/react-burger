@@ -1,0 +1,29 @@
+.main {
+  display: flex;
+  justify-content: left;
+  align-items: top;
+  height: 90vh;
+  overflow-y: hidden;
+  margin-top: 100px;
+}
+
+.main-form {
+  text-align: center;
+}
+
+.main-list {
+  text-align: left;
+}
+
+.main-list li {
+  list-style-type: none;
+  padding: 15px;
+  width: 290px; 
+}
+
+.description {
+  color: var(--text-inactive-color);
+  opacity: 0.4;
+  width: 320px;
+  margin-left: 54px;
+}
