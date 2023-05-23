@@ -1,7 +1,7 @@
 import { BASE_URL } from "../constants";
 import { getCookie, setCookie } from "./cookie";
 
-export const apiRequest = async (url: string, options: RequestInit | undefined) => {
+export const apiRequest = async (url: string, options: RequestInit) => {
   const res = await fetch(`${BASE_URL}${url}`, options);
   const data = await res.json();
   if (data.success) {
@@ -11,12 +11,12 @@ export const apiRequest = async (url: string, options: RequestInit | undefined) 
 };
 
 
-export const refreshToken = async ()  => {
+export const refreshToken = async () => {
   const options = {
     method: 'POST',
     body: JSON.stringify({
       "token": getCookie('refreshToken')
-  }),
+    }),
     headers: {
       'Content-Type': 'application/json'
     }

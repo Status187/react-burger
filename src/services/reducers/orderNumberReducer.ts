@@ -7,7 +7,7 @@ const initialState: IInitialData = {
   order: null
 };
 
-export const orderNumberReducer = (state = initialState, action: { type: any; order: any; } ) => {
+export const orderNumberReducer = (state = initialState, action: { type: string; order: any; }) => {
   switch (action.type) {
     case SET_ORDER_REQUEST:
       return { ...state, loading: true, isErrors: false };

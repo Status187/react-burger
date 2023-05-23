@@ -19,6 +19,6 @@ export const sendOrder = (ids: string[]) => (dispatch: AppDispatch) => {
       "ingredients": ids
     })
   })
-  .then((json: any) => dispatch({type: SET_ORDER_SUCCESS, order: json}))
-  .catch((error: any) => console.error(`"Что то пошло не так", ${error}`))
+    .then((json) => dispatch({ type: SET_ORDER_SUCCESS, order: json }))
+    .catch((error) => console.error(`"Что то пошло не так", ${error}`))
 };

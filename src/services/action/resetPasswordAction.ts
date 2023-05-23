@@ -4,7 +4,7 @@ import { AppDispatch } from "../store";
 import { FORGOT_PASSWORD_FAILED, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS, RESET_PASSWORD_FAILED, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS } from "./actionTypes";
 import { LOGIN_ROUTE_URL, RESET_ROUTE_URL } from "../../constants";
 
-export const getForgotPassword = (email: any, navigate: NavigateFunction) => (dispatch: AppDispatch) => {
+export const getForgotPassword = (email: string, navigate: NavigateFunction) => (dispatch: AppDispatch) => {
   const options = {
     method: 'POST',
     body: JSON.stringify({ 'email': email }),
@@ -16,26 +16,26 @@ export const getForgotPassword = (email: any, navigate: NavigateFunction) => (di
   dispatch({
     type: FORGOT_PASSWORD_REQUEST
   });
-  
+
   apiRequest('password-reset', options)
     .then(status => dispatch({
       type: FORGOT_PASSWORD_SUCCESS,
       status
     }))
-    .then(() => navigate(RESET_ROUTE_URL, {replace: true}))
+    .then(() => navigate(RESET_ROUTE_URL, { replace: true }))
     .catch((error) => dispatch({
       type: FORGOT_PASSWORD_FAILED,
       error
     }))
 };
 
-export const postResetPassword = (password: any, emailCode: any, navigate: NavigateFunction) => (dispatch: AppDispatch) => {
+export const postResetPassword = (password: string, emailCode: string | number, navigate: NavigateFunction) => (dispatch: AppDispatch) => {
   const options = {
     method: 'POST',
-    body: JSON.stringify(  {
+    body: JSON.stringify({
       "password": password,
       "token": emailCode
-  }),
+    }),
     headers: {
       'Content-Type': 'application/json'
     }
@@ -50,7 +50,7 @@ export const postResetPassword = (password: any, emailCode: any, navigate: Navig
       type: RESET_PASSWORD_SUCCESS,
       status
     }))
-    .then(() => navigate(LOGIN_ROUTE_URL, {replace: true}))
+    .then(() => navigate(LOGIN_ROUTE_URL, { replace: true }))
     .catch(error => dispatch({
       type: RESET_PASSWORD_FAILED,
       error

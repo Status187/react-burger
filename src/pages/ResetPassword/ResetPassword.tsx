@@ -12,8 +12,8 @@ export const ResetPassword = (): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const submitForm = React.useCallback((values: any) => {
-    dispatch(postResetPassword(values.password, values.token, navigate))
+  const submitForm = React.useCallback((values: { password?: string; token?: string; }) => {
+    dispatch(postResetPassword(values.password!, values.token!, navigate))
   }, [dispatch, navigate]);
 
   const {values, handleChange, onSubmit} = useForm({

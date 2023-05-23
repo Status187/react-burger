@@ -17,8 +17,8 @@ export const LoginPage = (): JSX.Element => {
 
   const navigate = useNavigate();
 
-  const submitForm = React.useCallback((values: any) => {
-      dispatch(authlogin(values.email, values.password, navigate));
+  const submitForm = React.useCallback((values: { email: string; password?: string; }) => {
+      dispatch(authlogin(values.email, values.password!, navigate));
   }, [dispatch, navigate]);
 
   const {values, handleChange, onSubmit} = useForm({

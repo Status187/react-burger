@@ -2,8 +2,8 @@ import {
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAILED,
-  FORGOT_PASSWORD_REQUEST, 
-  FORGOT_PASSWORD_SUCCESS, 
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_SUCCESS,
   FORGOT_PASSWORD_FAILED
 } from '../action/actionTypes';
 
@@ -17,7 +17,7 @@ const initialState = {
   resetFailure: false
 }
 
-export const resetPasswordReducer = (state = initialState, action: { type: any; status: { message: any; }; error: any; }) => {
+export const resetPasswordReducer = (state = initialState, action: { type: string; status: { message: string; }; error: any; }) => {
   switch (action.type) {
     case FORGOT_PASSWORD_REQUEST: {
       return {
@@ -48,7 +48,7 @@ export const resetPasswordReducer = (state = initialState, action: { type: any; 
         forgotFailed: true
       }
     }
-    
+
     case RESET_PASSWORD_REQUEST: {
       return {
         ...state,
@@ -77,7 +77,7 @@ export const resetPasswordReducer = (state = initialState, action: { type: any; 
         resetFailure: true
       }
     }
-    
+
     default:
       return state;
   }
