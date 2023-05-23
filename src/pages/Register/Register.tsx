@@ -11,8 +11,8 @@ export const Register = (): JSX.Element => {
 
   const dispatch = useAppDispatch();
 
-  const submitForm = React.useCallback((values: any) => {
-    dispatch(userRegistration(values.name, values.email, values.password));
+  const submitForm = React.useCallback((values: { name?: string; email?: string; password?: string; }) => {
+    dispatch(userRegistration(values.name!, values.email!, values.password!));
   }, [dispatch]);
 
   const {values, handleChange, onSubmit} = useForm({
@@ -25,9 +25,9 @@ export const Register = (): JSX.Element => {
     <div className={styles.main}>
       <form className={`${styles["main-form"]}`} onSubmit={onSubmit}>
         <h1 className="text text_type_main-medium mb-6">Регистрация</h1>
-        <Input placeholder="Имя" extraClass="mb-6" name="name" value={values.name} onChange={handleChange} />
+        <Input placeholder="Имя" extraClass="mb-6" name="name" value={values.name as string} onChange={handleChange} />
         <EmailInput extraClass="mb-6" name="email" value={values.email} onChange={handleChange} />
-        <PasswordInput extraClass="mb-6" name="password" value={values.password} onChange={handleChange} />
+        <PasswordInput extraClass="mb-6" name="password" value={values.password as string} onChange={handleChange} />
         <div className="mb-20">
           <Button type="primary" extraClass="mb-20" htmlType="submit">Зарегистрироваться</Button>
         </div>

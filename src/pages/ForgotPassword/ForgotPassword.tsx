@@ -13,7 +13,7 @@ export const ForgotPassword = (): JSX.Element => {
 
   const navigate = useNavigate();
 
-  const submitForm = React.useCallback((values: any) => {
+  const submitForm = React.useCallback((values: { email: string; }) => {
     dispatch(getForgotPassword(values.email, navigate))
   }, [dispatch, navigate]);
 

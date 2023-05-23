@@ -31,7 +31,7 @@ export const LoginPage = (): JSX.Element => {
       <form className={`${styles["main-form"]}`} onSubmit={onSubmit}>
         <h1 className="text_type_main-medium text mb-6">Вход</h1>
         <EmailInput extraClass="mb-6" name="email" value={values.email} onChange={handleChange} />
-        <PasswordInput extraClass="mb-6" name="password" value={values.password} onChange={handleChange} />
+        <PasswordInput extraClass="mb-6" name="password" value={values.password as string} onChange={handleChange} />
         { loginFailure && <p className="text text_type_main-default text_color_error">{status}</p>}
         <Button type="primary" extraClass="mb-20" htmlType="submit">Войти</Button>
         <p className="text text_type_main-default text_color_inactive mb-4">

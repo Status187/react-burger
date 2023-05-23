@@ -4,12 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { getAuth } from "../../services/selectors";
 import { LOGIN_ROUTE_URL,} from "../../constants";
 import { IInitialStateAuth } from "../../types";
-
-export interface IProtectRoute {
-  element: any;
-  path?: string;
-  onlyUnAuth?: boolean;
-}
+import { IProtectRoute } from "./interfaces";
 
 export const ProtectedRoute: React.FC<IProtectRoute> = (props) => {
   const {
