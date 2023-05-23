@@ -5,9 +5,10 @@ import { SORT_INGREDIENTS } from '../../../../services/action/actionTypes';
 import { useAppDispatch } from '../../../../services/store';
 import { DrugAndDrop } from '../DrugAndDrop/DrugAndDrop';
 import styles from './IngredientsChoice.module.css';
+import { IData } from '../../../../types';
 
 interface IIngredientsChoice {
-  el: any,
+  el: IData,
   index: number,
   onDelete: (index: number) => void
 }
@@ -24,7 +25,7 @@ export const IngredientsChoice: React.FC<IIngredientsChoice> = (props): JSX.Elem
 
   const [, drop] = useDrop({
     accept: "cart",
-    drop(el: any) {
+    drop(el: {index: number}) {
       if (index !== el.index) {
           dispatch({ type: SORT_INGREDIENTS, indexCurrent: index, indexNext: el.index });
       }

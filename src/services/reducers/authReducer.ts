@@ -1,7 +1,7 @@
 import { IAuthReducer, IInitialStateAuth } from '../../types';
-import { 
-  REGISTRATION_REQUEST, 
-  REGISTRATION_SUCCESS, 
+import {
+  REGISTRATION_REQUEST,
+  REGISTRATION_SUCCESS,
   REGISTRATION_FAILED,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -182,6 +182,6 @@ export const authReducerReducer = (state = initialState, action: IAuthReducer) =
     }
 
     default:
-        return state;
-    }
+      return state;
+  }
 };

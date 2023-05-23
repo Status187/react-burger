@@ -13,7 +13,7 @@ export const BurgerIngredients = (): JSX.Element => {
 
   const tabCurrent = useSelector(getTargetTab);
 
-  const handleChoice = (type: any) => {
+  const handleChoice = (type: string) => {
     dispatch({ type: SET_TARGET_TAB, tab: type})
   };
 

@@ -8,12 +8,8 @@ import { useAppDispatch } from '../../../../services/store';
 import styles from './RenderListData.module.css';
 import { INGREDIENTS_ROUTE_URL } from '../../../../constants';
 import { Link, useLocation } from 'react-router-dom';
-
-interface IRendarListData {
-  categoryTypesElement: any;
-  el: any;
-  openModal: () => void;
-}
+import { IData } from '../../../../types';
+import { IRendarListData, IStateIds } from './interfaces';
 
 export const RenderListData: React.FC<IRendarListData> = (props): JSX.Element => {
   const {
@@ -23,18 +19,19 @@ export const RenderListData: React.FC<IRendarListData> = (props): JSX.Element =>
   } = props;
 
   const ingredients = useSelector(getSelectedIngredients);
-  const bun = useSelector(getSelectedBuns);
+  const bun: IData = useSelector(getSelectedBuns);
 
   const dispatch = useAppDispatch();
 
   const countData = React.useMemo(() => {
-    const stateIds: any = {};
+    const stateIds: IStateIds = {};
+    
     if ( bun ) {
-        stateIds[bun._id] = 2;
+      stateIds[bun._id] = 2;
     }
     for ( let item of ingredients ) {
-        if ( !(item._id in stateIds) ) { stateIds[item._id] = 0; }
-        stateIds[item._id]++;
+      if ( !(item._id in stateIds) ) { stateIds[item._id] = 0; }
+      stateIds[item._id]++;
     }
     return stateIds;
   }, [ ingredients, bun ]);
@@ -53,7 +50,6 @@ export const RenderListData: React.FC<IRendarListData> = (props): JSX.Element =>
   }
   
   const location = useLocation();
-  React.useEffect(() => {console.log(location)}, [location]);
 
   return (
     <>
