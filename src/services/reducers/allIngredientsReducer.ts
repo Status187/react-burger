@@ -11,7 +11,6 @@ export function allIngredientsReducer(state = initialState, action: { type: stri
     case SAVE_INGREDIENTS:
       return { ...state, list: action.list };
     case SET_ACTIVE:
-      console.log(action.item)
       return { ...state, currentActive: action.item };
     default:
       return state;
