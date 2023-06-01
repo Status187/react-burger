@@ -45,17 +45,19 @@ export const IngredientList = ({
     )
   };
 
-  const handleScroll = (e: { currentTarget: { scrollTop: any; }; }) => {
+  const handleScroll = (e: { currentTarget: { scrollTop: number; } }) => {
     const scrollPosition = e.currentTarget.scrollTop;
-    const soucesContainer = soucesRef.current !== null && soucesRef.current.offsetTop;
-    const fillingsContainer = fillingsRef.current !== null && fillingsRef.current.offsetTop;
-    if (scrollPosition + SURPLUS <= soucesContainer) {
-      dispatch({ type: SET_TARGET_TAB, tab: BUN})
-    }
-    else if (scrollPosition + SURPLUS <= fillingsContainer) {
-      dispatch({ type: SET_TARGET_TAB, tab: SAUCE})
-    } else {
-      dispatch({ type: SET_TARGET_TAB, tab: FILLINGS})
+    if (soucesRef.current !== null && fillingsRef.current !== null) {
+      const soucesContainer = soucesRef.current && soucesRef.current.offsetTop;
+      const fillingsContainer = fillingsRef.current && fillingsRef.current.offsetTop;
+      if (scrollPosition + SURPLUS <= soucesContainer) {
+        dispatch({ type: SET_TARGET_TAB, tab: BUN})
+      }
+      else if (scrollPosition + SURPLUS <= fillingsContainer) {
+        dispatch({ type: SET_TARGET_TAB, tab: SAUCE})
+      } else {
+        dispatch({ type: SET_TARGET_TAB, tab: FILLINGS})
+      }
     }
 }
 

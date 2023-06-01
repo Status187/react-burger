@@ -40,8 +40,8 @@ export interface IModalOverlay {
 export interface IDataState {
   type: string;
   payload: {
-      success: boolean;
-      data: IData[];
+    success: boolean;
+    data: IData[];
   }
 };
 export interface IInitialState {
@@ -52,12 +52,12 @@ export interface IInfoAmount {
   onClick: () => void
 }
 export interface IDataReduce {
-  order: any;
-  type: string; 
-  payload: { 
+  order: number;
+  type: string;
+  payload: {
     success: boolean;
     name: string;
-    order: number; 
+    order: number;
   };
 }
 export interface IInitialData {
@@ -71,12 +71,12 @@ export interface IUser {
   name: string;
 }
 export interface IAuthReducer {
-  type: any;
+  type: string;
   user: IUser[];
-  error: any;
-  status: any;
-  res: { message: any; };
-  message: any;
+  error: string;
+  status: string;
+  res: { message: string; };
+  message: string;
 }
 
 export interface IInitialStateAuth {

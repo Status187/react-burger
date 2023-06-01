@@ -25,7 +25,7 @@ export const CATEGORY_TYPES = {
   sauce: "sauce"
 };
 
-export const SURPLUS = 300;
+export const SURPLUS: number = 300;
 
 export const INGREDIENTS_TEXT = "Переместите ингредиенты";
 export const BUNS_TEXT = "Переместите булки";

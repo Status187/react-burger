@@ -37,10 +37,6 @@ function App(): JSX.Element {
     }
   }, [dispatch]);
 
-  // React.useEffect(() => {
-  //   dispatch(loadIngredients())
-  // }, [])
-
   const { success } = useSelector(getIngredients);
 
   return (
