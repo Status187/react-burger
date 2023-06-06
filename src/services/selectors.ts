@@ -17,3 +17,7 @@ export const getOrder = (state: RootState) => state.order;
 export const getAuth = (state: RootState) => state.auth;
 
 export const getResetPassword = (state: RootState) => state.resetPassword;
+
+export const getAllOrders = (state: RootState) => state.allOrders;
+
+export const getUserOrders = (state: RootState) => state.userOrders;
