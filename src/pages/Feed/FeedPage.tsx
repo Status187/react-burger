@@ -6,11 +6,13 @@ import { ALL_ORDERS_END, ALL_ORDERS_START } from '../../services/action/allOrder
 import { API_WS_URL } from '../../constants';
 import { useAppDispatch } from '../../services/store';
 import { useSelector } from 'react-redux';
+import { OrdersList } from './components/OrdersList/OrdersList';
 
 
 export const Feed = (): JSX.Element =>  {
   const dispatch = useAppDispatch();
-  const { wsConnected, error, message } = useSelector(getAllOrders);
+  const { wsConnected, message } = useSelector(getAllOrders);
+  console.log(message)
 
   useEffect(() => {
     dispatch({ type: ALL_ORDERS_START, url: `${API_WS_URL}/orders/all` });
@@ -22,11 +24,11 @@ export const Feed = (): JSX.Element =>  {
   return (
     <div className="feed">
       {!wsConnected && <Loading />}
-      {!!error && <p className={`mb-2 error-text text text_type_main-default`}>{error}</p>}
-      {wsConnected && !message && (
+      {wsConnected && (
         <div className={styles.content}>
           <div className={styles.left_wrapper}>
             <span className="text text_type_main-large mt-6">Лента заказов</span>
+            {message && <OrdersList data={message} />}
           </div>
           <div className={styles.right_wrapper}>
           </div>

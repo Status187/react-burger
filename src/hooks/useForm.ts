@@ -20,9 +20,9 @@ export function useForm(inputValues: IStateForm, submitForm: (prevState: {
     }
   }, [submitForm, values]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setValues({ ...values, [name]: value });
-  };
+  }, [values]);
   return { values, setValues, handleChange, onSubmit };
 };

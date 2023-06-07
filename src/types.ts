@@ -102,7 +102,7 @@ export interface IInitialStateAuth {
   editUserFailure: boolean;
 };
 
-export interface IwsOrder {
+export interface IWsOrder {
   ingredients: string[];
   _id: string;
   status: string;
@@ -115,7 +115,7 @@ export interface IwsOrder {
 export type AppActions = TAllOrdersActions | TUserOrdersActions;
 
 export interface IListOrders  {
-  orders: IwsOrder[];
+  orders: IWsOrder[];
   total: number;
   totalToday: number;
 };

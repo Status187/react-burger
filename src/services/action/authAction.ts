@@ -139,6 +139,7 @@ export const getUser = () => (dispatch: AppDispatch) => {
       })
     })
     .catch(error => {
+      debugger
       if (error === 'jwt expired') {
         refreshToken()
           .then(() => dispatch(getUser()))
