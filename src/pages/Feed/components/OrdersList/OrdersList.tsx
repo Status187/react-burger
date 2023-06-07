@@ -8,7 +8,7 @@ export const OrdersList: React.FC<IOrderList> = ({ data }) => {
   return (
     <div className={`${styles.orders} custom-scroll`}>
       {data.orders && data.orders.map((elem: IWsOrder, index: number) =>
-        <OrdersItem key={index} order={elem} isPersonality={false} />
+        <OrdersItem key={index} order={elem} />
       )}
     </div>
   );

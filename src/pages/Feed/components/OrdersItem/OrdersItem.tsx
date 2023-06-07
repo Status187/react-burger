@@ -6,19 +6,12 @@ import { IOrderList } from "./interfaces";
 import { useSelector } from "react-redux";
 import { getIngredients } from "../../../../services/selectors";
 import { IData } from "../../../../types";
+import { MAXIMUM_NUMBER_ELEMENTS } from "../../../../constants";
 
-export const OrdersItem: React.FC<IOrderList> = ({order, isPersonality}) => {
+export const OrdersItem: React.FC<IOrderList> = ({order}) => {
   const location = useLocation();
 
   const { data } = useSelector(getIngredients);
-
-  const status = React.useMemo(
-    () => order.status === 'done' ? 'Выполнен' : order.status === 'created' ? 'Создан' : 'Готовится', [order]
-  );
-  
-  const colorStatus = React.useMemo(
-    () => order.status === 'done' ? styles.done : styles.default, [order]
-  );
 
   const orderIngredients = React.useMemo(
     () => order.ingredients.map((elId: string) => {
@@ -27,10 +20,8 @@ export const OrdersItem: React.FC<IOrderList> = ({order, isPersonality}) => {
     }), [data, order.ingredients]
   );
 
-  const maximumNumberElements = 6;
-
   const firstElements = React.useMemo(
-    () => orderIngredients.slice(0, maximumNumberElements)
+    () => orderIngredients.slice(0, MAXIMUM_NUMBER_ELEMENTS)
     , [orderIngredients]
   );
   
@@ -39,7 +30,7 @@ export const OrdersItem: React.FC<IOrderList> = ({order, isPersonality}) => {
     , [orderIngredients]
   );
 
-  const hideExcess = order.ingredients.length - maximumNumberElements;
+  const hideExcess = order.ingredients.length - MAXIMUM_NUMBER_ELEMENTS;
   const calc = (-2 * 10);
   
   return (
@@ -53,11 +44,6 @@ export const OrdersItem: React.FC<IOrderList> = ({order, isPersonality}) => {
     <div className={`${styles.title} text text_type_main-medium`}>
       {order.name}
     </div>
-    {isPersonality && status &&
-      <span className={`${styles.status} ${colorStatus} text text_type_main-default`}>
-        {status}
-      </span>
-    }
     <div className={styles.ingredients}>
       <div className={styles.ingredients_images}>
         {firstElements && firstElements.map((item: IData | undefined, el: number) => {
@@ -68,13 +54,13 @@ export const OrdersItem: React.FC<IOrderList> = ({order, isPersonality}) => {
               className={`${styles["ingredients_image"]}`}>
 
               <img
-                style={{ opacity: maximumNumberElements === (el + 1) && hideExcess > 0 ? '0.5' : '1' }}
+                style={{ opacity: MAXIMUM_NUMBER_ELEMENTS === (el + 1) && hideExcess > 0 ? '0.5' : '1' }}
                 src={item!.image_mobile}
                 alt={item!.name}
               />
 
               {
-                hideExcess > 0 && el === (maximumNumberElements - 1) &&
+                hideExcess > 0 && el === (MAXIMUM_NUMBER_ELEMENTS - 1) &&
                 <span className={`${styles.ingredients_hidden} text text_type_main-default`}>{'+' + hideExcess}</span>
               }
             </span>

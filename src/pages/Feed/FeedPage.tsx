@@ -7,6 +7,7 @@ import { ALL_ORDERS_URL } from '../../constants';
 import { useAppDispatch } from '../../services/store';
 import { useSelector } from 'react-redux';
 import { OrdersList } from './components/OrdersList/OrdersList';
+import { OrdersDetails } from './components/OrdersDetails/OrdersDetails';
 
 
 export const Feed = (): JSX.Element =>  {
@@ -25,14 +26,17 @@ export const Feed = (): JSX.Element =>  {
     <div className="feed">
       {!wsConnected && <Loading />}
       {wsConnected && (
-        <div className={styles.content}>
-          <div className={styles.left_wrapper}>
-            <span className="text text_type_main-large mt-6">Лента заказов</span>
-            {message && <OrdersList data={message} />}
+        <>
+        <h1 className={`${styles.title} text text_type_main-large`}>Лента заказов</h1>
+          <div className={styles.content}>
+            <div className={styles.left_wrapper}>
+              {message && <OrdersList data={message} />}
+            </div>
+            <div className={styles.right_wrapper}>
+              {message && <OrdersDetails data={message} />}
+            </div>
           </div>
-          <div className={styles.right_wrapper}>
-          </div>
-        </div>
+        </>
       )}
     </div>
   );

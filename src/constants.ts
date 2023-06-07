@@ -36,6 +36,10 @@ export const CATEGORY_TYPES: {
 
 export const SURPLUS: number = 300;
 
+export const MAXIMUM_NUMBER_ELEMENTS: number = 6;
+
+export const lIMITED_QUANTITY: number = 20;
+
 export const INGREDIENTS_TEXT: string = "Переместите ингредиенты";
 export const BUNS_TEXT: string = "Переместите булки";
 

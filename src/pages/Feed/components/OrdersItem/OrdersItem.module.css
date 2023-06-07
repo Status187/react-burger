@@ -25,14 +25,6 @@
   margin: 6px 0px 0px 0px;
 }
 
-.done {
-  color: #00CCCC;
-}
-
-.default {
-  color: white;
-}
-
 .ingredients {
   display: flex;
   flex-direction: row;
