@@ -6,7 +6,7 @@ import { OrdersItem } from '../OrdersItem/OrdersItem';
 
 export const OrdersList: React.FC<IOrderList> = ({ data }) => {
   return (
-    <div className={styles.orders}>
+    <div className={`${styles.orders} custom-scroll`}>
       {data.orders && data.orders.map((elem: IWsOrder, index: number) =>
         <OrdersItem key={index} order={elem} isPersonality={false} />
       )}

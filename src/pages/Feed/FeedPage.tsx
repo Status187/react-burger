@@ -3,7 +3,7 @@ import { getAllOrders } from '../../services/selectors';
 import { Loading } from '../../components/loading/Loading';
 import styles from './FeedPage.module.css';
 import { ALL_ORDERS_END, ALL_ORDERS_START } from '../../services/action/allOrdersAction';
-import { API_WS_URL } from '../../constants';
+import { ALL_ORDERS_URL } from '../../constants';
 import { useAppDispatch } from '../../services/store';
 import { useSelector } from 'react-redux';
 import { OrdersList } from './components/OrdersList/OrdersList';
@@ -15,7 +15,7 @@ export const Feed = (): JSX.Element =>  {
   console.log(message)
 
   useEffect(() => {
-    dispatch({ type: ALL_ORDERS_START, url: `${API_WS_URL}/orders/all` });
+    dispatch({ type: ALL_ORDERS_START, url: `${ALL_ORDERS_URL}` });
     return () => {
       dispatch({ type: ALL_ORDERS_END });
     }

@@ -1,6 +1,8 @@
 export const BASE_URL: 'https://norma.nomoreparties.space/api/' = 'https://norma.nomoreparties.space/api/';
-export const API_WS_URL = 'wss://norma.nomoreparties.space/api/';
+export const API_WS_URL = 'wss://norma.nomoreparties.space';
 
+export const ALL_ORDERS_URL = `${API_WS_URL}/orders/all`;
+export const USER_ORDERS_URL = `${API_WS_URL}/orders`;
 export const ORIGIN_ROUTE_URL: '/' = '/';
 export const LOGIN_ROUTE_URL: '/login' = '/login';
 export const FEED_ROUTE_URL: '/feed' = "/feed";
