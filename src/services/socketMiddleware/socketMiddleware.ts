@@ -2,6 +2,7 @@ import type { Middleware, MiddlewareAPI } from 'redux';
 import { refreshToken } from '../../utils/api';
 import { AppDispatch, RootState } from '../store';
 import { AppActions, wsActionsTypes } from '../../types';
+import { getCookie } from '../../utils/cookie';
 
 export function getEventMessage(e: Event) {
   if (e instanceof ErrorEvent) {
@@ -24,9 +25,12 @@ export const socketMiddleware = (wsActions: wsActionsTypes): Middleware => {
 
       if (action.type === wsActions.onStart) {
         url = action.url;
-        
-        let current = 0;
 
+        if (action.addToken) {
+          const token = getCookie('accessToken')?.split("Bearer ")[1]
+          url += `?token=${token}`;
+        }
+        let current = 0;
         while (current < 10) {
           try { 
             socket = new WebSocket(url);

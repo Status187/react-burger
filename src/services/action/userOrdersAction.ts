@@ -11,6 +11,7 @@ export const USER_ORDERS_MESSAGE = "USER_ORDERS_MESSAGE";
 export interface IUserStartAction {
   readonly type: typeof USER_ORDERS_START;
   readonly url: string;
+  readonly addToken: boolean;
 }
 
 export interface IUserOpenAction {
