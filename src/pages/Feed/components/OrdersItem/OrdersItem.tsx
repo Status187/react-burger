@@ -35,43 +35,43 @@ export const OrdersItem: React.FC<IOrderList> = ({order}) => {
   
   return (
     <Link className={`${styles.link}`} to={`${location.pathname}/${order.number}`} state={{ location: location }}> 
-    <div className='m-6'>
-      <div className={styles.link_header}>
-        <span className='text text_type_digits-default'>{'#' + order.number}</span>
-        <FormattedDate date={new Date(order.createdAt)} className='text text_type_main-default text_color_inactive ml-4' />
+      <div className='m-6'>
+        <div className={styles.link_header}>
+          <span className='text text_type_digits-default'>{'#' + order.number}</span>
+          <FormattedDate date={new Date(order.createdAt)} className='text text_type_main-default text_color_inactive ml-4' />
+        </div>
       </div>
-    </div>
-    <div className={`${styles.title} text text_type_main-medium`}>
-      {order.name}
-    </div>
-    <div className={styles.ingredients}>
-      <div className={styles.ingredients_images}>
-        {firstElements && firstElements.map((item: IData | undefined, el: number) => {
-          return (
-            <span 
-              key={el}
-              style={{ marginRight: calc }}
-              className={`${styles["ingredients_image"]}`}>
+      <div className={`${styles.title} text text_type_main-medium`}>
+        {order.name}
+      </div>
+      <div className={styles.ingredients}>
+        <div className={styles.ingredients_images}>
+          {firstElements && firstElements.map((item: IData | undefined, el: number) => {
+            return (
+              <span 
+                key={el}
+                style={{ marginRight: calc }}
+                className={`${styles["ingredients_image"]}`}>
 
-              <img
-                style={{ opacity: MAXIMUM_NUMBER_ELEMENTS === (el + 1) && hideExcess > 0 ? '0.5' : '1' }}
-                src={item!.image_mobile}
-                alt={item!.name}
-              />
+                <img
+                  style={{ opacity: MAXIMUM_NUMBER_ELEMENTS === (el + 1) && hideExcess > 0 ? '0.5' : '1' }}
+                  src={item!.image_mobile}
+                  alt={item!.name}
+                />
 
-              {
-                hideExcess > 0 && el === (MAXIMUM_NUMBER_ELEMENTS - 1) &&
-                <span className={`${styles.ingredients_hidden} text text_type_main-default`}>{'+' + hideExcess}</span>
-              }
-            </span>
-          )
-        })}
+                {
+                  hideExcess > 0 && el === (MAXIMUM_NUMBER_ELEMENTS - 1) &&
+                  <span className={`${styles.ingredients_hidden} text text_type_main-default`}>{'+' + hideExcess}</span>
+                }
+              </span>
+            )
+          })}
+        </div>
+        <div className={styles.amount}>
+          <span className={`text text_type_digits-default`}>{orderAmount}</span>
+          <CurrencyIcon type="primary" />
+        </div>
       </div>
-      <div className={styles.amount}>
-        <span className={`text text_type_digits-default`}>{orderAmount}</span>
-        <CurrencyIcon type="primary" />
-      </div>
-    </div>
     </Link>
   );
 };

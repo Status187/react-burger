@@ -7,7 +7,7 @@ import { loadIngredients } from '../../services/action/ingredientsAction';
 import { useAppDispatch } from '../../services/store';
 import { useSelector } from 'react-redux';
 import { getIngredients } from '../../services/selectors';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { NotFound404 } from '../../pages/NotFound/NotFound';
 import { LoginPage } from '../../pages/LoginPage/LoginPage';
 import { Register } from '../../pages/Register/Register';
@@ -22,12 +22,20 @@ import { getUser } from '../../services/action/authAction';
 import { getCookie } from '../../utils/cookie';
 import { IngredientDetailsPage } from '../../pages/IngredientDetails/IngredientsDeteilsPage';
 import { Feed } from '../../pages/Feed/FeedPage';
+import { OrderInfo } from '../OrderInfo/OrderInfo';
+import { Modal } from '../Modal/Modal';
+import { OrderPage } from '../../pages/Feed/components/OrderPage/OrderPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const location = useLocation();
-  const backgroundLocation = location.state && location.state.background;
+  const navigate = useNavigate();
+  const backgroundLocation: Location = location.state && location.state.background;
+
+  const handleCloseModal = () => {
+    navigate(-1);
+  }
   
   React.useEffect(() => {
     const accessToken = getCookie('accessToken');
@@ -53,6 +61,7 @@ function App(): JSX.Element {
               <Route path={REGISTER_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<Register />} />} />
               <Route path={FORGOT_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<ForgotPassword />} />} />
               <Route path={RESET_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<ResetPassword  />} />} />
+              <Route path={`${FEED_ROUTE_URL}/:id`} element={<OrderPage />}/>
 
               <Route path={PROFILE_ROUTE_URL} element={<Profile />} >
                 <Route index={true} element={<ProfileEditor />} />
@@ -72,6 +81,9 @@ function App(): JSX.Element {
                 <Route
                   path={`${INGREDIENTS_ROUTE_URL}/:id`}
                   element={<IngredientDetailsPage />}
+                />
+                <Route path={`${FEED_ROUTE_URL}/:id`} 
+                  element={<Modal onClose={handleCloseModal}><OrderInfo /></Modal>}
                 />
               </Routes>}
           </>

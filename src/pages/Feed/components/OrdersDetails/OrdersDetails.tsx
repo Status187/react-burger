@@ -29,12 +29,13 @@ export const OrdersDetails: React.FC<IOrdersDetails> = ({ data }) => {
           <h2 className="text text_type_main-medium">Готовы:</h2>
           <div className={`${styles.list_orders_numbers} mt-12`}>
             <div className={styles.grid_orders}>
-              {ordersСompleted.map((item, index) =>
+              {ordersСompleted.map((item, index) => (
                 <div key={index} className="mt-2 mr-8">
                   <Link to={`${item}`} state={{ location: location }} className={styles.ready_order}>
                     <span className="text text_type_digits-default">{item}</span>
                   </Link>
                 </div>
+                )
               )}
             </div>
           </div>
@@ -43,12 +44,13 @@ export const OrdersDetails: React.FC<IOrdersDetails> = ({ data }) => {
           <h2 className="text text_type_main-medium">В работе:</h2>
           <div className={styles.list_orders_numbers}>
             <div className={styles.grid_orders}>
-              {ordersInProgress.map((item, index) =>
+              {ordersInProgress.map((item, index) => (
                 <div key={index} className="mt-2 mr-8">
                   <Link to={`${item}`} state={{ location: location }} className={styles.work_order}>
                     <span className="text text_type_digits-default">{item}</span>
                   </Link>
                 </div>
+                )
               )}
             </div>
           </div>

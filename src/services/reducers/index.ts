@@ -7,6 +7,7 @@ import { authReducerReducer } from "./authReducer";
 import { resetPasswordReducer } from "./resetPasswordReducer";
 import { allOrdersReducer } from "./allOrdersReducer";
 import { ordersUserReducer } from "./userOrdersReducer";
+import { getOrderReducer } from "./orderReducer";
 
 export default combineReducers({
   tabItems: tabReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
   resetPassword: resetPasswordReducer,
   allOrders: allOrdersReducer,
   userOrders: ordersUserReducer,
+  getOrder: getOrderReducer
 });

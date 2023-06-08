@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import * as React from 'react';
 import { getAllOrders } from '../../services/selectors';
 import { Loading } from '../../components/loading/Loading';
 import styles from './FeedPage.module.css';
@@ -9,13 +9,12 @@ import { useSelector } from 'react-redux';
 import { OrdersList } from './components/OrdersList/OrdersList';
 import { OrdersDetails } from './components/OrdersDetails/OrdersDetails';
 
-
 export const Feed = (): JSX.Element =>  {
   const dispatch = useAppDispatch();
   const { wsConnected, message } = useSelector(getAllOrders);
-  console.log(message)
 
-  useEffect(() => {
+
+  React.useEffect(() => {
     dispatch({ type: ALL_ORDERS_START, url: `${ALL_ORDERS_URL}` });
     return () => {
       dispatch({ type: ALL_ORDERS_END });
@@ -27,7 +26,7 @@ export const Feed = (): JSX.Element =>  {
       {!wsConnected && <Loading />}
       {wsConnected && (
         <>
-        <h1 className={`${styles.title} text text_type_main-large`}>Лента заказов</h1>
+          <h1 className={`${styles.title} text text_type_main-large`}>Лента заказов</h1>
           <div className={styles.content}>
             <div className={styles.left_wrapper}>
               {message && <OrdersList data={message} />}

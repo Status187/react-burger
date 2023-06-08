@@ -18,6 +18,10 @@ export interface IData {
   v?: number
 };
 
+export type TCount = IData & {
+  quantity: number;
+}
+
 export type TCardElement = {
   bunsRef: React.RefObject<HTMLDivElement>,
   soucesRef: React.RefObject<HTMLDivElement>,

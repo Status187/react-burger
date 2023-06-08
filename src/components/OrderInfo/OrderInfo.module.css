@@ -1,0 +1,58 @@
+.wrapper {
+  margin: 0 auto;
+  width: 600px;
+}
+
+.number {
+  text-align: center;
+}
+
+.status {
+  color: var(--colors-interface-success);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 320px;
+  overflow: auto;
+  width: 620px;
+}
+
+.name_wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.wrapper_price {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 180px;
+}
+
+.name {
+  width: 330px;
+  word-wrap: normal;
+}
+
+.ingredient_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.image_wrapper {
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(var(--background-alt), var(--background-alt)) padding-box, linear-gradient(to right, var(--colors-interface-accent), var(--colors-interface-accent)) border-box;
+  border-radius: 100px;
+  border: 2px solid transparent;
+  height: 64px;
+  width: 64px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
