@@ -1,12 +1,12 @@
 import * as React from 'react';
 import styles from './OrderDetails.module.css';
 import graphics from '../../graphics.png';
-import { useSelector } from 'react-redux';
 import { getOrder } from '../../services/selectors';
+import { useAppSelector } from '../../services/store';
 
 export const OrderDetails = (): JSX.Element => {
 
-  const { order } = useSelector(getOrder)
+  const { order } = useAppSelector(getOrder)
 
   return (
     <div className={`${styles["modal-order"]} mt-30 mb-30`}>

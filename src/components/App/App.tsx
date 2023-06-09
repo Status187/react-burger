@@ -4,8 +4,7 @@ import { BurgerConstructor } from '../BurgerConstructor/BurgerConstructor';
 import { BurgerIngredients } from '../BurgerIngredients/BurgerIngredients';
 import styles from './App.module.css';
 import { loadIngredients } from '../../services/action/ingredientsAction';
-import { useAppDispatch } from '../../services/store';
-import { useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../services/store';
 import { getIngredients } from '../../services/selectors';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { NotFound404 } from '../../pages/NotFound/NotFound';
@@ -24,7 +23,6 @@ import { IngredientDetailsPage } from '../../pages/IngredientDetails/Ingredients
 import { Feed } from '../../pages/Feed/FeedPage';
 import { OrderInfo } from '../OrderInfo/OrderInfo';
 import { Modal } from '../Modal/Modal';
-import { OrderPage } from '../../pages/Feed/components/OrderPage/OrderPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -46,7 +44,7 @@ function App(): JSX.Element {
     }
   }, [dispatch]);
 
-  const { success } = useSelector(getIngredients);
+  const { success } = useAppSelector(getIngredients);
 
   return (
     <div className={styles.app}>

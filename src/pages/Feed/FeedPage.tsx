@@ -4,14 +4,13 @@ import { Loading } from '../../components/loading/Loading';
 import styles from './FeedPage.module.css';
 import { ALL_ORDERS_END, ALL_ORDERS_START } from '../../services/action/allOrdersAction';
 import { ALL_ORDERS_URL } from '../../constants';
-import { useAppDispatch } from '../../services/store';
-import { useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../services/store';
 import { OrdersList } from './components/OrdersList/OrdersList';
 import { OrdersDetails } from './components/OrdersDetails/OrdersDetails';
 
 export const Feed = (): JSX.Element =>  {
   const dispatch = useAppDispatch();
-  const { wsConnected, message } = useSelector(getAllOrders);
+  const { wsConnected, message } = useAppSelector(getAllOrders);
 
 
   React.useEffect(() => {

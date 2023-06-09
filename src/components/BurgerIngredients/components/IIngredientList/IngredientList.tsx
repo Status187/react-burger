@@ -3,9 +3,8 @@ import { IData, TCardElement } from '../../../../types';
 import styles from './IngredientList.module.css'
 import { Modal } from '../../../Modal/Modal';
 import { IngredientDetails } from '../../../IngredientDetails/IngredientDetails';
-import { useSelector } from 'react-redux';
 import { getActiveIngredient, getIngredients } from '../../../../services/selectors';
-import { useAppDispatch } from '../../../../services/store';
+import { useAppDispatch, useAppSelector } from '../../../../services/store';
 import { SET_ACTIVE, SET_TARGET_TAB } from '../../../../services/action/actionTypes';
 import { BUN, SAUCE, FILLINGS, SURPLUS, CATEGORY_TYPES, ORIGIN_ROUTE_URL } from '../../../../constants'
 import { RenderListData } from '../RenderListData/RenderListData';
@@ -17,8 +16,8 @@ export const IngredientList = ({
   fillingsRef
 }:TCardElement): JSX.Element => {
 
-  const { data } = useSelector(getIngredients);
-  const currentActive = useSelector(getActiveIngredient);
+  const { data } = useAppSelector(getIngredients);
+  const currentActive = useAppSelector(getActiveIngredient);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

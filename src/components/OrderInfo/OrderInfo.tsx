@@ -1,8 +1,7 @@
 import * as React from 'react';
 import styles from './OrderInfo.module.css'
-import { useSelector } from 'react-redux';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useAppDispatch } from '../../services/store';
+import { useAppDispatch, useAppSelector } from '../../services/store';
 import { IOrderInfo } from './interfaces';
 import { useParams } from 'react-router-dom';
 import { getOrderAction } from '../../services/action/orderAction';
@@ -17,8 +16,8 @@ export const OrderInfo: React.FC<IOrderInfo> = (): JSX.Element => {
     dispatch(getOrderAction(id));
   }, [dispatch, id]);
 
-  const { order } = useSelector(getCurrentOrder);
-  const { data } = useSelector(getIngredients);
+  const { order } = useAppSelector(getCurrentOrder);
+  const { data } = useAppSelector(getIngredients);
 
   const ingredientsSelectedOrder = React.useMemo(() => {
     const objectGroup: Record<string, TCount> = {};

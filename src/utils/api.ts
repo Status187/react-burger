@@ -2,12 +2,13 @@ import { BASE_URL } from "../constants";
 import { getCookie, setCookie } from "./cookie";
 
 export const apiRequest = async (url: string, options?: RequestInit) => {
-  const res = await fetch(`${BASE_URL}${url}`, options);
-  const data = await res.json();
-  if (data.success) {
-    return data;
-  }
-  return Promise.reject(data.message);
+  return fetch(`${BASE_URL}${url}`, options)
+    .then(res => {
+      if (res.ok) {
+          return res.json();
+      }
+      return Promise.reject(`Ошибка ${res.status}`);
+  })
 };
 
 export const refreshToken = async () => {

@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Loading } from '../../components/loading/Loading';
 import { OrdersList } from '../Feed/components/OrdersList/OrdersList';
-import { useAppDispatch } from '../../services/store';
-import { useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../services/store';
 import { getUserOrders } from '../../services/selectors';
 import { API_WS_URL } from '../../constants';
 import { USER_ORDERS_END, USER_ORDERS_START } from '../../services/action/userOrdersAction';
@@ -11,7 +10,7 @@ import { IListOrders } from '../../types';
 export const ProfileOrders = (): JSX.Element => {
 
   const dispatch = useAppDispatch();
-    const { wsConnected, error, message } = useSelector(getUserOrders);
+    const { wsConnected, error, message } = useAppSelector(getUserOrders);
 
     const messageSorted: IListOrders | null = React.useMemo(() => {
       if (!message) {

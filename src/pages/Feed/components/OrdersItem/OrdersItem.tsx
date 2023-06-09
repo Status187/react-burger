@@ -3,15 +3,15 @@ import * as React from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from './OrdersItem.module.css';
 import { IOrderList } from "./interfaces";
-import { useSelector } from "react-redux";
 import { getIngredients } from "../../../../services/selectors";
 import { IData } from "../../../../types";
 import { MAXIMUM_NUMBER_ELEMENTS } from "../../../../constants";
+import { useAppSelector } from "../../../../services/store";
 
 export const OrdersItem: React.FC<IOrderList> = ({order}) => {
   const location = useLocation();
 
-  const { data } = useSelector(getIngredients);
+  const { data } = useAppSelector(getIngredients);
 
   const orderIngredients = React.useMemo(
     () => order.ingredients.map((elId: string) => {

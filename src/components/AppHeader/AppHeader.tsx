@@ -4,12 +4,12 @@ import styles from './AppHeader.module.css';
 import { HeaderLink } from './components/HeaderLink/HeaderLink';
 import { FEED_ROUTE_URL, LOGIN_ROUTE_URL, ORIGIN_ROUTE_URL, PROFILE_ROUTE_URL } from '../../constants';
 import { getAuth } from '../../services/selectors';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../services/store';
 import { IInitialStateAuth } from '../../types';
 
 export const AppHeader = (): JSX.Element => {
 
-  const { user }: IInitialStateAuth = useSelector(getAuth);
+  const { user }: IInitialStateAuth = useAppSelector(getAuth);
 
   return (
     <header className={`${styles["header"]} text_type_main-default`}>

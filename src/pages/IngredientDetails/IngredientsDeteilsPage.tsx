@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styles from './IngredientsDeteilsPage.module.css';
 import { getIngredients } from '../../services/selectors';
 import { loadIngredients } from '../../services/action/ingredientsAction';
-import { useAppDispatch } from '../../services/store';
+import { useAppDispatch, useAppSelector } from '../../services/store';
 import { IData } from '../../types'
 import { IngredientDetails } from '../../components/IngredientDetails/IngredientDetails';
 import { useParams } from 'react-router-dom';
@@ -13,7 +12,7 @@ export const IngredientDetailsPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  const ingredients = useSelector(getIngredients);
+  const ingredients = useAppSelector(getIngredients);
   const [stateIngredient, setStateIngredient] = React.useState<IData>();
 
   React.useEffect(() => {
