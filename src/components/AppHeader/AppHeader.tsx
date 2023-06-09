@@ -6,6 +6,7 @@ import { FEED_ROUTE_URL, LOGIN_ROUTE_URL, ORIGIN_ROUTE_URL, PROFILE_ROUTE_URL } 
 import { getAuth } from '../../services/selectors';
 import { useAppSelector } from '../../services/store';
 import { IInitialStateAuth } from '../../types';
+import { Link } from 'react-router-dom';
 
 export const AppHeader = (): JSX.Element => {
 
@@ -19,7 +20,9 @@ export const AppHeader = (): JSX.Element => {
             <HeaderLink href={ORIGIN_ROUTE_URL} iconVariant={"constructor"} children="Конструктор"/>
             <HeaderLink href={FEED_ROUTE_URL} iconVariant={"orderFeed"} children="Лента заказов"/>
           </li>
-          <li className={`${styles["header-logo"]}`}><Logo /></li>
+          <li className={`${styles["header-logo"]}`}>
+            <Link to={ORIGIN_ROUTE_URL}><Logo/></Link>
+          </li>
           <li className={`${styles["item-right"]} mb-4 mt-4`}>
             <HeaderLink href={user?.email.length > 0 ? PROFILE_ROUTE_URL : LOGIN_ROUTE_URL }
             iconVariant={"personalAccount"} children={ user?.email.length > 0 ? user.email : "Личный кабинет" }/>

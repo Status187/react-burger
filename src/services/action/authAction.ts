@@ -147,7 +147,6 @@ export const getUser = () => (dispatch: AppDispatch) => {
     .catch(error => {
       if (error === 'jwt expired') {
         refreshToken()
-          .then(() => dispatch(getUser()))
       } else {
         dispatch({ type: GET_USER_AUTH_FAILED })
       }

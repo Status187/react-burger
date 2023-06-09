@@ -10,12 +10,12 @@ export const OrdersDetails: React.FC<IOrdersDetails> = ({ data }) => {
 
   const allReadyOrders = React.useMemo(
     () => data.orders.filter((elem: IWsOrder) => elem.status === 'done')
-      .map((elem: IWsOrder) => elem.number),
+      .map((elem) => elem.number),
     [data.orders]
   );
   const AllOrdersInProgress = React.useMemo(
     () => data.orders.filter((elem: IWsOrder) => elem.status === 'pending')
-      .map((elem: IWsOrder) => elem.number),
+      .map((elem) => elem.number),
     [data.orders]
   );
 
@@ -31,7 +31,7 @@ export const OrdersDetails: React.FC<IOrdersDetails> = ({ data }) => {
             <div className={styles.grid_orders}>
               {ordersСompleted.map((item, index) => (
                 <div key={index} className="mt-2 mr-8">
-                  <Link to={`${item}`} state={{ location: location }} className={styles.ready_order}>
+                  <Link to={`${item}`} state={{ background: location }} className={styles.ready_order}>
                     <span className="text text_type_digits-default">{item}</span>
                   </Link>
                 </div>
@@ -46,7 +46,7 @@ export const OrdersDetails: React.FC<IOrdersDetails> = ({ data }) => {
             <div className={styles.grid_orders}>
               {ordersInProgress.map((item, index) => (
                 <div key={index} className="mt-2 mr-8">
-                  <Link to={`${item}`} state={{ location: location }} className={styles.work_order}>
+                  <Link to={`${item}`} state={{ background: location }} className={styles.work_order}>
                     <span className="text text_type_digits-default">{item}</span>
                   </Link>
                 </div>

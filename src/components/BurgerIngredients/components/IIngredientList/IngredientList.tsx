@@ -1,14 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import { IData, TCardElement } from '../../../../types';
 import styles from './IngredientList.module.css'
-import { Modal } from '../../../Modal/Modal';
-import { IngredientDetails } from '../../../IngredientDetails/IngredientDetails';
-import { getActiveIngredient, getIngredients } from '../../../../services/selectors';
+import { getIngredients } from '../../../../services/selectors';
 import { useAppDispatch, useAppSelector } from '../../../../services/store';
-import { SET_ACTIVE, SET_TARGET_TAB } from '../../../../services/action/actionTypes';
-import { BUN, SAUCE, FILLINGS, SURPLUS, CATEGORY_TYPES, ORIGIN_ROUTE_URL } from '../../../../constants'
+import { SET_TARGET_TAB } from '../../../../services/action/actionTypes';
+import { BUN, SAUCE, FILLINGS, SURPLUS, CATEGORY_TYPES } from '../../../../constants'
 import { RenderListData } from '../RenderListData/RenderListData';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 export const IngredientList = ({
   bunsRef,
@@ -17,24 +14,8 @@ export const IngredientList = ({
 }:TCardElement): JSX.Element => {
 
   const { data } = useAppSelector(getIngredients);
-  // const currentActive = useAppSelector(getActiveIngredient);
 
   const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
-  // const location = useLocation();
-
-  // const [isOpenModal, setIsOpenModal] = React.useState(false)
-
-  // const openModal = () => {
-  //   setIsOpenModal(true)
-  // }
-
-  // const closeModal = () => {
-  //   dispatch({type: SET_ACTIVE, item: null})
-  //   setIsOpenModal(false);
-  //   navigate(ORIGIN_ROUTE_URL, { replace: true, state: { from: location } });
-  // };
-  
   const renderListData = (data: IData[], categoryTypesElement: string) => {
     return (
       data.map((el) => (
@@ -62,9 +43,6 @@ export const IngredientList = ({
 
   return (
     <div className={`${styles["category-wraper"]} custom-scroll`} onScroll={handleScroll}>
-      {/* {isOpenModal && <Modal onClose={closeModal}>
-          <IngredientDetails {...currentActive}/>
-        </Modal>} */}
       <div ref={bunsRef}>
         <span className={`${styles["category-title"]}`}>Булки</span>
         <div className={`${styles["category-list"]}`}>{renderListData(data, CATEGORY_TYPES.bun)}</div>

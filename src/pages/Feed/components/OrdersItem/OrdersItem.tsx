@@ -4,18 +4,18 @@ import { Link, useLocation } from "react-router-dom";
 import styles from './OrdersItem.module.css';
 import { IOrderList } from "./interfaces";
 import { getIngredients } from "../../../../services/selectors";
-import { IData } from "../../../../types";
+import { IInitialState } from "../../../../types";
 import { MAXIMUM_NUMBER_ELEMENTS } from "../../../../constants";
 import { useAppSelector } from "../../../../services/store";
 
 export const OrdersItem: React.FC<IOrderList> = ({order}) => {
   const location = useLocation();
 
-  const { data } = useAppSelector(getIngredients);
+  const { data }: IInitialState = useAppSelector(getIngredients);
 
   const orderIngredients = React.useMemo(
     () => order.ingredients.map((elId) => {
-      const matchingId = data.find((el: IData) => el._id === elId);
+      const matchingId = data.find((el) => el._id === elId);
       return matchingId
     }), [data, order.ingredients]
   );
@@ -25,8 +25,8 @@ export const OrdersItem: React.FC<IOrderList> = ({order}) => {
     , [orderIngredients]
   );
   
-  const orderAmount = React.useMemo(
-    () => orderIngredients.reduce( (amount: number, el: IData | undefined) => el!.price + amount, 0)
+  const orderAmount: number = React.useMemo(
+    () => orderIngredients.reduce( (amount, el) => el!.price + amount, 0)
     , [orderIngredients]
   );
 
@@ -34,7 +34,7 @@ export const OrdersItem: React.FC<IOrderList> = ({order}) => {
   const calc = (-2 * 10);
   
   return (
-    <Link className={`${styles.link}`} to={`${location.pathname}/${order.number}`} state={{ location: location }}> 
+    <Link className={`${styles.link}`} to={`${location.pathname}/${order.number}`} state={{ background: location }}> 
       <div className='m-6'>
         <div className={styles.link_header}>
           <span className='text text_type_digits-default'>{'#' + order.number}</span>
@@ -46,7 +46,7 @@ export const OrdersItem: React.FC<IOrderList> = ({order}) => {
       </div>
       <div className={styles.ingredients}>
         <div className={styles.ingredients_images}>
-          {firstElements && firstElements.map((item: IData | undefined, el: number) => {
+          {firstElements && firstElements.map((item, el) => {
             return (
               <span 
                 key={el}

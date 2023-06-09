@@ -25,13 +25,10 @@ export const refreshToken = async () => {
   await apiRequest('auth/token', options)
     .then(res => {
       const accessToken = res.accessToken.split("Bearer ")[1];
-      debugger
         const refreshToken = res.refreshToken;
         if (accessToken) {
             setCookie("accessToken", accessToken);
             localStorage.setItem("refreshToken", refreshToken);
         }
-      // setCookie('accessToken', res.accessToken);
-      // setCookie('refreshToken', res.refreshToken);
     })
 };

@@ -72,14 +72,10 @@ function App(): JSX.Element {
                 element={<IngredientDetailsPage />}
               />
               <Route path={`${PROFILE_ROUTE_URL}/${PROFILE_ORDERS_ROUTE_URL}/:id`} element={
-                  <Modal onClose={handleCloseModal}>
-                    <OrderInfo />
-                  </Modal>
+                  <OrderInfo />
               } />
               <Route path={`${FEED_ROUTE_URL}/:id`} element={
-                  <Modal onClose={handleCloseModal}>
-                    <OrderInfo />
-                  </Modal>
+                  <OrderInfo />
               } />
             </Routes>
 
@@ -96,7 +92,7 @@ function App(): JSX.Element {
                   <Modal onClose={handleCloseModal}>
                     <OrderInfo />
                   </Modal>
-                } />
+                } /> 
               </Routes>}
           </>
         )}

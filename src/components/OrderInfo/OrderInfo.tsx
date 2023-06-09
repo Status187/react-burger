@@ -6,7 +6,7 @@ import { IOrderInfo } from './interfaces';
 import { useParams } from 'react-router-dom';
 import { getOrderAction } from '../../services/action/orderAction';
 import { getCurrentOrder, getIngredients } from '../../services/selectors';
-import { TCount } from '../../types';
+import { IInitialState, TCount } from '../../types';
 
 export const OrderInfo: React.FC<IOrderInfo> = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -17,7 +17,7 @@ export const OrderInfo: React.FC<IOrderInfo> = (): JSX.Element => {
   }, [dispatch, id]);
 
   const { order } = useAppSelector(getCurrentOrder);
-  const { data } = useAppSelector(getIngredients);
+  const { data }: IInitialState = useAppSelector(getIngredients);
 
   const ingredientsSelectedOrder = React.useMemo(() => {
     const objectGroup: Record<string, TCount> = {};
@@ -28,20 +28,20 @@ export const OrderInfo: React.FC<IOrderInfo> = (): JSX.Element => {
       }
       
       for (let item of order!.ingredients) {
-        const ingredient = data.find((el: TCount) => el._id === item);
+        const ingredient = data.find((el) => el._id === item);
 
         if (ingredient) {
           if (!objectGroup[item]) {
             objectGroup[item] = {...ingredient, quantity: 0};
           }
-          objectGroup[item].quantity = 1;
+          objectGroup[item].quantity += 1;
         }
-
       }
       
       for (let item of order!.ingredients) {
         if (objectGroup[item]) {
           array.push(objectGroup[item]);
+          delete objectGroup[item];
         }
 
       }
@@ -54,7 +54,7 @@ export const OrderInfo: React.FC<IOrderInfo> = (): JSX.Element => {
       return null;
     }
     return ingredientsSelectedOrder!.reduce(
-      (amount: number, elem: TCount | undefined) => elem!.price + amount, 0)
+      (amount, elem) => elem!.type === 'bun' ? (elem!.price * 2) + amount: elem!.price + amount, 0)
   }, [ingredientsSelectedOrder]);
   
 

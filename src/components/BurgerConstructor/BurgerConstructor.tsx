@@ -68,7 +68,7 @@ export const BurgerConstructor = (): JSX.Element => {
 
   const getChoiceIngredients = (): JSX.Element[] => {
     return (
-      ingredients.map((el, index: number) => (
+      ingredients.map((el, index) => (
         <IngredientsChoice el={el} key={el.uuid} index={index} onDelete={() => deleteIngredient(index)}/>
     )))
   };

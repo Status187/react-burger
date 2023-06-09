@@ -29,7 +29,6 @@ export const ProfileOrders = (): JSX.Element => {
 
   return (
     <>
-      {!wsConnected && <Loading />}
       {!message ?
         <div>
           <h1 className="text mb-4 mt-4">История заказов</h1>
@@ -43,6 +42,7 @@ export const ProfileOrders = (): JSX.Element => {
           )}
         </div>
       }
+      {!wsConnected && <Loading />}
     </>
   );
 };
