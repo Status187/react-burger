@@ -21,11 +21,11 @@ export const InfoAmount = ({
   const dispatch = useAppDispatch();
 
   const getAllOrderId = () => {
-      const allIngredientsId = ingredients && ingredients.map((el) => el._id)
-      const bansId = bun && [bun._id];
-      const ids = bansId.concat(allIngredientsId)
-      const plusBun = ids.concat(bansId)
-      dispatch(sendOrder(plusBun))
+    const allIngredientsId = ingredients && ingredients.map((el) => el._id)
+    const bansId = bun && [bun._id];
+    const ids = bansId.concat(allIngredientsId)
+    const plusBun = ids.concat(bansId)
+    dispatch(sendOrder(plusBun))
     return plusBun;
   }
 

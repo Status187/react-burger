@@ -1,3 +1,4 @@
+import { getCookie } from "../../utils/cookie";
 import { request } from "../../utils/request";
 import { AppDispatch } from "../store";
 
@@ -14,6 +15,7 @@ export const sendOrder = (ids: string[]) => (dispatch: AppDispatch) => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
+      Authorization: getCookie('accessToken')
     },
     body: JSON.stringify({
       "ingredients": ids
