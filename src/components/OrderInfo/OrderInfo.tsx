@@ -78,7 +78,7 @@ export const OrderInfo: React.FC<IOrderInfo> = (): JSX.Element => {
           <div className={`text text_type_digits-default mb-10 ${styles.number}`}>
             {"#" + order!.number}
           </div>
-          <div className={`text text_type_main-medium mb-3`}>
+          <div className={`text text_type_main-medium mb-2`}>
             {order!.name}
           </div>
           <div className={`text text_type_main-default mb-10 ${styles.status}`}>
@@ -89,9 +89,9 @@ export const OrderInfo: React.FC<IOrderInfo> = (): JSX.Element => {
           </div>
           <section className={`${styles.container} custom-scroll`}>
 
-            {ingredientsSelectedOrder && ingredientsSelectedOrder.map((item) => {
+            {ingredientsSelectedOrder && ingredientsSelectedOrder.map((item, index) => {
               return (
-                <div className={`${styles.ingredient_wrapper} mt-4 mr-6`}>
+                <div key={item._id + index} className={`${styles.ingredient_wrapper} mt-4 mr-6`}>
                   <div className={styles.name_wrapper}>
                     <div className={styles.image_wrapper}>
                       <img src={item!.image_mobile} alt={item!.name} />

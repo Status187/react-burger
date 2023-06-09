@@ -61,7 +61,6 @@ function App(): JSX.Element {
               <Route path={REGISTER_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<Register />} />} />
               <Route path={FORGOT_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<ForgotPassword />} />} />
               <Route path={RESET_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<ResetPassword  />} />} />
-              <Route path={`${FEED_ROUTE_URL}/:id`} element={<OrderPage />}/>
 
               <Route path={PROFILE_ROUTE_URL} element={<Profile />} >
                 <Route index={true} element={<ProfileEditor />} />
@@ -74,6 +73,16 @@ function App(): JSX.Element {
                 path={`${INGREDIENTS_ROUTE_URL}/:id`}
                 element={<IngredientDetailsPage />}
               />
+              <Route path={`${PROFILE_ROUTE_URL}/${PROFILE_ORDERS_ROUTE_URL}/:id`} element={
+                  <Modal onClose={handleCloseModal}>
+                    <OrderInfo />
+                  </Modal>
+              } />
+              <Route path={`${FEED_ROUTE_URL}/:id`} element={
+                  <Modal onClose={handleCloseModal}>
+                    <OrderInfo />
+                  </Modal>
+              } />
             </Routes>
 
             {backgroundLocation &&
@@ -85,6 +94,11 @@ function App(): JSX.Element {
                 <Route path={`${FEED_ROUTE_URL}/:id`} 
                   element={<Modal onClose={handleCloseModal}><OrderInfo /></Modal>}
                 />
+                <Route path={`${PROFILE_ROUTE_URL}/${PROFILE_ORDERS_ROUTE_URL}/:id`} element={
+                  <Modal onClose={handleCloseModal}>
+                    <OrderInfo />
+                  </Modal>
+                } />
               </Routes>}
           </>
         )}
