@@ -87,7 +87,7 @@ function App(): JSX.Element {
               <Routes>
                 <Route
                   path={`${INGREDIENTS_ROUTE_URL}/:id`}
-                  element={<IngredientDetailsPage />}
+                  element={<Modal onClose={handleCloseModal}><IngredientDetailsPage /></Modal>}
                 />
                 <Route path={`${FEED_ROUTE_URL}/:id`} 
                   element={<Modal onClose={handleCloseModal}><OrderInfo /></Modal>}

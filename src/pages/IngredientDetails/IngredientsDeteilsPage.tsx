@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './IngredientsDeteilsPage.module.css';
 import { getIngredients } from '../../services/selectors';
-import { loadIngredients } from '../../services/action/ingredientsAction';
 import { useAppDispatch, useAppSelector } from '../../services/store';
 import { IData } from '../../types'
 import { IngredientDetails } from '../../components/IngredientDetails/IngredientDetails';
@@ -16,9 +15,6 @@ export const IngredientDetailsPage = () => {
   const [stateIngredient, setStateIngredient] = React.useState<IData>();
 
   React.useEffect(() => {
-    if (ingredients.data.length === 0) {
-      dispatch(loadIngredients());
-    }
     if (ingredients.data.length > 0) {
       const ingredient = ingredients.data.find((i: { _id: string | undefined; }) => i._id === id);
       setStateIngredient(ingredient);

@@ -17,28 +17,28 @@ export const IngredientList = ({
 }:TCardElement): JSX.Element => {
 
   const { data } = useAppSelector(getIngredients);
-  const currentActive = useAppSelector(getActiveIngredient);
+  // const currentActive = useAppSelector(getActiveIngredient);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
+  // const navigate = useNavigate();
+  // const location = useLocation();
 
-  const [isOpenModal, setIsOpenModal] = React.useState(false)
+  // const [isOpenModal, setIsOpenModal] = React.useState(false)
 
-  const openModal = () => {
-    setIsOpenModal(true)
-  }
+  // const openModal = () => {
+  //   setIsOpenModal(true)
+  // }
 
-  const closeModal = () => {
-    dispatch({type: SET_ACTIVE, item: null})
-    setIsOpenModal(false);
-    navigate(ORIGIN_ROUTE_URL, { replace: true, state: { from: location } });
-  };
+  // const closeModal = () => {
+  //   dispatch({type: SET_ACTIVE, item: null})
+  //   setIsOpenModal(false);
+  //   navigate(ORIGIN_ROUTE_URL, { replace: true, state: { from: location } });
+  // };
   
   const renderListData = (data: IData[], categoryTypesElement: string) => {
     return (
       data.map((el) => (
-        <RenderListData key={el._id} el={el} categoryTypesElement={categoryTypesElement} openModal={openModal}/>
+        <RenderListData key={el._id} el={el} categoryTypesElement={categoryTypesElement}/>
         )
       )
     )
@@ -62,9 +62,9 @@ export const IngredientList = ({
 
   return (
     <div className={`${styles["category-wraper"]} custom-scroll`} onScroll={handleScroll}>
-      {isOpenModal && <Modal onClose={closeModal}>
+      {/* {isOpenModal && <Modal onClose={closeModal}>
           <IngredientDetails {...currentActive}/>
-        </Modal>}
+        </Modal>} */}
       <div ref={bunsRef}>
         <span className={`${styles["category-title"]}`}>Булки</span>
         <div className={`${styles["category-list"]}`}>{renderListData(data, CATEGORY_TYPES.bun)}</div>

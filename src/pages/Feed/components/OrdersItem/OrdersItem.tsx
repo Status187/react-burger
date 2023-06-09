@@ -14,7 +14,7 @@ export const OrdersItem: React.FC<IOrderList> = ({order}) => {
   const { data } = useAppSelector(getIngredients);
 
   const orderIngredients = React.useMemo(
-    () => order.ingredients.map((elId: string) => {
+    () => order.ingredients.map((elId) => {
       const matchingId = data.find((el: IData) => el._id === elId);
       return matchingId
     }), [data, order.ingredients]

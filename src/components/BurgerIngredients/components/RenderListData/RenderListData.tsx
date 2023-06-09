@@ -14,7 +14,7 @@ export const RenderListData: React.FC<IRendarListData> = (props): JSX.Element =>
   const {
     categoryTypesElement,
     el,
-    openModal
+    // openModal
   } = props;
 
   const ingredients = useAppSelector(getSelectedIngredients);
@@ -44,7 +44,7 @@ export const RenderListData: React.FC<IRendarListData> = (props): JSX.Element =>
   });
 
   const sendSelectedData = () => {
-    openModal();
+    // openModal();
     dispatch({type: SET_ACTIVE, item: el});
   }
   
