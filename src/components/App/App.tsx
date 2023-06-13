@@ -60,7 +60,7 @@ function App(): JSX.Element {
               <Route path={FORGOT_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<ForgotPassword />} />} />
               <Route path={RESET_ROUTE_URL} element={<ProtectedRoute onlyUnAuth element={<ResetPassword  />} />} />
 
-              <Route path={PROFILE_ROUTE_URL} element={<Profile />} >
+              <Route path={PROFILE_ROUTE_URL} element={<ProtectedRoute element={<Profile />} />} >
                 <Route index={true} element={<ProfileEditor />} />
                 <Route path={PROFILE_ORDERS_ROUTE_URL} element={<ProfileOrders />} />
                 <Route path={NOT_FOUND_ROUTE_URL} element={<NotFound404 />} />
@@ -71,9 +71,7 @@ function App(): JSX.Element {
                 path={`${INGREDIENTS_ROUTE_URL}/:id`}
                 element={<IngredientDetailsPage />}
               />
-              <Route path={`${PROFILE_ROUTE_URL}/${PROFILE_ORDERS_ROUTE_URL}/:id`} element={
-                  <OrderInfo />
-              } />
+              <Route path={`${PROFILE_ROUTE_URL}/${PROFILE_ORDERS_ROUTE_URL}/:id`} element={<ProtectedRoute element={<OrderInfo />} />} />
               <Route path={`${FEED_ROUTE_URL}/:id`} element={
                   <OrderInfo />
               } />

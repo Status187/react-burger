@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IData, TCardElement } from '../../../../types';
+import { IData, IInitialState, TCardElement } from '../../../../types';
 import styles from './IngredientList.module.css'
 import { getIngredients } from '../../../../services/selectors';
 import { useAppDispatch, useAppSelector } from '../../../../services/store';
@@ -13,7 +13,7 @@ export const IngredientList = ({
   fillingsRef
 }:TCardElement): JSX.Element => {
 
-  const { data } = useAppSelector(getIngredients);
+  const { data }: IInitialState = useAppSelector(getIngredients);
 
   const dispatch = useAppDispatch();
   const renderListData = (data: IData[], categoryTypesElement: string) => {
