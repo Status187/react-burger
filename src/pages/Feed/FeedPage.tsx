@@ -12,7 +12,6 @@ export const Feed = (): JSX.Element =>  {
   const dispatch = useAppDispatch();
   const { wsConnected, message } = useAppSelector(getAllOrders);
 
-
   React.useEffect(() => {
     dispatch({ type: ALL_ORDERS_START, url: `${ALL_ORDERS_URL}` });
     return () => {

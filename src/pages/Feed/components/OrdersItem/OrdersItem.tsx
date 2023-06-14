@@ -26,7 +26,7 @@ export const OrdersItem: React.FC<IOrderList> = ({order}) => {
   );
   
   const orderAmount: number = React.useMemo(
-    () => orderIngredients.reduce( (amount, el) => el!.price + amount, 0)
+    () => orderIngredients.reduce( (amount, el) => (el?.price || 0) + amount, 0)
     , [orderIngredients]
   );
 
@@ -55,8 +55,8 @@ export const OrdersItem: React.FC<IOrderList> = ({order}) => {
 
                 <img
                   style={{ opacity: MAXIMUM_NUMBER_ELEMENTS === (el + 1) && hideExcess > 0 ? '0.5' : '1' }}
-                  src={item!.image_mobile}
-                  alt={item!.name}
+                  src={item?.image_mobile}
+                  alt={item?.name}
                 />
 
                 {
