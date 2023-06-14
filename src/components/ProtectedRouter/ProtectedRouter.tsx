@@ -17,14 +17,16 @@ export const ProtectedRoute: React.FC<IProtectRoute> = (props) => {
     const location = useLocation();
 
     const located = location.state?.from || ORIGIN_ROUTE_URL;
+    
+    if (getUserRequest) { return null }
 
     if (onlyUnAuth && user.email) {
       return <Navigate to={ located } />;
     }
   
     if (!onlyUnAuth && !user.email) {
-      return !getUserRequest && <Navigate to={LOGIN_ROUTE_URL} state={{ from: location }}/>;
+      return <Navigate to={LOGIN_ROUTE_URL} state={{ from: location }}/>;
     }
-  
+    
     return element;
 };  
