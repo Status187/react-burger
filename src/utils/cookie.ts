@@ -1,4 +1,4 @@
-export function setCookie(name: string, value: string, props?: any) {
+export function setCookie(name: string, value: string, props?: Record<string, any>) {
   props = props || {};
   let exp = props.expires;
   if (typeof exp == 'number' && exp) {
@@ -31,6 +31,3 @@ export function getCookie(name: string) {
 export function deleteCookie(name: string) {
   setCookie(name, '', { expires: -1 });
 };
-
-
-

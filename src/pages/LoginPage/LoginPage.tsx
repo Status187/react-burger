@@ -2,16 +2,15 @@ import * as React from 'react';
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './LoginPage.module.css';
-import { useSelector } from 'react-redux';
 import { getAuth } from '../../services/selectors';
-import { useAppDispatch } from '../../services/store';
+import { useAppDispatch, useAppSelector } from '../../services/store';
 import { authlogin } from '../../services/action/authAction';
 import { FORGOT_ROUTE_URL, REGISTER_ROUTE_URL } from '../../constants';
 import { useForm } from '../../hooks/useForm';
 
 export const LoginPage = (): JSX.Element => {
 
-  const { status, loginFailure } = useSelector(getAuth);
+  const { status, loginFailure } = useAppSelector(getAuth);
 
   const dispatch = useAppDispatch();
 

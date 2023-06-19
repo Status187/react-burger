@@ -1,10 +1,9 @@
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import * as React from 'react';
 import { useDrag } from 'react-dnd';
-import { useSelector } from 'react-redux';
 import { SET_ACTIVE } from '../../../../services/action/actionTypes';
 import { getSelectedBuns, getSelectedIngredients } from '../../../../services/selectors';
-import { useAppDispatch } from '../../../../services/store';
+import { useAppDispatch, useAppSelector } from '../../../../services/store';
 import styles from './RenderListData.module.css';
 import { INGREDIENTS_ROUTE_URL } from '../../../../constants';
 import { Link, useLocation } from 'react-router-dom';
@@ -15,11 +14,11 @@ export const RenderListData: React.FC<IRendarListData> = (props): JSX.Element =>
   const {
     categoryTypesElement,
     el,
-    openModal
+    // openModal
   } = props;
 
-  const ingredients = useSelector(getSelectedIngredients);
-  const bun: IData = useSelector(getSelectedBuns);
+  const ingredients = useAppSelector(getSelectedIngredients);
+  const bun: IData = useAppSelector(getSelectedBuns);
 
   const dispatch = useAppDispatch();
 
@@ -45,7 +44,7 @@ export const RenderListData: React.FC<IRendarListData> = (props): JSX.Element =>
   });
 
   const sendSelectedData = () => {
-    openModal();
+    // openModal();
     dispatch({type: SET_ACTIVE, item: el});
   }
   

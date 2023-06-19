@@ -1,28 +1,32 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { getAuth } from "../../services/selectors";
-import { LOGIN_ROUTE_URL,} from "../../constants";
+import { LOGIN_ROUTE_URL, ORIGIN_ROUTE_URL,} from "../../constants";
 import { IInitialStateAuth } from "../../types";
 import { IProtectRoute } from "./interfaces";
+import { useAppSelector } from "../../services/store";
 
 export const ProtectedRoute: React.FC<IProtectRoute> = (props) => {
   const {
     element,
     onlyUnAuth = false
   } = props;
+
+  const { user, getUserRequest }: IInitialStateAuth = useAppSelector(getAuth);
   
-  const navigate = useNavigate();
+    const location = useLocation();
 
-  const { pathname } = useLocation();
+    const located = location.state?.from || ORIGIN_ROUTE_URL;
+    
+    if (getUserRequest) { return null }
 
-  const { user }: IInitialStateAuth = useSelector(getAuth);
-
-  React.useEffect(() => {
-    if (!user && onlyUnAuth) {
-      navigate(LOGIN_ROUTE_URL, { state: { from: pathname }, replace: true });
+    if (onlyUnAuth && user.email) {
+      return <Navigate to={ located } />;
     }
-  }, [element, navigate, onlyUnAuth, pathname, user]);
-
-  return element
+  
+    if (!onlyUnAuth && !user.email) {
+      return <Navigate to={LOGIN_ROUTE_URL} state={{ from: location }}/>;
+    }
+    
+    return element;
 };  

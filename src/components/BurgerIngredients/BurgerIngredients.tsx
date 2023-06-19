@@ -3,15 +3,14 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './BurgerIngredients.module.css';
 import { IngredientList } from './components/IIngredientList/IngredientList';
 import { BUN, FILLINGS, SAUCE } from '../../constants';
-import { useSelector } from 'react-redux';
 import { SET_TARGET_TAB } from '../../services/action/actionTypes';
-import { useAppDispatch } from '../../services/store';
+import { useAppDispatch, useAppSelector } from '../../services/store';
 import { getTargetTab } from '../../services/selectors';
 
 export const BurgerIngredients = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
-  const tabCurrent = useSelector(getTargetTab);
+  const tabCurrent = useAppSelector(getTargetTab);
 
   const handleChoice = (type: string) => {
     dispatch({ type: SET_TARGET_TAB, tab: type})

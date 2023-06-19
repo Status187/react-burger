@@ -1,0 +1,72 @@
+.link {
+  color: var(--text-primary-color);
+  background-color: var(--background);
+  border-radius: 40px;
+  text-decoration: none;
+}
+
+.link_header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  min-height: 30px;
+  line-height: 30px;
+  padding: 12px 24px;
+  margin: 0;
+  z-index: 10;
+}
+
+.status {
+  padding: 0px 0px 0px 12px;
+  margin: 6px 0px 0px 0px;
+}
+
+.ingredients {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  padding: 0px;
+  margin: 12px 24px 24px 24px;
+}
+
+.ingredients_images {
+  display: flex;
+  background: var(--background);
+  height: 64px;
+}
+
+.ingredients_image {
+  display: flex;
+  justify-content: center;
+  height: 64px;
+  width: 64px;
+  position: relative;
+  background: linear-gradient(var(--background-element), #121215) padding-box, linear-gradient(to right, #801AB2, #4C4CFF) border-box;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+.ingredients_hidden {
+  left: 30%;
+  top: 30%;
+  position: absolute;
+  line-height: 24px;
+}
+
+.amount {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  height: 64px;
+  max-width: 25vw;
+  padding: 0px;
+  text-decoration: none;
+}

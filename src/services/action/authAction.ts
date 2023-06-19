@@ -72,6 +72,12 @@ export const authlogin = (email: string, password: string | number, navigator: N
 
   apiRequest('auth/login', options)
     .then(res => {
+      const accessToken = res.accessToken.split("Bearer ")[1];
+      const refreshToken = res.refreshToken;
+      if (accessToken) {
+        setCookie("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+      }
       dispatch({ type: LOGIN_SUCCESS, user: res.user });
       setCookie('accessToken', res.accessToken);
       setCookie('refreshToken', res.refreshToken);
@@ -141,7 +147,6 @@ export const getUser = () => (dispatch: AppDispatch) => {
     .catch(error => {
       if (error === 'jwt expired') {
         refreshToken()
-          .then(() => dispatch(getUser()))
       } else {
         dispatch({ type: GET_USER_AUTH_FAILED })
       }

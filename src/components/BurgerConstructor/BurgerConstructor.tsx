@@ -5,9 +5,8 @@ import { InfoAmount } from './components/InfoAmount/InfoAmount';
 import { Modal } from '../Modal/Modal';
 import { OrderDetails } from '../OrderDetails/OrderDetails';
 import { BUN, BUNS_TEXT, DOWN, INGREDIENTS_TEXT, MAIN, SAUCE, UP} from '../../constants';
-import { useSelector } from 'react-redux';
 import { getSelectedBuns, getSelectedIngredients } from '../../services/selectors';
-import { useAppDispatch } from '../../services/store';
+import { useAppDispatch, useAppSelector } from '../../services/store';
 import { DELETE_INGREDIENT, SET_AMOUNT, SET_BUNS, SET_CLEAR_CONSTRUCTOR } from '../../services/action/actionTypes';
 import { useDrop } from 'react-dnd';
 import { IngredientsChoice } from './components/IngredientsChoice/IngredientsChoice';
@@ -18,8 +17,8 @@ import { IData } from '../../types';
 export const BurgerConstructor = (): JSX.Element => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
 
-  const ingredients = useSelector(getSelectedIngredients);
-  const bun = useSelector(getSelectedBuns);
+  const ingredients = useAppSelector(getSelectedIngredients);
+  const bun = useAppSelector(getSelectedBuns);
 
   const dispatch = useAppDispatch();
 
@@ -69,7 +68,7 @@ export const BurgerConstructor = (): JSX.Element => {
 
   const getChoiceIngredients = (): JSX.Element[] => {
     return (
-      ingredients.map((el, index: number) => (
+      ingredients.map((el, index) => (
         <IngredientsChoice el={el} key={el.uuid} index={index} onDelete={() => deleteIngredient(index)}/>
     )))
   };

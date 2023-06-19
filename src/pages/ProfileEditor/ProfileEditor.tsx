@@ -1,17 +1,16 @@
 import * as React from 'react';
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './ProfileEditor.module.css';
-import { useSelector } from 'react-redux';
 import { getAuth } from '../../services/selectors';
 import { updateUser } from '../../services/action/authAction';
-import { useAppDispatch } from '../../services/store';
+import { useAppDispatch, useAppSelector } from '../../services/store';
 import { useForm } from '../../hooks/useForm';
 import { IInitialStateAuth } from '../../types';
 
 export const ProfileEditor = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
-  const { user }: IInitialStateAuth = useSelector(getAuth);
+  const { user }: IInitialStateAuth = useAppSelector(getAuth);
 
   const submitForm = React.useCallback((values: { email: string; }) => {
     dispatch(updateUser(values))

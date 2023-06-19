@@ -3,8 +3,7 @@ import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-co
 import styles from './InfoAmount.module.css';
 import { IInfoAmount, IInitialStateAuth } from '../../../../types';
 import { getAuth, getSelectedBuns, getSelectedIngredients, getTotalAmount } from '../../../../services/selectors';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../../../services/store';
+import { useAppDispatch, useAppSelector } from '../../../../services/store';
 import { sendOrder } from '../../../../services/action/orderNumberAction';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTE_URL } from '../../../../constants';
@@ -13,19 +12,20 @@ export const InfoAmount = ({
   onClick = () => {}
 }: IInfoAmount): JSX.Element => {
 
-  const bun = useSelector(getSelectedBuns);
-  const ingredients = useSelector(getSelectedIngredients);
-  const dispatch = useAppDispatch();
-  const { user }: IInitialStateAuth = useSelector(getAuth);
+  const bun = useAppSelector(getSelectedBuns);
+  const ingredients = useAppSelector(getSelectedIngredients);
+  const { user }: IInitialStateAuth = useAppSelector(getAuth);
+  const totalAmount = useAppSelector(getTotalAmount)
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useAppDispatch();
 
   const getAllOrderId = () => {
-      const allIngredientsId = ingredients && ingredients.map((el) => el._id)
-      const bansId = bun && [bun._id];
-      const ids = bansId.concat(allIngredientsId)
-      const plusBun = ids.concat(bansId)
-      dispatch(sendOrder(plusBun))
+    const allIngredientsId = ingredients && ingredients.map((el) => el._id)
+    const bansId = bun && [bun._id];
+    const ids = bansId.concat(allIngredientsId)
+    const plusBun = ids.concat(bansId)
+    dispatch(sendOrder(plusBun))
     return plusBun;
   }
 
@@ -43,8 +43,6 @@ export const InfoAmount = ({
       navigate(LOGIN_ROUTE_URL, { replace: true, state: { from: location } });
     }
   }
-
-  const totalAmount = useSelector(getTotalAmount)
 
   return (
       <div className={`${styles["info-amount"]} mt-10 mr-4`}>

@@ -1,0 +1,24 @@
+.content {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 1280px;
+  column-gap: 80px;
+}
+
+.title {
+  max-width: 1240px;
+  margin: 40px auto 20px auto;
+}
+
+.left_wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.right_wrapper {
+  margin-top: 20px;
+  width: 100%;
+}
