@@ -5,9 +5,9 @@ import {
   FORGOT_PASSWORD_REQUEST,
   FORGOT_PASSWORD_SUCCESS,
   FORGOT_PASSWORD_FAILED
-} from '../action/actionTypes';
+} from '../../action/actionTypes';
 
-const initialState = {
+export const initialState = {
   status: null,
   forgotRequest: false,
   fargotSuccess: false,

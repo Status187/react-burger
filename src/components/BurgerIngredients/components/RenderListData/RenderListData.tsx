@@ -44,7 +44,6 @@ export const RenderListData: React.FC<IRendarListData> = (props): JSX.Element =>
   });
 
   const sendSelectedData = () => {
-    // openModal();
     dispatch({type: SET_ACTIVE, item: el});
   }
   

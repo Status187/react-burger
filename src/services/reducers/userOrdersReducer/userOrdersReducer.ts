@@ -1,6 +1,6 @@
-import { IOrdersState } from "../../types";
-import { TUserOrdersActions, USER_ORDERS_CLOSED, USER_ORDERS_ERROR, USER_ORDERS_MESSAGE, USER_ORDERS_SUCCESS } from "../action/userOrdersAction";
-import { initialState } from "./utils/initialState";
+import { IOrdersState } from "../../../types";
+import { TUserOrdersActions, USER_ORDERS_CLOSED, USER_ORDERS_ERROR, USER_ORDERS_MESSAGE, USER_ORDERS_SUCCESS } from "../../action/userOrdersAction";
+import { initialState } from "../utils/initialState";
 
 export function ordersUserReducer(state = initialState, action: TUserOrdersActions): IOrdersState {
   switch (action.type) {

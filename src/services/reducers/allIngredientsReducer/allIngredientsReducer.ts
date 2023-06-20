@@ -1,7 +1,7 @@
-import { IData } from "../../types";
-import { SAVE_INGREDIENTS, SET_ACTIVE } from "../action/actionTypes";
+import { IData } from "../../../types";
+import { SAVE_INGREDIENTS, SET_ACTIVE } from "../../action/actionTypes";
 
-const initialState = {
+export const initialState = {
   list: [] as IData[],
   currentActive: null
 };

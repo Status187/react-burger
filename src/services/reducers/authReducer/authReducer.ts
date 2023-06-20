@@ -1,4 +1,4 @@
-import { IAuthReducer, IInitialStateAuth } from '../../types';
+import { IAuthReducer, IInitialStateAuth } from '../../../types';
 import {
   REGISTRATION_REQUEST,
   REGISTRATION_SUCCESS,
@@ -16,7 +16,7 @@ import {
   EDIT_USER_AUTH_SUCCESS,
   EDIT_USER_AUTH_FAILED,
   CLEAR_STATE
-} from '../action/actionTypes';
+} from '../../action/actionTypes';
 
 export const initialState: IInitialStateAuth = {
   user: {

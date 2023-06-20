@@ -1,10 +1,10 @@
-import { IWsOrder } from '../../types';
+import { IWsOrder } from '../../../types';
 import { 
   ORDER_START, 
   ORDER_SUCCESS, 
   ORDER_ERROR, 
   TGetOrderActions
-} from '../action/orderAction';
+} from '../../action/orderAction';
 
 interface IGetOrderState {
   requestStart: boolean;
@@ -12,7 +12,7 @@ interface IGetOrderState {
   order: IWsOrder | null;
 }
 
-const initialState: IGetOrderState = {
+export const initialState: IGetOrderState = {
   requestStart: false,
   requestError: null,
   order: null

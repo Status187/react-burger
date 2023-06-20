@@ -1,7 +1,7 @@
-import { IInitialData } from '../../types';
-import { SET_CLEAR_ORDER, SET_ORDER_ERROR, SET_ORDER_REQUEST, SET_ORDER_SUCCESS } from '../action/orderNumberAction';
+import { IInitialData } from '../../../types';
+import { SET_CLEAR_ORDER, SET_ORDER_ERROR, SET_ORDER_REQUEST, SET_ORDER_SUCCESS } from '../../action/orderNumberAction';
 
-const initialState: IInitialData = {
+export const initialState: IInitialData = {
   loading: false,
   isErrors: false,
   order: null
