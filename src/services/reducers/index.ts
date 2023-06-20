@@ -3,7 +3,7 @@ import { allIngredientsReducer } from "./allIngredientsReducer";
 import { constructorReducer } from "./constructorReducer";
 import { orderNumberReducer } from "./orderNumberReducer";
 import { tabReducer } from "./tabReducer";
-import { authReducerReducer } from "./authReducer";
+import { authReducer } from "./authReducer";
 import { resetPasswordReducer } from "./resetPasswordReducer";
 import { allOrdersReducer } from "./allOrdersReducer";
 import { ordersUserReducer } from "./userOrdersReducer";
@@ -14,7 +14,7 @@ export default combineReducers({
   ingredients: allIngredientsReducer,
   burgerConstructor: constructorReducer,
   order: orderNumberReducer,
-  auth: authReducerReducer,
+  auth: authReducer,
   resetPassword: resetPasswordReducer,
   allOrders: allOrdersReducer,
   userOrders: ordersUserReducer,

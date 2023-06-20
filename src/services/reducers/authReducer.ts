@@ -18,7 +18,7 @@ import {
   CLEAR_STATE
 } from '../action/actionTypes';
 
-const initialState: IInitialStateAuth = {
+export const initialState: IInitialStateAuth = {
   user: {
     email: '',
     name: '',
@@ -38,7 +38,7 @@ const initialState: IInitialStateAuth = {
   editUserFailure: false,
 };
 
-export const authReducerReducer = (state = initialState, action: IAuthReducer) => {
+export const authReducer = (state = initialState, action: IAuthReducer) => {
   switch (action.type) {
     case CLEAR_STATE: {
       return initialState;
