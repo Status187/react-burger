@@ -1,9 +1,11 @@
 describe('Conctructor', () => {
+  const email = "status187@yandex.ru";
+  const password = "123123"
   
   beforeEach(() => {
     cy.visit('http://localhost:3000');
     cy.viewport(1920, 1080);
-  })
+  });
 
   it('Должно быть запущено по адресу localhost:3000', () => {
     cy.visit('http://localhost:3000');
@@ -19,7 +21,7 @@ describe('Conctructor', () => {
     cy.contains("Биокотлета из марсианской Магнолии");
   });
 
-  it('Drag & Drop должен отрабатывать корректно', function () {
+  it('Создание заказа должно отрабатывать корректно', function () {
 
     const dragAndDropBunUp = (index) => {
       cy.get('[data-testid="ingredient"]').eq(index).trigger('dragstart');
@@ -42,6 +44,17 @@ describe('Conctructor', () => {
     for (let i = 0; i <= 9; i++) {
       dragAndDropIngredients(i)
     }
+
+    cy.get('[data-testid="place-an-order"]').click();
+
+    cy.get('[data-testid="email-entrance"]').type(`${email}{enter}`);
+    cy.get('[data-testid="password-entrance"]').type(`${password}{enter}`);
+
+    cy.get('[data-testid="home-page"]').click();
+    cy.get('[data-testid="home-page"]').click();
+    
+    cy.get('[data-testid="place-an-order"]').click();
+    
   });
 
-})
+});

@@ -50,7 +50,7 @@ export const InfoAmount = ({
           <span className={`${styles["amount"]} text_type_digits-medium`}>{totalAmount}</span>
           <CurrencyIcon type="primary"/>
         </div>
-        <Button htmlType='button' size='large' disabled={disabled} onClick={onHandleClick}>Оформить заказ</Button>
+        <Button data-testid="place-an-order" htmlType='button' size='large' disabled={disabled} onClick={onHandleClick}>Оформить заказ</Button>
       </div>
   )
 }
