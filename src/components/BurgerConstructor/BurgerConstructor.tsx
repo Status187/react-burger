@@ -126,15 +126,15 @@ export const BurgerConstructor = (): JSX.Element => {
 
       <div className={`${styles["constructor-wrapper"]} mt-25`}>
 
-        <div ref={refDropBunUp}>
+        <div ref={refDropBunUp} data-testid="up-bun">
           { bun ? (getChoiceBunTop()) : (<StubOfBunsTop/>)}
         </div>
 
-        <div className={`${styles["ingredients-wrapper"]} custom-scroll`} ref={refDropIngredients}>
+        <div data-testid="drop-target" className={`${styles["ingredients-wrapper"]} custom-scroll`} ref={refDropIngredients}>
           { ingredients.length > 0 ? (getChoiceIngredients()) : (<StubOfIngredients/>)}
         </div>
 
-        <div ref={refDropBunDown}>
+        <div ref={refDropBunDown} data-testid="down-bun">
         { bun ? (getChoiceBunBottom()) : (<StubOfBunsBottom/>)}
         </div>
 

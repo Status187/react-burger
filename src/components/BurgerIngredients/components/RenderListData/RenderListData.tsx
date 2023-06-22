@@ -13,8 +13,7 @@ import { IRendarListData, IStateIds } from './interfaces';
 export const RenderListData: React.FC<IRendarListData> = (props): JSX.Element => {
   const {
     categoryTypesElement,
-    el,
-    // openModal
+    el
   } = props;
 
   const ingredients = useAppSelector(getSelectedIngredients);
@@ -54,7 +53,7 @@ export const RenderListData: React.FC<IRendarListData> = (props): JSX.Element =>
     {el.type === categoryTypesElement && (
       !isDrag && (
         <Link className={`${styles["link"]}`} to={`${INGREDIENTS_ROUTE_URL}/${el._id}`} state={{ background: location }}>
-        <div className={`${styles["cart"]}`} onClick={() => {sendSelectedData()}} ref={refDragItem}>
+        <div className={`${styles["cart"]}`} onClick={() => {sendSelectedData()}} ref={refDragItem} data-testid="ingredient">
           <img src={el.image} alt={el.name} className='ml-4 mr-4' />
           <div>
             <div className={`${styles["price"]} text_type_digits-default mt-1 mb-1`}>{el.price}<CurrencyIcon type={'secondary'} /></div>
