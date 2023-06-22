@@ -21,6 +21,14 @@ describe('Conctructor', () => {
     cy.contains("Биокотлета из марсианской Магнолии");
   });
 
+  it("Открыть модальное окно c ингредиентом, и закрыть", () => {
+    const ingredientModal = (index) => {
+      cy.get('[data-testid="ingredient"]').eq(index).click();
+      cy.get('[data-testid="close-modal-button"]').click();
+    };
+    ingredientModal(1);
+  });
+
   it('Создание заказа должно отрабатывать корректно', function () {
 
     const dragAndDropBunUp = (index) => {
@@ -54,7 +62,5 @@ describe('Conctructor', () => {
     cy.get('[data-testid="home-page"]').click();
     
     cy.get('[data-testid="place-an-order"]').click();
-    
   });
-
 });
