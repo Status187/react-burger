@@ -32,7 +32,7 @@ export const Modal = ({
   return ReactDOM.createPortal(
     <div>
       <div className={styles.modal}>
-      <div className={`${styles["modal-close"]}`}><CloseIcon type="primary" onClick={() => onClose()}/></div>
+      <div className={`${styles["modal-close"]}`} data-testid="close-modal-button"><CloseIcon type="primary" onClick={() => onClose()}/></div>
         {children}
       </div>
       <ModalOverlay onClose={onClose} forwardRef={pointRef}/>

@@ -21,7 +21,7 @@ export const AppHeader = (): JSX.Element => {
             <HeaderLink href={FEED_ROUTE_URL} iconVariant={"orderFeed"} children="Лента заказов"/>
           </li>
           <li className={`${styles["header-logo"]}`}>
-            <Link to={ORIGIN_ROUTE_URL}><Logo/></Link>
+            <Link to={ORIGIN_ROUTE_URL}  data-testid="home-page"><Logo/></Link>
           </li>
           <li className={`${styles["item-right"]} mb-4 mt-4`}>
             <HeaderLink href={user?.email.length > 0 ? PROFILE_ROUTE_URL : LOGIN_ROUTE_URL }

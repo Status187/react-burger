@@ -1,6 +1,6 @@
-import { IOrdersState } from '../../types';
-import { ALL_ORDERS_CLOSED, ALL_ORDERS_ERROR, ALL_ORDERS_MESSAGE, ALL_ORDERS_SUCCESS, TAllOrdersActions } from '../action/allOrdersAction';
-import { initialState } from './utils/initialState';
+import { IOrdersState } from '../../../types';
+import { ALL_ORDERS_CLOSED, ALL_ORDERS_ERROR, ALL_ORDERS_MESSAGE, ALL_ORDERS_SUCCESS, TAllOrdersActions } from '../../action/allOrdersAction';
+import { initialState } from '../utils/initialState';
 
 export function allOrdersReducer(state = initialState, action: TAllOrdersActions): IOrdersState {
   switch (action.type) {

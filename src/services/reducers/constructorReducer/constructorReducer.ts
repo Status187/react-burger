@@ -1,7 +1,7 @@
-import { IData } from "../../types";
-import { ADD_INGREDIENTS, DELETE_INGREDIENT, SET_AMOUNT, SET_BUNS, SET_CLEAR_CONSTRUCTOR, SORT_INGREDIENTS } from "../action/actionTypes";
+import { IData } from "../../../types";
+import { ADD_INGREDIENTS, DELETE_INGREDIENT, SET_AMOUNT, SET_BUNS, SET_CLEAR_CONSTRUCTOR, SORT_INGREDIENTS } from "../../action/actionTypes";
 
-const initialState = {
+export const initialState = {
   bun: null,
   ingredients: [] as IData[],
   amount: 0

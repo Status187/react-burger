@@ -1,7 +1,7 @@
-import { BUN } from "../../constants";
-import { SET_TARGET_TAB } from "../action/actionTypes";
+import { BUN } from "../../../constants";
+import { SET_TARGET_TAB } from "../../action/actionTypes";
 
-const initialState = {
+export const initialState = {
   tab: BUN
 }
 
